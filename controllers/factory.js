@@ -45,14 +45,14 @@ exports.getFactories = async () => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log("Failed fetching all factories")
+                    console.log("Failed to fetch all factories")
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log("Failed fetching all factories")
+            console.log("Failed to fetch all factories")
         }
     }
 }
@@ -82,14 +82,14 @@ exports.createFactory = async (factory, options) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else { 
-                    console.log(`Failed creating ${factory} factory.`)
+                    console.log(`Failed to create ${factory} factory.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed creating ${factory} factory.`)
+            console.log(`Failed to create ${factory} factory.`)
         }
     }
 }
@@ -120,14 +120,14 @@ exports.editFactory = async (factory, options) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else { 
-                    console.log(`Failed editing ${factory} factory.`)
+                    console.log(`Failed to edit ${factory} factory.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed editing ${factory} factory.`)
+            console.log(`Failed to edit ${factory} factory.`)
         }
     }
 }
@@ -150,20 +150,20 @@ exports.removenFactory = async (factory) => {
             timeout: 0,
         })
             .then(res => {
-                Object.keys(res).length === 0 ? console.log(`Factory ${factory} was removed.`) : console.log(`Failed removing ${factory} factory.`)
+                Object.keys(res).length === 0 ? console.log(`Factory ${factory} was removed.`) : console.log(`Failed to remove ${factory} factory.`)
             })
             .catch((error) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed removing ${factory} factory.`)
+                    console.log(`Failed to remove ${factory} factory.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed removing ${factory} factory.`)
+            console.log(`Failed to remove ${factory} factory.`)
         }
     }
 }

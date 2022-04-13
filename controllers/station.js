@@ -65,13 +65,15 @@ exports.getAllStations = async () => {
                         return {
                             "name": station.name,
                             "factory": station.factory_name,
-                            "created by": station.created_by_user,
-                            "creation": station.creation_date.substring(0,10),
                             "retention type": station.retention_type,
                             "retentention value": station.retention_value,
+                            "storage type": station.storage_type,
                             "replicas": station.replicas,
+                            "dedup enabled": station.dedup_enabled,
                             "dedup window ms": station.dedup_window_in_ms,
-                            
+                            "created by": station.created_by_user,
+                            "creation date": station.creation_date.substring(0,10),
+                            "last_update": station.last_update.substring(0,10),
                         };
                     })
                 )
@@ -80,14 +82,14 @@ exports.getAllStations = async () => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log("Failed fetching all stations")
+                    console.log("Failed to fetch all stations")
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log("Failed fetching all stations")
+            console.log("Failed to fetch all stations")
         }
     }
 }
@@ -113,24 +115,40 @@ exports.createStation = async (station, options) => {
                 "dedup_enabled": options.dedupenabled,
                 "dedup_window_in_ms": options.dedupwindow
             },
+            
             queryParams: null,
             timeout: 0,
         })
             .then(res => {
-                console.log(`Station ${station} was created with the following details:`)
+                console.log(`Station ${station} was created with the following details:`);
+                console.table(
+                    [res].map(station => {
+                        return {
+                            "name": station.name,
+                            "retention type": station.retention_type,
+                            "retentention value": station.retention_value,
+                            "storage type": station.storage_type,
+                            "replicas": station.replicas,
+                            "dedup enabled": station.dedup_enabled,
+                            "dedup window ms": station.dedup_window_in_ms,
+                            "created by": station.created_by_user,
+                            "creation date": station.creation_date.substring(0,10),
+                        };
+                    })
+                )
             })
             .catch((error) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed creating ${station} station.`)
+                    console.log(`Failed to create ${station} station.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed creating ${station} station.`)
+            console.log(`Failed to create ${station} station.`)
         }
     }
 }
@@ -158,14 +176,14 @@ exports.getStationInfo = async (station) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed fetching ${station} station details.`)
+                    console.log(`Failed to fetch ${station} station details.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed fetching ${station} station details.`)
+            console.log(`Failed to fetch ${station} station details.`)
         }
     }
 }
@@ -188,20 +206,20 @@ exports.removeStation = async (station) => {
             timeout: 0,
         })
             .then(res => {
-                Object.keys(res).length === 0 ? console.log(`Statoin ${station} was removed.`) : console.log(`Failed removing station ${station}.`)
+                Object.keys(res).length === 0 ? console.log(`Statoin ${station} was removed.`) : console.log(`Failed to remove station ${station}.`)
             })
             .catch((error) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed removing ${station} station.`)
+                    console.log(`Failed to remove ${station} station.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed removing ${station} station.`)
+            console.log(`Failed to remove ${station} station.`)
         }
     }
 }
