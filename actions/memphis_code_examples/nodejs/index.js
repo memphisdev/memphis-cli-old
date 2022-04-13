@@ -1,10 +1,9 @@
 const memphis = require("memphisos");
-
 (async function () {
     try {
         await memphis.connect({
             host: "<host-name>",
-            port: 9000,
+            port: 6666,
             brokerHost: "<broker-host>",
             brokerPort: 7766,
             username: "<username (type application)>",
@@ -14,12 +13,10 @@ const memphis = require("memphisos");
             reconnectIntervalMs: 1500, // optional
             timeoutMs: 1500 // optional
         });
-
         const factory = await memphis.factory({
             name: "<factory-name>",
             description: "" // optional
         });
-
         const station = await memphis.station({
             name: "<station-name>",
             factoryName: "<factory-name>",
@@ -30,12 +27,10 @@ const memphis = require("memphisos");
             dedupEnabled: false, // optional
             dedupWindowMs: 0 // optional
         });
-
         const producer = await memphis.producer({
             stationName: "<station-name>",
             producerName: "<producer-name>"
         });
-
         const consumer = await memphis.consumer({
             stationName: "<station-name>",
             consumerName: "<consumer-name>",
@@ -44,16 +39,13 @@ const memphis = require("memphisos");
             batchSize: 10, // optional
             batchMaxTimeToWaitMs: 5000 // optional
         });
-
         consumer.on("message", message => {
             console.log(message);
             message.ack();
         });
-
         consumer.on("error", error => {
             console.log(error);
         });
-
         await station.destroy();
         await factory.destroy();
         await producer.destroy();
