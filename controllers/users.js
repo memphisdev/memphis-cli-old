@@ -32,14 +32,14 @@ exports.getUsers = async () => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log("Failed fetching all users")
+                    console.log("Failed to fetch all users")
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log("Failed fetching all users")
+            console.log("Failed to fetch all users")
         }    
     }
 }
@@ -78,14 +78,14 @@ exports.addUser = async (user) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed adding ${user.name} user.`)
+                    console.log(`Failed to add ${user.name} user.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed adding ${user.name} user.`)
+            console.log(`Failed to add ${user.name} user.`)
         }
     }
 }
@@ -109,13 +109,13 @@ exports.removeUser = async (user) => {
                 Object.keys(res).length === 0 ? console.log(`User ${user} was removed.`) : console.log(`Failed removing user ${user}.`)
             })
             .catch((error) => {
-                console.log(`Failed removing user ${user}.`)
+                console.log(`Failed to remove user ${user}.`)
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed removing user ${user}.`)
+            console.log(`Failed to remove user ${user}.`)
         }
     }
 }
@@ -143,13 +143,13 @@ exports.removeUser = async (user) => {
 //                 user.hubpass && console.log(`User's hub password was updated.`)
 //             })
 //             .catch((error) => {
-//                 console.error(`Failed updating hub credentials.`)
+//                 console.error(`Failed to update hub credentials.`)
 //             })
 //     } catch (error) {
             // if (error.status === 666){
             //     console.log(error.errorObj.message);
             // } else {
-            //     console.error(`Failed updating hub credentials.`)
+            //     console.error(`Failed to update hub credentials.`)
             // }
 //     }
 // }
