@@ -12,7 +12,6 @@ const stationHelp = `Station Commands:
    ls                List of stations
    create            Create new station  
    info              Specific station's info
-   edit              Edit station name
    del               Delete a station
 `
 const userDesc = `Manage users and premissions`
@@ -23,7 +22,7 @@ const userHelp =    `User Commands:
    del               Delete user
   `
 
-const connectDesc = `Connection configuration to Memphis server`
+const connectDesc = `Connection configuration to Memphis control plain`
 
 
 const producerDesc = `Producer is the entity who can send messages into stations`

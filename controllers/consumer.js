@@ -22,6 +22,7 @@ exports.getConsumers = async () => {
                     console.table([{ 
                             name: ' ',
                             type: ' ',
+                            consumer_group: ' ',
                             created_by_user: ' ',
                             station_name: ' ',
                             factory_name: ' ',
@@ -35,6 +36,7 @@ exports.getConsumers = async () => {
                             return {
                                 "name": consumer.name,
                                 "type": consumer.type,
+                                "consumer_group": consumer.consumer_group,
                                 "created_by_user": consumer.created_by_user,
                                 "station_name": consumer.station_name,
                                 "factory_name": consumer.factory_name,
@@ -48,14 +50,14 @@ exports.getConsumers = async () => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else { 
-                    console.log("Failed fetching all consumers")
+                    console.log("Failed to fetch all consumers")
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else { 
-            console.log("Failed fetching all consumers")
+            console.log("Failed to fetch all consumers")
         }
     }
 }
@@ -81,6 +83,7 @@ exports.getConsumersByStation = async (station) => {
                     console.table([{ 
                             name: ' ',
                             type: ' ',
+                            consumer_group: ' ',
                             created_by_user: ' ',
                             station_name: ' ',
                             factory_name: ' ',
@@ -94,6 +97,7 @@ exports.getConsumersByStation = async (station) => {
                             return {
                                 "name": consumer.name,
                                 "type": consumer.type,
+                                "consumer_group": consumer.consumer_group,
                                 "created_by_user": consumer.created_by_user,
                                 "station_name": consumer.station_name,
                                 "factory_name": consumer.factory_name,
@@ -106,14 +110,14 @@ exports.getConsumersByStation = async (station) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed fetching all consumers of station ${station}.`)
+                    console.log(`Failed to fetch all consumers of station ${station}.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else { 
-            console.log(`Failed fetching all consumers of station ${station}.`)
+            console.log(`Failed to fetch all consumers of station ${station}.`)
         }
     }
 }

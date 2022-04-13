@@ -48,14 +48,14 @@ exports.getProducers = async () => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log("Failed fetching all producers")
+                    console.log("Failed to fetch all producers")
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log("Failed fetching all producers")
+            console.log("Failed to fetch all producers")
         }
     }
 }
@@ -107,14 +107,14 @@ exports.getProducersByStation = async (station) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed fetching all producers of station ${station}.`)
+                    console.log(`Failed to fetch all producers of station ${station}.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed fetching all producers of station ${station}.`)
+            console.log(`Failed to fetch all producers of station ${station}.`)
         }
     }
 }

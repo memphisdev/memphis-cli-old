@@ -30,26 +30,25 @@ ${helper.consumerHelp}
 `)
 //TODO: add ${helper.hubDesc} ${helper.hubHelp}
     .configureHelp({
-        sortSubcommands: true,
+        sortSubcommands: false,
         subcommandTerm: (cmd) => cmd.name() // Just show the name, instead of short usage.
     });
 
 program
     .command('connect')
-    .description('Connection to Memphis server')
+    .description('Connection to Memphis control plain')
     .argument('[command]')
     .option("-u, --user <user>", "User")
     .option("-p, --password <password>", "Password")
-    .option("-s, --server <server>", "Memphis server")
+    .option("-s, --server <server>", "Memphis control plain")
     .usage('<command> [options]')
     .showHelpAfterError()
     .addHelpText('before', helper.connectDesc)
     .action(function () {
-        if (Object.keys(this.opts()).length === 0) {
+        if (Object.keys(this.opts()).length === 0 || !this.opts().user || !this.opts().password || !this.opts().server) {
+            console.log("\nUse command: mem connect --user <user> --password <password> --server <server>\n")
+            console.log("Example: mem connect -u root -p memphis -s http://memphis-ui.test.com/api\n")
             console.log(program.commands[0].help())
-        }
-        else if (!this.opts().user || !this.opts().password || !this.opts().server) {
-            console.log("Use command: mem connect --user <user> --password <password> --server <server>")
         }
         else {
             connect(this.opts())
@@ -60,7 +59,6 @@ program
     .command('factory')
     .description('Factories usage commands')
     .argument('<command>')
-    .option("-n, --name <factory-name>", "Factory name")
     .option("-d, --desc <factory-description>", "Factory description")
     .usage('<command> [options]')
     .showHelpAfterError()
@@ -73,6 +71,7 @@ program
     .action(function () {
         const factoryActions = ["ls", "create", "edit", "del"]
         if (!this.args?.length || !factoryActions.includes(this.args[0])) {
+            console.log("");
             console.log(program.commands[1].help())
         }
         else {
@@ -84,8 +83,7 @@ program
     .command('station')
     .description('Stations usage commands')
     .argument('<command>')
-    .option("-n, --name <station-name>", "Station name")
-    .option("-f, --factory <factory>", "Factory name", "defultFactory")
+    .option("-f, --factory <factory>", "Factory name")
     .option("-rt, --retentiontype <retention-type>", "Retention type")
     .option("-rv, --retentionvalue <retention-value>", "Retention value")
     .option("-s, --storage <storage-type>", "Storage type")
@@ -101,8 +99,9 @@ program
     .addHelpText('before', helper.stationDesc)
     .addHelpText('after', `\n${helper.stationHelp}`)
     .action(function () {
-        const stationActions = ["ls", "create", "info", "edit", "del"]
+        const stationActions = ["ls", "create", "info", "del"]
         if (!this.args?.length || !stationActions.includes(this.args[0])) {
+            console.log("");
             console.log(program.commands[2].help())
         }
         else {
@@ -131,6 +130,7 @@ program
     .action(function () {
         const userActions = ["ls", "add", "del"]
         if (!this.args?.length || !userActions.includes(this.args[0])) {
+            console.log("");
             console.log(program.commands[3].help())
         }
         else {
@@ -154,7 +154,8 @@ program
     .action(function () {
         const producerActions = ["ls"]
         if (!this.args?.length || !producerActions.includes(this.args[0])) {
-            console.log(program.commands[1].help())
+            console.log("");
+            console.log(program.commands[4].help())
         }
         else {
             producer.producerMenu(this.args, this.opts())
@@ -177,7 +178,8 @@ program
     .action(function () {
         const consumerActions = ["ls"]
         if (!this.args?.length || !consumerActions.includes(this.args[0])) {
-            console.log(program.commands[1].help())
+            console.log("");
+            console.log(program.commands[5].help())
         }
         else {
             consumer.consumerMenu(this.args, this.opts())

@@ -8,14 +8,16 @@ const handleFactoryActions = (action, options) => {
             factory.getFactories()
             break;
         case "create":
-            if (!action[1])
-                console.log("Factory name is required. Use command:\nmem factory create <factory-name> --desc <factory-description>")
+            if (!action[1]){
+                console.log("\nFactory name is required. Use command:\n\nmem factory create <factory-name> [options]\n")
+                console.log("Options:\n-d, --desc <factory-description>", "Factory description\n");
+            }
             else
                 factory.createFactory(action[1], options)
             break;
         case "edit":
             if (!action[1])
-                console.log("Factory name is required. Use command:\nmem factory edit <factory-name> --name <new-factory-name> --desc <new-factory-description>")
+                console.log("\nFactory name is required. Use command:\n\nmem factory edit <factory-name> --name <new-factory-name> --desc <new-factory-description>\n")
             else if (!(options.name || options.desc))
                 console.log("New factory name or description is required. Use command:\nmem factory edit <factory-name> --name <new-factory-name> --desc <new-factory-description>")
             else
@@ -42,7 +44,7 @@ exports.factoryMenu = (action, options) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log("Failed connecting")
+                    console.log("Failed to connect to Memphis control plain.")
                 }
             })
     }
