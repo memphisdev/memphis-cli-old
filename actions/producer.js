@@ -27,7 +27,7 @@ exports.producerMenu = (action, options) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log("Failed connecting")
+                    console.log("Failed to connect to Memphis control plain.")
                 }
             })
     }
