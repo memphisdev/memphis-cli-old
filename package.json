@@ -1,6 +1,6 @@
 {
-  "name": "cli",
-  "version": "1.0.0",
+  "name": "memphiscli",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "bin": {
