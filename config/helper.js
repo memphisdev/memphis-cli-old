@@ -22,7 +22,7 @@ const userHelp =    `User Commands:
    del               Delete user
   `
 
-const connectDesc = `Connection configuration to Memphis control plain`
+const connectDesc = `Connection configuration to Memphis control plane`
 
 
 const producerDesc = `Producer is the entity who can send messages into stations`
