@@ -36,18 +36,18 @@ ${helper.consumerHelp}
 
 program
     .command('connect')
-    .description('Connection to Memphis control plain')
+    .description('Connection to Memphis control plane')
     .argument('[command]')
     .option("-u, --user <user>", "User")
     .option("-p, --password <password>", "Password")
-    .option("-s, --server <server>", "Memphis control plain")
+    .option("-s, --server <server>", "Memphis control plane")
     .usage('<command> [options]')
     .showHelpAfterError()
     .addHelpText('before', helper.connectDesc)
     .action(function () {
         if (Object.keys(this.opts()).length === 0 || !this.opts().user || !this.opts().password || !this.opts().server) {
             console.log("\nUse command: mem connect --user <user> --password <password> --server <server>\n")
-            console.log("Example: mem connect -u root -p memphis -s http://memphis-ui.test.com/api\n")
+            console.log("Example: mem connect -u root -p memphis -s http://<memphis-control-plane>:<port>")
             console.log(program.commands[0].help())
         }
         else {

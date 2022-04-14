@@ -50,19 +50,6 @@ const handleInitActions = (action, options) => {
 }
 
 exports.initMenu = (action, options) => {
-    if (!isValidToken()) {
-        login()
-            .then(res => {
-                handleInitActions(action, options)
-            })
-            .catch((error) => {
-                if (error.status === 666){
-                    console.log(error.errorObj.message);
-                } else {
-                    console.log("Failed to connect to Memphis control plain.")
-                }
-            })
-    }
-    else handleInitActions(options)
+    handleInitActions(action, options)
 };
 
