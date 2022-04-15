@@ -6,6 +6,9 @@
   "bin": {
     "mem": "index.js"
   },
+  "pkg": {
+    "assets": "actions/memphis_code_examples/*"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
