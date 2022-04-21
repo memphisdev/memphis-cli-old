@@ -1,7 +1,7 @@
 {
   "name": "memphiscli",
-  "version": "0.1.4",
-  "description": "",
+  "version": "0.1.5",
+  "description": "A dev-first event processing platform",
   "main": "index.js",
   "bin": {
     "mem": "index.js"
