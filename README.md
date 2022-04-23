@@ -80,7 +80,7 @@ For Memphis CLI
 
 ### Kubernetes
 #### Install
-```shell
+``` PowerShell
 helm repo add memphis https://k8s.memphis.dev/charts/
 helm install my-memphis memphis/memphis --create-namespace --namespace memphis
 ```
@@ -107,7 +107,7 @@ Example:<br>
     docker compose -f docker-compose.yml -p memphis up
 
 The following will be deployed as docker containers
-```shell
+``` PowerShell
 memphis-control-plane-1
 memphis-ui-1
 memphis-cluster-1
@@ -119,7 +119,7 @@ memphis-mongo-1
 ## Next Steps
 ### Kubernetes
 #### Localhost Environment
-```shell
+``` PowerShell
 Memphis UI can be accessed via port 80 on the following DNS name from within your cluster: 
 memphis-ui.memphis.svc.cluster.local
 
