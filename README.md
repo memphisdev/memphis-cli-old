@@ -103,8 +103,10 @@ Example:<br>
 
 ### Docker
 #### Install
+``` PowerShell
     curl -s https://memphis-os.github.io/memphis-docker/docker-compose.yml -o docker-compose.yml
     docker compose -f docker-compose.yml -p memphis up
+```
 
 The following will be deployed as docker containers
 ``` PowerShell
