@@ -179,15 +179,15 @@ $ mem factory <command> [options]
 ```
 ### Factory commands
 ``` PowerShell
-   ls                List of factories
-   create            Create new factory  
-   edit              Edit factory name and/or description
-   del               Delete a factory
+ls                List of factories
+create            Create new factory  
+edit              Edit factory name and/or description
+del               Delete a factory
 ```
 ### Factory options
 ``` PowerShell
-  -d, --desc <factory-description>  Factory description
-  -h, --help                        display help for command
+-d, --desc <factory-description>  Factory description
+-h, --help                        display help for command
 ```
 ### Examples
 ``` PowerShell
@@ -248,14 +248,14 @@ $ mem station <command> [options]
 ```
 ### Station options
 ``` PowerShell
-  -f, --factory <factory>                  Factory name
-  -rt, --retentiontype <retention-type>    Retention type
-  -rv, --retentionvalue <retention-value>  Retention value
-  -s, --storage <storage-type>             Storage type
-  -r, --replicas <replicas>                Replicas
-  -de, --dedupenabled <dedup-enabled>      Dedup enabled
-  -dw, --dedupwindow <dedup-window-in-ms>  Dedup window in ms
-  -h, --help                               display help for command
+-f, --factory <factory>                  Factory name
+-rt, --retentiontype <retention-type>    Retention type
+-rv, --retentionvalue <retention-value>  Retention value
+-s, --storage <storage-type>             Storage type
+-r, --replicas <replicas>                Replicas
+-de, --dedupenabled <dedup-enabled>      Dedup enabled
+-dw, --dedupwindow <dedup-window-in-ms>  Dedup window in ms
+-h, --help                               display help for command
 ```
 
 ### Examples
@@ -323,17 +323,17 @@ $ mem user <command> [options]
 
 ### User commands
 ``` PowerShell
-   ls                List of users
-   add               Add new user  
-   del               Delete user
+ls                List of users
+add               Add new user  
+del               Delete user
 ```
 ### User options
 ``` PowerShell
-  -n, --name <user-name>          User name
-  -p, --password <user-password>  User password
-  -t, --type <user-type>          User type (default: "management") - application/management
-  -a, --avatar <avatar-id>        Avatar id (default: 1) -  1-4
-  -h, --help                      display help for command
+-n, --name <user-name>          User name
+-p, --password <user-password>  User password
+-t, --type <user-type>          User type (default: "management") - application/management
+-a, --avatar <avatar-id>        Avatar id (default: 1) -  1-4
+-h, --help                      display help for command
 ```
 ### Examples
 ``` PowerShell
@@ -380,12 +380,12 @@ $ mem user ls
 > ##### Producer is the entity who can send messages into stations
 ### Producer commands
 ``` PowerShell
-   ls                List of Producers
+ls                List of Producers
 ```
 ### Producer options
 ``` PowerShell
-  -s, --station <station-name>  Producers by station
-  -h, --help                    display help for command
+-s, --station <station-name>  Producers by station
+-h, --help                    display help for command
 ```
 ### Examples
 ``` PowerShell
@@ -401,12 +401,12 @@ $ mem producer ls
 > ##### Consumer is the entity who can consume messages from stations
 ### Consumer commands
 ``` PowerShell
-   ls                List of Consumers
+ls                List of Consumers
 ```
 ### Consumer options
 ``` PowerShell
-  -s, --station <station-name>  Consumers by station
-  -h, --help                    display help for command
+-s, --station <station-name>  Consumers by station
+-h, --help                    display help for command
 ```
 ### Examples
 ``` PowerShell
