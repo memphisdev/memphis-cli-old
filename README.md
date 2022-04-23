@@ -241,10 +241,10 @@ $ mem station <command> [options]
 ```
 ### Station commands
 ``` PowerShell
-   ls                List of stations
-   create            Create new station  
-   info              Specific station's info
-   del               Delete a station
+ls                List of stations
+create            Create new station  
+info              Specific station's info
+del               Delete a station
 ```
 ### Station options
 ``` PowerShell
