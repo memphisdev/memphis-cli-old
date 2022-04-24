@@ -33,34 +33,39 @@ In the coming versions, Memphis will answer the challenges above,<br>and recude 
 For Memphis CLI
 
 **Table of Contents**
-- [Memphis Components](#memphis-components)
-- [Memphis repos](#memphis-repos)
-- [Current SDKs](#current-sdks)
-- [Installation](#installation)
-  * [Kubernetes](#kubernetes)
-    + [Install](#install)
-    + [K8S Diagram](#k8s-diagram)
-  * [Docker](#docker)
-    + [Install](#install-1)
-  * [Homebrew](#homebrew)
-  * [npm](#npm)
-- [Next Steps](#next-steps)
-  * [Kubernetes](#kubernetes-1)
-    + [Localhost Environment](#localhost-environment)
-    + [Production Environments](#production-environments)
-  * [Docker](#docker-1)
 - [Usage](#usage)
-  * [Connect](#connect)
-  * [Factory](#factory)
-  * [Station](#station)
-  * [User](#user)
-  * [Producer](#producer)
-  * [Consumer](#consumer)
-  * [Init](#init)
-- [Memphis Contributors](#memphis-contributors)
-- [Contribution guidelines](#contribution-guidelines)
-- [Documentation](#documentation)
-- [Contact](#contact)
+  - [Installation](#installation-1)
+    - [Homebrew](#homebrew)
+    - [npm](#npm)
+  - [Connect](#connect)
+    - [Parameters - all required](#parameters---all-required)
+    - [Example](#example)
+  - [Factory](#factory)
+    - [Factory commands](#factory-commands)
+    - [Factory options](#factory-options)
+    - [Examples](#examples)
+  - [Station](#station)
+    - [Station commands](#station-commands)
+    - [Station options](#station-options)
+    - [Examples](#examples-1)
+  - [User](#user)
+    - [User commands](#user-commands)
+    - [User options](#user-options)
+    - [Examples](#examples-2)
+  - [Producer](#producer)
+    - [Producer commands](#producer-commands)
+    - [Producer options](#producer-options)
+    - [Examples](#examples-3)
+  - [Consumer](#consumer)
+    - [Consumer commands](#consumer-commands)
+    - [Consumer options](#consumer-options)
+    - [Examples](#examples-4)
+  - [Init](#init)
+    - [Examples](#examples-5)
+  - [Memphis Contributors](#memphis-contributors)
+  - [Contribution guidelines](#contribution-guidelines)
+  - [Documentation](#documentation)
+  - [Contact](#contact)
 
 ## Memphis Components
 ![](https://memphis-public-files.s3.eu-central-1.amazonaws.com/graphics+for+github/components+diagram+-+cli.png )
@@ -116,15 +121,6 @@ memphis-cluster-1
 memphis-mongo-1
 ```
 ---
-### Homebrew
-``` PowerShell
-$ brew install Memphis-OS/homebrew-memphis-cli/memphis
-```
-### npm
-``` PowerShell
-$ npm i memphiscli -g
-```
----
 
 ## Next Steps
 ### Kubernetes
@@ -156,6 +152,17 @@ Control-Plane for SDK - `localhost:6666` + `localhost:5555`
 
 
 # Usage
+
+## Installation
+### Homebrew
+``` PowerShell
+$ brew install Memphis-OS/homebrew-memphis-cli/memphis
+```
+### npm
+``` PowerShell
+$ npm i memphiscli -g
+```
+
 ## Connect
 > ##### Connection to Memphis control plane
 
