@@ -160,7 +160,7 @@ $ brew install Memphis-OS/homebrew-memphis-cli/memphis
 ```
 ### npm
 ``` PowerShell
-$ npm i memphiscli -g
+$ npm i memphis-dev-cli -g
 ```
 
 ## Connect
