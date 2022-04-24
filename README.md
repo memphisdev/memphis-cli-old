@@ -115,8 +115,16 @@ memphis-ui-1
 memphis-cluster-1
 memphis-mongo-1
 ```
-
-
+---
+### Homebrew
+``` PowerShell
+$ brew install Memphis-OS/homebrew-memphis-cli/memphis
+```
+### npm
+``` PowerShell
+$ npm i memphiscli -g
+```
+---
 
 ## Next Steps
 ### Kubernetes
