@@ -50,7 +50,6 @@ exports.addUser = async (user) => {
         if (data.length == 0) {
             return
         }
-        console.log(user)
         const credentials = JSON.parse(data.toString())
         httpRequest({
             method: "POST",
@@ -78,14 +77,14 @@ exports.addUser = async (user) => {
                 if (error.status === 666){
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed to add ${user.name} user.`)
+                    console.log(`Failed to add user ${user.name}.`)
                 }
             })
     } catch (error) {
         if (error.status === 666){
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed to add ${user.name} user.`)
+            console.log(`Failed to add user ${user.name}.`)
         }
     }
 }
