@@ -14,7 +14,7 @@ const stationHelp = `Station Commands:
    info              Specific station's info
    del               Delete a station
 `
-const userDesc = `Manage users and premissions`
+const userDesc = `Manage users and permissions`
 
 const userHelp =    `User Commands:
    ls                List of users
