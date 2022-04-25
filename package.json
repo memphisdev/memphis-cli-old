@@ -1,5 +1,5 @@
 {
-  "name": "memphiscli",
+  "name": "memphis-dev-cli",
   "version": "0.1.2",
   "description": "A dev-first event processing platform",
   "main": "index.js",
