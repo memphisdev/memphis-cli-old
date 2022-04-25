@@ -36,7 +36,7 @@ const handleInitActions = (action, options) => {
     }
     else{
         console.log(`\n'mem init' creates an example project for connecting an app with Memphis.\n\nThe default language is nodejs.\nIf you want to use different language use 'mem init -l/--language <language>'.\nCurrently supported languages: ${allowedLang}.\n\nFor more help use 'mem init -h'.\n`);
-        readline.question(`The project will be created in directory ${__dirname}\n continue? Y/n`, answer => {
+        readline.question(`The project will be created in directory ${process.cwd()}\n continue? Y/n    ->    `, answer => {
             if (answer.toString().trim().toLowerCase() === "y" || !answer){
                 writeIndexFile(language);
             }
