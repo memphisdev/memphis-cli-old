@@ -7,7 +7,11 @@
     "mem": "index.js"
   },
   "pkg": {
-    "assets": "actions/memphis_code_examples/nodejs/index.js"
+    "assets": [
+      "actions/memphis_code_examples/nodejs/consumer.js",
+      "actions/memphis_code_examples/nodejs/producer.js",
+      "actions/memphis_code_examples/nodejs/package.json"
+    ]
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
