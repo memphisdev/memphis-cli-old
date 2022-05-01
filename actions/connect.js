@@ -4,12 +4,14 @@ const fs = require('fs');
 
 module.exports = (credentials) => {
      let fixedUrl;
+     let url = credentials.server.endsWith('/') ? credentials.server.slice(0, -1) : credentials.server;
+     url = url.endsWith('api') ? url.replace('/api', '') : url;
      try {
-          if(!credentials.server.startsWith("http")){
-               fixedUrl = "https://" + credentials.server;
+          if(!url.startsWith("http")){
+               fixedUrl = "https://" + url;
           }
           else{
-               fixedUrl = credentials.server;
+               fixedUrl = url;
           }
           return login(fixedUrl, credentials.user, credentials.password)
                .then(res => {
@@ -25,19 +27,19 @@ module.exports = (credentials) => {
                          };
                          const data = JSON.stringify(credentialsDetails);
                          fs.writeFileSync('.memconfig', data);
-                         console.log("Connected successfully to Memphis control plane.")
+                         console.log(`Connected successfully to ${fixedUrl}`);
                     }
                     else {
                          let fixedUrl;
                               try {
-                                  if(!credentials.server.startsWith("http")){
+                                  if(!url.startsWith("http")){
                                       fixedUrl = "http://" + url;
                                   }
-                                  else if(credentials.server.startsWith("https")){
-                                      fixedUrl = credentials.server.replace("https", "http"); 
+                                  else if(url.startsWith("https")){
+                                      fixedUrl = url.replace("https", "http"); 
                                   }
-                                  else if(!credentials.server.startsWith("https")){
-                                        fixedUrl = credentials.server.replace("http", "https");
+                                  else if(!url.startsWith("https")){
+                                        fixedUrl = url.replace("http", "https");
                                   }
                                   return login(fixedUrl, credentials.user, credentials.password)
                                   .then(res => {
@@ -53,7 +55,7 @@ module.exports = (credentials) => {
                                              };
                                              const data = JSON.stringify(credentialsDetails);
                                              fs.writeFileSync('.memconfig', data);
-                                             console.log("Connected successfully to Memphis control plane.")
+                                             console.log(`Connected successfully to ${fixedUrl}`);
                                         }
                                         else{
                                              console.log("Failed to connect to Memphis control plane.")
