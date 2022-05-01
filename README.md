@@ -145,8 +145,8 @@ Please expose the UI, Cluster, and Control-plane via k8s ingress / load balancer
 **To access Memphis, run the below commands:**
 Dashboard - `http://localhost:9000`<br>
 Broker - `localhost:7766`<br>
-Control-Plane for CLI - `localhost:5555`<br>
-Control-Plane for SDK - `localhost:6666` + `localhost:5555`
+Control-Plane for CLI - `localhost:9000`<br>
+Control-Plane for SDK - `localhost:6666`
 
 
 

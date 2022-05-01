@@ -9,11 +9,12 @@ const helper = require('./config/helper')
 const producer = require('./actions/producer')
 const consumer = require('./actions/consumer')
 const init = require('./actions/init')
+const packageDetails = require('./package.json')
 
 const program = new commander.Command();
 
 program
-    .version('0.1.0')
+    .version(`Memphis CLI version ${packageDetails.version}`)
     .usage('<command> [options]')
     // .description('Memphis CLI')
     .addHelpText('after', `
