@@ -1,13 +1,17 @@
 {
   "name": "memphis-dev-cli",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A dev-first event processing platform",
   "main": "index.js",
   "bin": {
     "mem": "index.js"
   },
   "pkg": {
-    "assets": "actions/memphis_code_examples/nodejs/index.js"
+    "assets": [
+      "actions/memphis_code_examples/nodejs/consumer.js",
+      "actions/memphis_code_examples/nodejs/producer.js",
+      "actions/memphis_code_examples/nodejs/package.json"
+    ]
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
