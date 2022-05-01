@@ -3,15 +3,15 @@ const memphis = require("memphis-dev");
 (async function () {
     try {
         await memphis.connect({
-            host: "localhost",
-            brokerHost: "localhost",
-            username: "app_1",
-            connectionToken: "dYDkiGnr7Z2drNRvpGdq"
+            host: "<control-plane>",
+            brokerHost: "<broker>",
+            username: "<application type username>",
+            connectionToken: "<broker-token>"
         });
 
         const producer = await memphis.producer({
-            stationName: "test_station",
-            producerName: "first_app"
+            stationName: "<station-name>",
+            producerName: "<producer-name>"
         });
 
         const promises = [];
