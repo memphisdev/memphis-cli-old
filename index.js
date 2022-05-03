@@ -1,23 +1,42 @@
 #!/usr/bin/env node
+
+// Copyright 2021-2022 The Memphis Authors
+// Licensed under the Apache License, Version 2.0 (the “License”);
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an “AS IS” BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 const commander = require('commander');
 
-const factory = require('./actions/factory')
-const station = require('./actions/station')
-const user = require('./actions/users')
-const connect = require('./actions/connect')
-const helper = require('./config/helper')
-const producer = require('./actions/producer')
-const consumer = require('./actions/consumer')
-const init = require('./actions/init')
-const packageDetails = require('./package.json')
+const factory = require('./actions/factory');
+const station = require('./actions/station');
+const user = require('./actions/users');
+const connect = require('./actions/connect');
+const helper = require('./config/helper');
+const producer = require('./actions/producer');
+const consumer = require('./actions/consumer');
+const init = require('./actions/init');
+const packageDetails = require('./package.json');
+const validateVersion = require('./utils/validateVersion');
 
 const program = new commander.Command();
+
+validateVersion();
 
 program
     .version(`Memphis CLI version ${packageDetails.version}`)
     .usage('<command> [options]')
     // .description('Memphis CLI')
-    .addHelpText('after', `
+    .addHelpText(
+        'after',
+        `
 ${helper.factoryDesc}
 ${helper.factoryHelp}
 ${helper.stationDesc}
@@ -28,8 +47,9 @@ ${helper.producerDesc}
 ${helper.producerHelp}
 ${helper.consumerDesc}
 ${helper.consumerHelp}
-`)
-//TODO: add ${helper.hubDesc} ${helper.hubHelp}
+`
+    )
+    //TODO: add ${helper.hubDesc} ${helper.hubHelp}
     .configureHelp({
         sortSubcommands: false,
         subcommandTerm: (cmd) => cmd.name() // Just show the name, instead of short usage.
@@ -39,28 +59,27 @@ program
     .command('connect')
     .description('Connection to Memphis control plane')
     .argument('[command]')
-    .option("-u, --user <user>", "User")
-    .option("-p, --password <password>", "Password")
-    .option("-s, --server <server>", "Memphis control plane")
+    .option('-u, --user <user>', 'User')
+    .option('-p, --password <password>', 'Password')
+    .option('-s, --server <server>', 'Memphis control plane')
     .usage('<command> [options]')
     .showHelpAfterError()
     .addHelpText('before', helper.connectDesc)
     .action(function () {
         if (Object.keys(this.opts()).length === 0 || !this.opts().user || !this.opts().password || !this.opts().server) {
-            console.log("\nUse command: mem connect --user <user> --password <password> --server <server>\n")
-            console.log("Example: mem connect -u root -p memphis -s http://<memphis-control-plane>:<port>")
-            console.log(program.commands[0].help())
+            console.log('\nUse command: mem connect --user <user> --password <password> --server <server>\n');
+            console.log('Example: mem connect -u root -p memphis -s http://<memphis-control-plane>:<port>');
+            console.log(program.commands[0].help());
+        } else {
+            connect(this.opts());
         }
-        else {
-            connect(this.opts())
-        }
-    })
+    });
 
 program
     .command('factory')
     .description('Factories usage commands')
     .argument('<command>')
-    .option("-d, --desc <factory-description>", "Factory description")
+    .option('-d, --desc <factory-description>', 'Factory description')
     .usage('<command> [options]')
     .showHelpAfterError()
     .configureHelp({
@@ -70,27 +89,26 @@ program
     .addHelpText('before', helper.factoryDesc)
     .addHelpText('after', `\n${helper.factoryHelp}`)
     .action(function () {
-        const factoryActions = ["ls", "create", "edit", "del"]
+        const factoryActions = ['ls', 'create', 'edit', 'del'];
         if (!this.args?.length || !factoryActions.includes(this.args[0])) {
-            console.log("");
-            console.log(program.commands[1].help())
+            console.log('');
+            console.log(program.commands[1].help());
+        } else {
+            factory.factoryMenu(this.args, this.opts());
         }
-        else {
-            factory.factoryMenu(this.args, this.opts())
-        }
-    })
+    });
 
 program
     .command('station')
     .description('Stations usage commands')
     .argument('<command>')
-    .option("-f, --factory <factory>", "Factory name")
-    .option("-rt, --retentiontype <retention-type>", "Retention type")
-    .option("-rv, --retentionvalue <retention-value>", "Retention value")
-    .option("-s, --storage <storage-type>", "Storage type")
-    .option("-r, --replicas <replicas>", "Replicas")
-    .option("-de, --dedupenabled <dedup-enabled>", "Dedup enabled")
-    .option("-dw, --dedupwindow <dedup-window-in-ms>", "Dedup window in ms")
+    .option('-f, --factory <factory>', 'Factory name')
+    .option('-rt, --retentiontype <retention-type>', 'Retention type')
+    .option('-rv, --retentionvalue <retention-value>', 'Retention value')
+    .option('-s, --storage <storage-type>', 'Storage type')
+    .option('-r, --replicas <replicas>', 'Replicas')
+    .option('-de, --dedupenabled <dedup-enabled>', 'Dedup enabled')
+    .option('-dw, --dedupwindow <dedup-window-in-ms>', 'Dedup window in ms')
     .usage('<command> [options]')
     .showHelpAfterError()
     .configureHelp({
@@ -100,24 +118,23 @@ program
     .addHelpText('before', helper.stationDesc)
     .addHelpText('after', `\n${helper.stationHelp}`)
     .action(function () {
-        const stationActions = ["ls", "create", "info", "del"]
+        const stationActions = ['ls', 'create', 'info', 'del'];
         if (!this.args?.length || !stationActions.includes(this.args[0])) {
-            console.log("");
-            console.log(program.commands[2].help())
+            console.log('');
+            console.log(program.commands[2].help());
+        } else {
+            station.stationMenu(this.args, this.opts());
         }
-        else {
-            station.stationMenu(this.args, this.opts())
-        }
-    })
+    });
 
 program
     .command('user')
     .description('Users usage commands')
     .argument('<command>')
-    .option("-n, --name <user-name>", "User name")
-    .option("-p, --password <user-password>", "User password")
-    .option("-t, --type <user-type>", "User type", "management")
-    .option("-a, --avatar <avatar-id>", "Avatar id", 1)
+    .option('-n, --name <user-name>', 'User name')
+    .option('-p, --password <user-password>', 'User password')
+    .option('-t, --type <user-type>', 'User type', 'management')
+    .option('-a, --avatar <avatar-id>', 'Avatar id', 1)
     // .option("-hu, --hubuser <hub-username>", "Hub user name")
     // .option("-hp, --hubpass <hub-password>", "Hub password")
     .usage('<command> [options]')
@@ -129,20 +146,19 @@ program
     .addHelpText('before', helper.userDesc)
     .addHelpText('after', `\n${helper.userHelp}`)
     .action(function () {
-        const userActions = ["ls", "add", "del"]
+        const userActions = ['ls', 'add', 'del'];
         if (!this.args?.length || !userActions.includes(this.args[0])) {
-            console.log("");
-            console.log(program.commands[3].help())
+            console.log('');
+            console.log(program.commands[3].help());
+        } else {
+            user.userMenu(this.args, this.opts());
         }
-        else {
-            user.userMenu(this.args, this.opts())
-        }
-    })
+    });
 
 program
     .command('producer')
     .description('Producers usage commands')
-    .option("-s, --station <station-name>", "Producers by station")
+    .option('-s, --station <station-name>', 'Producers by station')
     .argument('<command>')
     .usage('<command> [options]')
     .showHelpAfterError()
@@ -153,20 +169,19 @@ program
     .addHelpText('before', helper.producerDesc)
     .addHelpText('after', `\n${helper.producerHelp}`)
     .action(function () {
-        const producerActions = ["ls"]
+        const producerActions = ['ls'];
         if (!this.args?.length || !producerActions.includes(this.args[0])) {
-            console.log("");
-            console.log(program.commands[4].help())
+            console.log('');
+            console.log(program.commands[4].help());
+        } else {
+            producer.producerMenu(this.args, this.opts());
         }
-        else {
-            producer.producerMenu(this.args, this.opts())
-        }
-    })
+    });
 
 program
     .command('consumer')
     .description('Consumer usage commands')
-    .option("-s, --station <station-name>", "Consumers by station")
+    .option('-s, --station <station-name>', 'Consumers by station')
     .argument('<command>')
     .usage('<command> [options]')
     .showHelpAfterError()
@@ -177,26 +192,25 @@ program
     .addHelpText('before', helper.consumerDesc)
     .addHelpText('after', `\n${helper.consumerHelp}`)
     .action(function () {
-        const consumerActions = ["ls"]
+        const consumerActions = ['ls'];
         if (!this.args?.length || !consumerActions.includes(this.args[0])) {
-            console.log("");
-            console.log(program.commands[5].help())
+            console.log('');
+            console.log(program.commands[5].help());
+        } else {
+            consumer.consumerMenu(this.args, this.opts());
         }
-        else {
-            consumer.consumerMenu(this.args, this.opts())
-        }
-    })
+    });
 
 program
     .command('init')
     .description('Creates an example project for working with Memphis')
-    .option("-l, --lang <language>", "Language of project", "nodejs")
+    .option('-l, --lang <language>', 'Language of project', 'nodejs')
     .argument('[command]')
     .usage('[options]')
     .showHelpAfterError()
     .action(function () {
-        init.initMenu(this.args, this.opts())
-    })
+        init.initMenu(this.args, this.opts());
+    });
 
 //Prepare to hub command
 // program
@@ -221,5 +235,4 @@ program
 //         }
 //     })
 
-
-program.parse(process.argv)
+program.parse(process.argv);

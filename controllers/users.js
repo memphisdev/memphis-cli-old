@@ -1,123 +1,137 @@
-const ApiEndpoint = require("../apiEndpoints")
-const httpRequest = require("../services/httpRequest")
+// Copyright 2021-2022 The Memphis Authors
+// Licensed under the Apache License, Version 2.0 (the “License”);
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an “AS IS” BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+const ApiEndpoint = require('../apiEndpoints');
+const httpRequest = require('../services/httpRequest');
 const fs = require('fs');
 
 exports.getUsers = async () => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8')
+        const data = fs.readFileSync('.memconfig', 'utf8');
         if (data.length == 0) {
-            return
+            return;
         }
-        const credentials = JSON.parse(data.toString())
+        const credentials = JSON.parse(data.toString());
         httpRequest({
-            method: "GET",
+            method: 'GET',
             url: `${credentials.server}${ApiEndpoint.GET_ALL_USERS}`,
-            headers: { 'Authorization': 'Bearer ' + credentials.jwt },
+            headers: { Authorization: 'Bearer ' + credentials.jwt },
             bodyParams: null,
             queryParams: null,
-            timeout: 0,
+            timeout: 0
         })
-            .then(res => {
-                res.sort((a, b) => a.creation_date.localeCompare(b.creation_date))
+            .then((res) => {
+                res.sort((a, b) => a.creation_date.localeCompare(b.creation_date));
                 console.table(
-                    res.map(user => {
+                    res.map((user) => {
                         return {
-                            "user_name": user.username,
-                            "creation_date": user.creation_date,
-                            "user_type": user.user_type,
+                            user_name: user.username,
+                            creation_date: user.creation_date,
+                            user_type: user.user_type
                         };
-                    }))
+                    })
+                );
             })
             .catch((error) => {
-                if (error.status === 666){
+                if (error.status === 666) {
                     console.log(error.errorObj.message);
                 } else {
-                    console.log("Failed to fetch all users")
+                    console.log('Failed to fetch all users');
                 }
-            })
+            });
     } catch (error) {
-        if (error.status === 666){
+        if (error.status === 666) {
             console.log(error.errorObj.message);
         } else {
-            console.log("Failed to fetch all users")
-        }    
+            console.log('Failed to fetch all users');
+        }
     }
-}
+};
 
 exports.addUser = async (user) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8')
+        const data = fs.readFileSync('.memconfig', 'utf8');
         if (data.length == 0) {
-            return
+            return;
         }
-        const credentials = JSON.parse(data.toString())
+        const credentials = JSON.parse(data.toString());
         httpRequest({
-            method: "POST",
+            method: 'POST',
             url: `${credentials.server}${ApiEndpoint.ADD_USER}`,
-            headers: { 'Authorization': 'Bearer ' + credentials.jwt },
+            headers: { Authorization: 'Bearer ' + credentials.jwt },
             bodyParams: {
-                "username": user.name,
-                "password": user.password,
+                username: user.name,
+                password: user.password,
                 // "hub_username": user.hubuser,
                 // "hub_password": user.hubpass,
-                "user_type": user.type,
-                "avatar_id": parseInt(user.avatar),
+                user_type: user.type,
+                avatar_id: parseInt(user.avatar)
             },
             queryParams: null,
-            timeout: 0,
+            timeout: 0
         })
-            .then(res => {
+            .then((res) => {
                 console.log(`User ${res.username} was created.`);
-                if(res.user_type === "application"){
-                    console.log(`Broker connection credentials: ${res.broker_connection_creds}`)
+                if (res.user_type === 'application') {
+                    console.log(`Broker connection credentials: ${res.broker_connection_creds}`);
                     console.warn(`These credentials CAN'T be restored, save them in a safe place`);
                 }
             })
             .catch((error) => {
-                if (error.status === 666){
+                if (error.status === 666) {
                     console.log(error.errorObj.message);
                 } else {
-                    console.log(`Failed to add user ${user.name}.`)
+                    console.log(`Failed to add user ${user.name}.`);
                 }
-            })
+            });
     } catch (error) {
-        if (error.status === 666){
+        if (error.status === 666) {
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed to add user ${user.name}.`)
+            console.log(`Failed to add user ${user.name}.`);
         }
     }
-}
+};
 
 exports.removeUser = async (user) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8')
+        const data = fs.readFileSync('.memconfig', 'utf8');
         if (data.length == 0) {
-            return
+            return;
         }
-        const credentials = JSON.parse(data.toString())
+        const credentials = JSON.parse(data.toString());
         httpRequest({
-            method: "DELETE",
+            method: 'DELETE',
             url: `${credentials.server}${ApiEndpoint.REMOVE_USER}`,
-            headers: { 'Authorization': 'Bearer ' + credentials.jwt },
-            bodyParams: { "username": user },
+            headers: { Authorization: 'Bearer ' + credentials.jwt },
+            bodyParams: { username: user },
             queryParams: null,
-            timeout: 0,
+            timeout: 0
         })
-            .then(res => {
-                Object.keys(res).length === 0 ? console.log(`User ${user} was removed.`) : console.log(`Failed removing user ${user}.`)
+            .then((res) => {
+                Object.keys(res).length === 0 ? console.log(`User ${user} was removed.`) : console.log(`Failed removing user ${user}.`);
             })
             .catch((error) => {
-                console.log(`Failed to remove user ${user}.`)
-            })
+                console.log(`Failed to remove user ${user}.`);
+            });
     } catch (error) {
-        if (error.status === 666){
+        if (error.status === 666) {
             console.log(error.errorObj.message);
         } else {
-            console.log(`Failed to remove user ${user}.`)
+            console.log(`Failed to remove user ${user}.`);
         }
     }
-}
+};
 
 // exports.edithubcred = async (user) => {
 //     try {
@@ -145,10 +159,10 @@ exports.removeUser = async (user) => {
 //                 console.error(`Failed to update hub credentials.`)
 //             })
 //     } catch (error) {
-            // if (error.status === 666){
-            //     console.log(error.errorObj.message);
-            // } else {
-            //     console.error(`Failed to update hub credentials.`)
-            // }
+// if (error.status === 666){
+//     console.log(error.errorObj.message);
+// } else {
+//     console.error(`Failed to update hub credentials.`)
+// }
 //     }
 // }
