@@ -11,21 +11,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const fs = require('fs');
+const packageDetails = require('../package.json');
+
+var getVersion = require('git-repo-version');
 
 module.exports = () => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
-        if (data.length == 0) {
-            return false;
+        const version = getVersion().split('+')[0].replace('v', '');
+        if (version) {
+            if (version !== packageDetails.version) {
+                console.log(
+                    '\x1b[33m',
+                    `\nMemphis CLI is out of date, we strongly recommend upgrading it\nThe version installed is ${packageDetails.version} but current version is ${version}`
+                );
+                console.log('\x1b[0m', '');
+            }
         }
-        const credentials = JSON.parse(data.toString());
-        const d = new Date();
-        return !(d.getTime() > credentials.expiration);
-    } catch (error) {
-        if (error.status === 666) {
-            console.log(error.errorObj.message);
-        }
-        return false;
+    } catch (ex) {
+        return;
     }
 };
