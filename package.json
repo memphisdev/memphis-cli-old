@@ -9,8 +9,7 @@
     "pkg": {
         "assets": [
             "actions/memphis_code_examples/nodejs/consumer.js",
-            "actions/memphis_code_examples/nodejs/producer.js",
-            "actions/memphis_code_examples/nodejs/package.json"
+            "actions/memphis_code_examples/nodejs/producer.js"
         ]
     },
     "scripts": {
