@@ -68,7 +68,7 @@ For Memphis CLI
   - [Contact](#contact)
 
 ## Memphis Components
-![](https://memphis-public-files.s3.eu-central-1.amazonaws.com/graphics+for+github/components+diagram+-+cli.png )
+![](https://memphis-public-files.s3.eu-central-1.amazonaws.com/graphics+for+github/Architecture+for+ReadME-Page-2.drawio.png )
 
 ## Memphis repos
 - [memphis-control-plane](https://github.com/Memphis-OS/memphis-control-plane "memphis-control-plane")
