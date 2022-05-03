@@ -68,7 +68,7 @@ program
     .action(function () {
         if (Object.keys(this.opts()).length === 0 || !this.opts().user || !this.opts().password || !this.opts().server) {
             console.log('\nUse command: mem connect --user <user> --password <password> --server <server>\n');
-            console.log('Example: mem connect -u root -p memphis -s http://<memphis-control-plane>:<port>');
+            console.log('Example: mem connect -u root -p memphis -s <host>:<port>');
             console.log(program.commands[0].help());
         } else {
             connect(this.opts());
