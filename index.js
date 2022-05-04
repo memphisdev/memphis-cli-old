@@ -24,11 +24,8 @@ const producer = require('./actions/producer');
 const consumer = require('./actions/consumer');
 const init = require('./actions/init');
 const packageDetails = require('./package.json');
-const validateVersion = require('./utils/validateVersion');
 
 const program = new commander.Command();
-
-validateVersion();
 
 program
     .version(`Memphis CLI version ${packageDetails.version}`)
@@ -57,18 +54,18 @@ ${helper.consumerHelp}
 
 program
     .command('connect')
-    .description('Connection to Memphis control plane')
+    .description('Connection to Memphis')
     .argument('[command]')
     .option('-u, --user <user>', 'User')
     .option('-p, --password <password>', 'Password')
-    .option('-s, --server <server>', 'Memphis control plane')
+    .option('-s, --server <server>', 'Memphis')
     .usage('<command> [options]')
     .showHelpAfterError()
     .addHelpText('before', helper.connectDesc)
     .action(function () {
         if (Object.keys(this.opts()).length === 0 || !this.opts().user || !this.opts().password || !this.opts().server) {
             console.log('\nUse command: mem connect --user <user> --password <password> --server <server>\n');
-            console.log('Example: mem connect -u root -p memphis -s <host>:<port>');
+            console.log('Example: mem connect -u root -p memphis -s <host>:<management_port>');
             console.log(program.commands[0].help());
         } else {
             connect(this.opts());
