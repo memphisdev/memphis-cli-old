@@ -24,11 +24,8 @@ const producer = require('./actions/producer');
 const consumer = require('./actions/consumer');
 const init = require('./actions/init');
 const packageDetails = require('./package.json');
-const validateVersion = require('./utils/validateVersion');
 
 const program = new commander.Command();
-
-validateVersion();
 
 program
     .version(`Memphis CLI version ${packageDetails.version}`)
