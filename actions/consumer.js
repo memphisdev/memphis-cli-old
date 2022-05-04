@@ -37,7 +37,7 @@ exports.consumerMenu = (action, options) => {
                 if (error.status === 666) {
                     console.log(error.errorObj.message);
                 } else {
-                    console.log('Failed to connect to Memphis control plane.');
+                    console.log('Failed to connect to Memphis.');
                 }
             });
     } else handleConsumerActions(action, options);
