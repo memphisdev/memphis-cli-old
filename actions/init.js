@@ -22,13 +22,10 @@ const writeProjectFiles = (language) => {
             case 'nodejs':
                 const consumer = 'consumer.js';
                 const producer = 'producer.js';
-                const package = 'package.json';
                 const consumerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/nodejs/consumer.js');
                 const producerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/nodejs/producer.js');
-                const packageData = fs.readFileSync(global.__basedir + '/memphis_code_examples/nodejs/package.json');
                 fs.writeFileSync(consumer, consumerData);
                 fs.writeFileSync(producer, producerData);
-                fs.writeFileSync(package, packageData);
         }
         console.log(`Example project was created.`);
     } catch (error) {
