@@ -24,20 +24,20 @@ const handleUserActions = (action, options) => {
         case 'add':
             if (!options.name)
                 console.log(
-                    `User name is required. Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type> --avatar <avatar-id>\nNote:\ntype values: application/management\n* Password is not required for type application *`
+                    `User name is required. Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type>\nNote:\ntype values: application/management\n* Password is not required for type application *`
                 ); //--hubuser <hub-username> --hubpass <hub-password>`)
             else if (!options.password && options.type === 'management')
                 console.log(
-                    `Password is required for user of type management. Use command:\nmem user add --name <user-name> --password <user-password> --type management --avatar <avatar-id>`
+                    `Password is required for user of type management. Use command:\nmem user add --name <user-name> --password <user-password> --type management`
                 );
             else if (options.password && options.type === 'application')
                 console.log(
-                    `Password is not required for user of type application. Use command:\nmem user add --name <user-name> --type application --avatar <avatar-id>`
+                    `Password is not required for user of type application. Use command:\nmem user add --name <user-name> --type application`
                 );
             else if (!options.type || options.type === 'management' || options.type === 'application') users.addUser(options);
             else
                 console.log(
-                    ` Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type> --avatar <avatar-id>\nNote:\ntype values: application/management`
+                    ` Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type>\nNote:\ntype values: application/management`
                 );
             break;
         case 'del':

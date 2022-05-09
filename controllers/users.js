@@ -74,8 +74,7 @@ exports.addUser = async (user) => {
                 password: user.password,
                 // "hub_username": user.hubuser,
                 // "hub_password": user.hubpass,
-                user_type: user.type,
-                avatar_id: parseInt(user.avatar)
+                user_type: user.type
             },
             queryParams: null,
             timeout: 0

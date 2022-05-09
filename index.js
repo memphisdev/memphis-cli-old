@@ -131,7 +131,6 @@ program
     .option('-n, --name <user-name>', 'User name')
     .option('-p, --password <user-password>', 'User password')
     .option('-t, --type <user-type>', 'User type', 'management')
-    .option('-a, --avatar <avatar-id>', 'Avatar id', 1)
     // .option("-hu, --hubuser <hub-username>", "Hub user name")
     // .option("-hp, --hubpass <hub-password>", "Hub password")
     .usage('<command> [options]')
