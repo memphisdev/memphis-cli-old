@@ -79,24 +79,24 @@ module.exports = (credentials) => {
                                     const loginInfo = fixedUrl.startsWith('https') ? fixedUrl.replace('https://', '') : fixedUrl.replace('http://', '');
                                     console.log(`Connected successfully to ${loginInfo}`);
                                 } else {
-                                    console.log('Failed to connect to Memphis control plane.');
+                                    console.log('Failed to connect to Memphis.');
                                 }
                             })
                             .catch((error) => {
                                 if (error.status === 666) {
                                     console.log(error.errorObj.message);
                                 } else {
-                                    console.log('Failed to connect to Memphis control plane.');
+                                    console.log('Failed to connect to Memphis.');
                                 }
                             });
                     } catch (error) {
                         if (error.status === 666) {
                             console.log(error.errorObj.message);
                         } else {
-                            console.log('Failed to connect to Memphis control plane.');
+                            console.log('Failed to connect to Memphis.');
                         }
                     }
-                    console.log('Failed to connect to Memphis control plane.');
+                    console.log('Failed to connect to Memphis.');
                     const memConfigDir = configDir();
                     if (memConfigDir === null) {
                         console.log(`No support for this OS`);
@@ -110,14 +110,14 @@ module.exports = (credentials) => {
                 if (error.status === 666) {
                     console.log(error.errorObj.message);
                 } else {
-                    console.log('Failed to connect to Memphis control plane.');
+                    console.log('Failed to connect to Memphis.');
                 }
             });
     } catch (error) {
         if (error.status === 666) {
             console.log(error.errorObj.message);
         } else {
-            console.log('Failed to connect to Memphis control plane.');
+            console.log('Failed to connect to Memphis.');
         }
     }
 };

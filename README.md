@@ -190,8 +190,8 @@ $ npm i memphis-dev-cli -g
 
 > ##### Once connected, the entire functionalities offered by Memphis are available.
 
-```PowerShell
-$ mem connect -s <control-plane> -u root -p memphis
+``` PowerShell
+$ mem connect -s <memphis> -u root -p memphis
 ```
 
 ### Parameters - all required
@@ -199,15 +199,15 @@ $ mem connect -s <control-plane> -u root -p memphis
 ```PowerShell
 -u, --user                 User
 -p, --password <password>  Password
--s, --server <server>      Memphis control plane
+-s, --server <server>      Memphis broker
 -h, --help                 display help for command
 ```
 
 ### Example
 
-```PowerShell
-$ mem connect -u root -p memphis -s http://control-plane
-Connected successfully to Memphis control plane.
+``` PowerShell
+$ mem connect -u root -p memphis -s http://localhost:5555                
+Connected successfully to Memphis.
 ```
 
 ---
