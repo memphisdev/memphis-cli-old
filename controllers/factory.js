@@ -11,13 +11,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const fs = require('fs');
+
 const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
-const fs = require('fs');
+const configDir = require('../utils/configDir');
 
 exports.getFactories = async () => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -71,7 +78,12 @@ exports.getFactories = async () => {
 
 exports.createFactory = async (factory, options) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -108,7 +120,12 @@ exports.createFactory = async (factory, options) => {
 
 exports.editFactory = async (factory, options) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -146,7 +163,12 @@ exports.editFactory = async (factory, options) => {
 
 exports.removenFactory = async (factory) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }

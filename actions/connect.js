@@ -11,8 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const login = require('../controllers/login');
 const fs = require('fs');
+
+const configDir = require('../utils/configDir');
+const login = require('../controllers/login');
 
 module.exports = (credentials) => {
     let fixedUrl;
@@ -37,7 +39,12 @@ module.exports = (credentials) => {
                         expiration: expiration
                     };
                     const data = JSON.stringify(credentialsDetails);
-                    fs.writeFileSync('.memconfig', data);
+                    const memConfigDir = configDir();
+                    if (memConfigDir === null) {
+                        console.log(`No support for this OS`);
+                        return;
+                    }
+                    fs.writeFileSync(memConfigDir + '.memconfig', data);
                     const loginInfo = fixedUrl.startsWith('https') ? fixedUrl.replace('https://', '') : fixedUrl.replace('http://', '');
                     console.log(`Connected successfully to ${loginInfo}`);
                 } else {
@@ -63,7 +70,12 @@ module.exports = (credentials) => {
                                         expiration: expiration
                                     };
                                     const data = JSON.stringify(credentialsDetails);
-                                    fs.writeFileSync('.memconfig', data);
+                                    const memConfigDir = configDir();
+                                    if (memConfigDir === null) {
+                                        console.log(`No support for this OS`);
+                                        return;
+                                    }
+                                    fs.writeFileSync(memConfigDir + '.memconfig', data);
                                     const loginInfo = fixedUrl.startsWith('https') ? fixedUrl.replace('https://', '') : fixedUrl.replace('http://', '');
                                     console.log(`Connected successfully to ${loginInfo}`);
                                 } else {
@@ -85,7 +97,12 @@ module.exports = (credentials) => {
                         }
                     }
                     console.log('Failed to connect to Memphis.');
-                    fs.writeFileSync('.memconfig', '');
+                    const memConfigDir = configDir();
+                    if (memConfigDir === null) {
+                        console.log(`No support for this OS`);
+                        return;
+                    }
+                    fs.writeFileSync(memConfigDir + '.memconfig', '');
                 }
                 return res;
             })

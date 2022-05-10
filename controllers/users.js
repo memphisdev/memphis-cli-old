@@ -11,13 +11,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const fs = require('fs');
+
 const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
-const fs = require('fs');
+const configDir = require('../utils/configDir');
 
 exports.getUsers = async () => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -60,7 +67,12 @@ exports.getUsers = async () => {
 
 exports.addUser = async (user) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -74,8 +86,7 @@ exports.addUser = async (user) => {
                 password: user.password,
                 // "hub_username": user.hubuser,
                 // "hub_password": user.hubpass,
-                user_type: user.type,
-                avatar_id: parseInt(user.avatar)
+                user_type: user.type
             },
             queryParams: null,
             timeout: 0
@@ -105,7 +116,12 @@ exports.addUser = async (user) => {
 
 exports.removeUser = async (user) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -135,7 +151,12 @@ exports.removeUser = async (user) => {
 
 // exports.edithubcred = async (user) => {
 //     try {
-//         const data = fs.readFileSync('.memconfig', 'utf8')
+//         const memConfigDir = configDir();
+//        if (memConfigDir === null) {
+//            console.log(`No support for this OS`);
+//            return;
+//        }
+//        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
 //         if (data.length == 0) {
 //             return
 //         }
