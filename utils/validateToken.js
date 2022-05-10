@@ -13,9 +13,16 @@
 
 const fs = require('fs');
 
+const configDir = require('../utils/configDir');
+
 module.exports = () => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return false;
         }
