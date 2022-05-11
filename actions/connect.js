@@ -44,6 +44,9 @@ module.exports = (credentials) => {
                         console.log(`No support for this OS`);
                         return;
                     }
+                    if (!fs.existsSync(memConfigDir)) {
+                        fs.mkdirSync(memConfigDir);
+                    }
                     fs.writeFileSync(memConfigDir + '.memconfig', data);
                     const loginInfo = fixedUrl.startsWith('https') ? fixedUrl.replace('https://', '') : fixedUrl.replace('http://', '');
                     console.log(`Connected successfully to ${loginInfo}`);
@@ -75,6 +78,9 @@ module.exports = (credentials) => {
                                         console.log(`No support for this OS`);
                                         return;
                                     }
+                                    if (!fs.existsSync(memConfigDir)) {
+                                        fs.mkdirSync(memConfigDir);
+                                    }
                                     fs.writeFileSync(memConfigDir + '.memconfig', data);
                                     const loginInfo = fixedUrl.startsWith('https') ? fixedUrl.replace('https://', '') : fixedUrl.replace('http://', '');
                                     console.log(`Connected successfully to ${loginInfo}`);
@@ -101,6 +107,9 @@ module.exports = (credentials) => {
                     if (memConfigDir === null) {
                         console.log(`No support for this OS`);
                         return;
+                    }
+                    if (!fs.existsSync(memConfigDir)) {
+                        fs.mkdirSync(memConfigDir);
                     }
                     fs.writeFileSync(memConfigDir + '.memconfig', '');
                 }
