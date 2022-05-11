@@ -260,7 +260,7 @@ exports.removeStation = async (station) => {
             timeout: 0
         })
             .then((res) => {
-                Object.keys(res).length === 0 ? console.log(`Statoin ${station} was removed.`) : console.log(`Failed to remove station ${station}.`);
+                Object.keys(res).length === 0 ? console.log(`Station ${station} was removed.`) : console.log(`Failed to remove station ${station}.`);
             })
             .catch((error) => {
                 if (error.status === 666) {

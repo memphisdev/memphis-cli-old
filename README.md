@@ -367,7 +367,7 @@ Station info:
 
 del
 $ mem station del mystation
-Statoin mystation was removed.
+Station mystation was removed.
 
 $ mem station ls
 ┌─────────┬────────┬─────────┬───────────────────┬────────────────────┬──────────────┬──────────┬───────────────┬─────────────────┬────────────┬───────────────┬──────────────┐
