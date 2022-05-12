@@ -108,7 +108,6 @@ exports.createStation = async (station, options) => {
         const s = options.storage ? options.storage : 'file';
         const rv = Number(options.retentionvalue ? options.retentionvalue : 604800);
         const rt = options.retentiontype ? options.retentiontype : 'message_age_sec';
-        console.log(dw);
         httpRequest({
             method: 'POST',
             url: `${credentials.server}${ApiEndpoint.CREATE_STATION}`,
@@ -146,7 +145,6 @@ exports.createStation = async (station, options) => {
                 );
             })
             .catch((error) => {
-                console.log(error.response);
                 if (error.status === 666) {
                     console.log(error.message);
                 } else {
@@ -154,7 +152,6 @@ exports.createStation = async (station, options) => {
                 }
             });
     } catch (error) {
-        console.log(error);
         if (error.status === 666) {
             console.log(error.message);
         } else {
