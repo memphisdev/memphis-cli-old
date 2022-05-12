@@ -108,10 +108,6 @@ module.exports = (credentials) => {
                         console.log(`No support for this OS`);
                         return;
                     }
-                    if (!fs.existsSync(memConfigDir)) {
-                        fs.mkdirSync(memConfigDir);
-                    }
-                    fs.writeFileSync(memConfigDir + '.memconfig', '');
                 }
                 return res;
             })
