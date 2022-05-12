@@ -11,8 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const isValidToken = require('../utils/validateToken');
-const login = require('../controllers/login');
 const fs = require('fs');
 
 const writeProjectFiles = (language) => {

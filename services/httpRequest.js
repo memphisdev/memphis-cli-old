@@ -28,7 +28,7 @@ const httpRequest = async ({ method, url, headers = {}, bodyParams = {}, queryPa
     } catch (ex) {
         if (ex?.response?.status === 400) throw { status: 400, errorObj: ex.response.data };
         else if (ex.status === 666 || ex?.response?.status === 666) {
-            console.log(error.errorObj.message);
+            throw ex;
         } else throw ex;
     }
 };

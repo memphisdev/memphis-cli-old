@@ -12,9 +12,7 @@
 // limitations under the License.
 
 const users = require('../controllers/users');
-const inputValidation = require('../utils/inputValidations');
-const isValidToken = require('../utils/validateToken');
-const login = require('../controllers/login');
+const validateToken = require('../utils/validateToken');
 
 const handleUserActions = (action, options) => {
     switch (action[0]) {
@@ -25,20 +23,16 @@ const handleUserActions = (action, options) => {
             if (!options.name)
                 console.log(
                     `User name is required. Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type>\nNote:\ntype values: application/management\n* Password is not required for type application *`
-                ); //--hubuser <hub-username> --hubpass <hub-password>`)
+                );
+            //--hubuser <hub-username> --hubpass <hub-password>`)
             else if (!options.password && options.type === 'management')
                 console.log(
                     `Password is required for user of type management. Use command:\nmem user add --name <user-name> --password <user-password> --type management`
                 );
             else if (options.password && options.type === 'application')
-                console.log(
-                    `Password is not required for user of type application. Use command:\nmem user add --name <user-name> --type application`
-                );
+                console.log(`Password is not required for user of type application. Use command:\nmem user add --name <user-name> --type application`);
             else if (!options.type || options.type === 'management' || options.type === 'application') users.addUser(options);
-            else
-                console.log(
-                    ` Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type>\nNote:\ntype values: application/management`
-                );
+            else console.log(` Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type>\nNote:\ntype values: application/management`);
             break;
         case 'del':
             if (!action[1]) console.log('User name is required. Use command:\nmem user del <user-name> ');
@@ -55,18 +49,15 @@ const handleUserActions = (action, options) => {
     }
 };
 
-exports.userMenu = (action, options) => {
-    if (!isValidToken()) {
-        login()
-            .then((res) => {
-                handleUserActions(action, options);
-            })
-            .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.errorObj.message);
-                } else {
-                    console.log('Failed to connect to Memphis.');
-                }
-            });
-    } else handleUserActions(action, options);
+exports.userMenu = async (action, options) => {
+    try {
+        await validateToken();
+        handleUserActions(action, options);
+    } catch (error) {
+        if (error.status === 666) {
+            console.log(error.message);
+        } else {
+            console.log('Please check your credentials and connect again');
+        }
+    }
 };
