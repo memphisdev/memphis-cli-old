@@ -17,49 +17,6 @@ const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
 const configDir = require('../utils/configDir');
 
-const stations = [
-    {
-        factory_name: 'factory1',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'messsages',
-        max_throughput_value: '100000'
-    },
-    {
-        factory_name: 'factory2',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 day',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '100000'
-    },
-    {
-        factory_name: 'factory3',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '5000000'
-    },
-    {
-        factory_name: 'factory4',
-        application_name: 'application2',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '500000'
-    },
-    {
-        factory_name: 'factory5',
-        application_name: 'application3',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'messsages',
-        max_throughput_value: '15000'
-    }
-];
-
 exports.getAllStations = async () => {
     try {
         const memConfigDir = configDir();
