@@ -17,49 +17,6 @@ const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
 const configDir = require('../utils/configDir');
 
-const stations = [
-    {
-        factory_name: 'factory1',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'messsages',
-        max_throughput_value: '100000'
-    },
-    {
-        factory_name: 'factory2',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 day',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '100000'
-    },
-    {
-        factory_name: 'factory3',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '5000000'
-    },
-    {
-        factory_name: 'factory4',
-        application_name: 'application2',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '500000'
-    },
-    {
-        factory_name: 'factory5',
-        application_name: 'application3',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'messsages',
-        max_throughput_value: '15000'
-    }
-];
-
 exports.getAllStations = async () => {
     try {
         const memConfigDir = configDir();
@@ -153,11 +110,11 @@ exports.createStation = async (station, options) => {
                 name: station,
                 factory_name: options.factory,
                 retention_type: options.retentiontype,
-                retention_value: options.retentionvalue,
+                retention_value: Number(options.retentionvalue),
                 storage_type: options.storage,
-                replicas: options.replicas,
-                dedup_enabled: options.dedupenabled,
-                dedup_window_in_ms: options.dedupwindow
+                replicas: Number(options.replicas),
+                dedup_enabled: Boolean(options.dedupenabled),
+                dedup_window_in_ms: Number(options.dedupwindow)
             },
 
             queryParams: null,
@@ -168,11 +125,11 @@ exports.createStation = async (station, options) => {
                 console.table(
                     [res].map((station) => {
                         return {
-                            name: station.name,
+                            'name ': station.name,
                             'retention type': station.retention_type,
                             'retentention value': station.retention_value,
                             'storage type': station.storage_type,
-                            replicas: station.replicas,
+                            'replicas ': station.replicas,
                             'dedup enabled': station.dedup_enabled,
                             'dedup window ms': station.dedup_window_in_ms,
                             'created by': station.created_by_user,
