@@ -153,11 +153,11 @@ exports.createStation = async (station, options) => {
                 name: station,
                 factory_name: options.factory,
                 retention_type: options.retentiontype,
-                retention_value: options.retentionvalue,
+                retention_value: Number(options.retentionvalue),
                 storage_type: options.storage,
-                replicas: options.replicas,
-                dedup_enabled: options.dedupenabled,
-                dedup_window_in_ms: options.dedupwindow
+                replicas: Number(options.replicas),
+                dedup_enabled: Boolean(options.dedupenabled),
+                dedup_window_in_ms: Number(options.dedupwindow)
             },
 
             queryParams: null,
@@ -168,11 +168,11 @@ exports.createStation = async (station, options) => {
                 console.table(
                     [res].map((station) => {
                         return {
-                            name: station.name,
+                            'name ': station.name,
                             'retention type': station.retention_type,
                             'retentention value': station.retention_value,
                             'storage type': station.storage_type,
-                            replicas: station.replicas,
+                            'replicas ': station.replicas,
                             'dedup enabled': station.dedup_enabled,
                             'dedup window ms': station.dedup_window_in_ms,
                             'created by': station.created_by_user,
