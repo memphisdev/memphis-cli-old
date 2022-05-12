@@ -62,14 +62,14 @@ exports.getFactories = async () => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log('Failed to fetch all factories');
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log('Failed to fetch all factories');
         }
@@ -104,14 +104,14 @@ exports.createFactory = async (factory, options) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to create ${factory} factory.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to create ${factory} factory.`);
         }
@@ -147,14 +147,14 @@ exports.editFactory = async (factory, options) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to edit ${factory} factory.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to edit ${factory} factory.`);
         }
@@ -188,14 +188,14 @@ exports.removenFactory = async (factory) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to remove ${factory} factory.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to remove ${factory} factory.`);
         }

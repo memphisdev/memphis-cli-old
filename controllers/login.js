@@ -32,7 +32,7 @@ module.exports = async (url, username, password) => {
         })
         .catch((error) => {
             if (error.status === 666) {
-                console.log(error.errorObj.message);
+                console.log(error.message);
             }
             return false;
         });

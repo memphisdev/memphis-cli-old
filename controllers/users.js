@@ -51,14 +51,14 @@ exports.getUsers = async () => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log('Failed to fetch all users');
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log('Failed to fetch all users');
         }
@@ -100,14 +100,14 @@ exports.addUser = async (user) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to add user ${user.name}.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to add user ${user.name}.`);
         }
@@ -142,7 +142,7 @@ exports.removeUser = async (user) => {
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to remove user ${user}.`);
         }
@@ -181,7 +181,7 @@ exports.removeUser = async (user) => {
 //             })
 //     } catch (error) {
 // if (error.status === 666){
-//     console.log(error.errorObj.message);
+//     console.log(error.message);
 // } else {
 //     console.error(`Failed to update hub credentials.`)
 // }

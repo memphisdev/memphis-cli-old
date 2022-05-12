@@ -76,14 +76,14 @@ exports.getAllStations = async () => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log('Failed to fetch all stations');
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log('Failed to fetch all stations');
         }
@@ -102,6 +102,13 @@ exports.createStation = async (station, options) => {
             return;
         }
         const credentials = JSON.parse(data.toString());
+        const dw = Number(options.dedupwindow ? options.dedupwindow : 0);
+        const de = Boolean(options.dedupenabled ? options.dedupenabled : false);
+        const r = Number(options.replicas ? options.replicas : 1);
+        const s = options.storage ? options.storage : 'file';
+        const rv = Number(options.retentionvalue ? options.retentionvalue : 604800);
+        const rt = options.retentiontype ? options.retentiontype : 'message_age_sec';
+        console.log(dw);
         httpRequest({
             method: 'POST',
             url: `${credentials.server}${ApiEndpoint.CREATE_STATION}`,
@@ -109,12 +116,12 @@ exports.createStation = async (station, options) => {
             bodyParams: {
                 name: station,
                 factory_name: options.factory,
-                retention_type: options.retentiontype,
-                retention_value: Number(options.retentionvalue),
-                storage_type: options.storage,
-                replicas: Number(options.replicas),
-                dedup_enabled: Boolean(options.dedupenabled),
-                dedup_window_in_ms: Number(options.dedupwindow)
+                retention_type: rt,
+                retention_value: rv,
+                storage_type: s,
+                replicas: r,
+                dedup_enabled: de,
+                dedup_window_in_ms: dw
             },
 
             queryParams: null,
@@ -139,15 +146,17 @@ exports.createStation = async (station, options) => {
                 );
             })
             .catch((error) => {
+                console.log(error.response);
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to create ${station} station.`);
                 }
             });
     } catch (error) {
+        console.log(error);
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to create ${station} station.`);
         }
@@ -180,14 +189,14 @@ exports.getStationInfo = async (station) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to fetch ${station} station details.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to fetch ${station} station details.`);
         }
@@ -221,14 +230,14 @@ exports.removeStation = async (station) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to remove ${station} station.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to remove ${station} station.`);
         }

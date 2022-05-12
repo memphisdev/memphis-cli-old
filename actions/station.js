@@ -12,10 +12,9 @@
 // limitations under the License.
 
 const station = require('../controllers/station');
-const isValidToken = require('../utils/validateToken');
-const login = require('../controllers/login');
+const validateToken = require('../utils/validateToken');
 
-const handleStatoionActions = (action, options) => {
+const handleStationActions = (action, options) => {
     switch (action[0]) {
         case 'ls':
             station.getAllStations();
@@ -49,18 +48,15 @@ const handleStatoionActions = (action, options) => {
     }
 };
 
-exports.stationMenu = (action, options) => {
-    if (!isValidToken()) {
-        login()
-            .then((res) => {
-                handleStatoionActions(action, options);
-            })
-            .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.errorObj.message);
-                } else {
-                    console.log('Failed to connect to Memphis control plane.');
-                }
-            });
-    } else handleStatoionActions(action, options);
+exports.stationMenu = async (action, options) => {
+    try {
+        await validateToken();
+        handleStationActions(action, options);
+    } catch (error) {
+        if (error.status === 666) {
+            console.log(error.message);
+        } else {
+            console.log('Please check your credentials and connect again');
+        }
+    }
 };

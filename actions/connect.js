@@ -90,14 +90,14 @@ module.exports = (credentials) => {
                             })
                             .catch((error) => {
                                 if (error.status === 666) {
-                                    console.log(error.errorObj.message);
+                                    console.log(error.message);
                                 } else {
                                     console.log('Failed to connect to Memphis control plane.');
                                 }
                             });
                     } catch (error) {
                         if (error.status === 666) {
-                            console.log(error.errorObj.message);
+                            console.log(error.message);
                         } else {
                             console.log('Failed to connect to Memphis control plane.');
                         }
@@ -113,14 +113,14 @@ module.exports = (credentials) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log('Failed to connect to Memphis control plane.');
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log('Failed to connect to Memphis control plane.');
         }

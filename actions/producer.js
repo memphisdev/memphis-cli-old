@@ -12,8 +12,7 @@
 // limitations under the License.
 
 const producer = require('../controllers/producer');
-const isValidToken = require('../utils/validateToken');
-const login = require('../controllers/login');
+const validateToken = require('../utils/validateToken');
 
 const handleProducerActions = (action, options) => {
     switch (action[0]) {
@@ -27,18 +26,15 @@ const handleProducerActions = (action, options) => {
     }
 };
 
-exports.producerMenu = (action, options) => {
-    if (!isValidToken()) {
-        login()
-            .then((res) => {
-                handleProducerActions(action, options);
-            })
-            .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.errorObj.message);
-                } else {
-                    console.log('Failed to connect to Memphis control plane.');
-                }
-            });
-    } else handleProducerActions(action, options);
+exports.producerMenu = async (action, options) => {
+    try {
+        await validateToken();
+        handleProducerActions(action, options);
+    } catch (error) {
+        if (error.status === 666) {
+            console.log(error.message);
+        } else {
+            console.log('Please check your credentials and connect again');
+        }
+    }
 };

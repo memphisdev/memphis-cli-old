@@ -12,8 +12,7 @@
 // limitations under the License.
 
 const factory = require('../controllers/factory');
-const isValidToken = require('../utils/validateToken');
-const login = require('../controllers/login');
+const validateToken = require('../utils/validateToken');
 
 const handleFactoryActions = (action, options) => {
     switch (action[0]) {
@@ -44,18 +43,15 @@ const handleFactoryActions = (action, options) => {
     }
 };
 
-exports.factoryMenu = (action, options) => {
-    if (!isValidToken()) {
-        login()
-            .then((res) => {
-                handleFactoryActions(action, options);
-            })
-            .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.errorObj.message);
-                } else {
-                    console.log('Failed to connect to Memphis control plane.');
-                }
-            });
-    } else handleFactoryActions(action, options);
+exports.factoryMenu = async (action, options) => {
+    try {
+        await validateToken();
+        handleFactoryActions(action, options);
+    } catch (error) {
+        if (error.status === 666) {
+            console.log(error.message);
+        } else {
+            console.log('Please check your credentials and connect again');
+        }
+    }
 };
