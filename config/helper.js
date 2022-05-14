@@ -35,7 +35,7 @@ const userHelp = `User Commands:
    del               Delete user
   `;
 
-const connectDesc = `Connection configuration to Memphis control plane`;
+const connectDesc = `Connection configuration to Memphis`;
 
 const producerDesc = `Producer is the entity who can send messages into stations`;
 
