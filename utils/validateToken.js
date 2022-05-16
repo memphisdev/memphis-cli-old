@@ -14,6 +14,7 @@
 const fs = require('fs');
 
 const configDir = require('../utils/configDir');
+const login = require('../controllers/login');
 
 module.exports = async () => {
     try {
@@ -28,7 +29,7 @@ module.exports = async () => {
         }
         const credentials = JSON.parse(data.toString());
         const d = new Date();
-        if (!(d.getTime() > credentials.expiration)) {
+        if (d.getTime() > credentials.expiration) {
             const memConfigDir = configDir();
             if (memConfigDir === null) {
                 throw new Error({ status: 666, message: 'No support for this OS' });
