@@ -39,34 +39,31 @@ module.exports = async () => {
                 throw new Error({ status: 666, message: 'Please Login' });
             }
             const credentials = JSON.parse(data.toString());
-            login(credentials.server, credentials.user, credentials.password)
-                .then((res) => {
-                    if (res) {
-                        const d = new Date();
-                        const expiration = d.getTime() + res.expires_in - 100000;
-                        const credentialsDetails = {
-                            user: credentials.user,
-                            password: credentials.password,
-                            server: credentials.server,
-                            jwt: res.jwt,
-                            expiration: expiration
-                        };
-                        const data = JSON.stringify(credentialsDetails);
-                        if (!fs.existsSync(memConfigDir)) {
-                            fs.mkdirSync(memConfigDir);
-                        }
-                        fs.writeFileSync(memConfigDir + '.memconfig', data);
-                    } else {
-                        throw new Error({ status: 666, message: 'Please check your credentials and connect again' });
-                    }
-                })
-                .catch((error) => {
-                    throw new Error({ status: 666, message: 'Please check your credentials and connect again' });
-                });
+            const res = await login(credentials.server, credentials.user, credentials.password);
+            if (res) {
+                const d = new Date();
+                const expiration = d.getTime() + res.expires_in - 100000;
+                const credentialsDetails = {
+                    user: credentials.user,
+                    password: credentials.password,
+                    server: credentials.server,
+                    jwt: res.jwt,
+                    expiration: expiration
+                };
+                const data = JSON.stringify(credentialsDetails);
+                if (!fs.existsSync(memConfigDir)) {
+                    fs.mkdirSync(memConfigDir);
+                }
+                fs.writeFileSync(memConfigDir + '.memconfig', data);
+            } else {
+                throw new Error({ status: 666, message: 'Please check your credentials and connect again' });
+            }
         } else return;
     } catch (error) {
         if (error.status === 666) {
             throw error;
+        } else {
+            throw new Error({ status: 666, message: 'Please check your credentials and connect again' });
         }
     }
 };

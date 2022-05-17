@@ -43,9 +43,8 @@ exports.getConsumers = async () => {
                         {
                             name: ' ',
                             type: ' ',
-                            consumer_group: ' ',
+                            consumers_group: ' ',
                             created_by_user: ' ',
-                            consumer_group: ' ',
                             station_name: ' ',
                             factory_name: ' ',
                             creation_date: ' '
@@ -57,9 +56,8 @@ exports.getConsumers = async () => {
                             return {
                                 name: consumer.name,
                                 type: consumer.type,
-                                consumer_group: consumer.consumer_group,
+                                consumers_group: consumer.consumers_group,
                                 created_by_user: consumer.created_by_user,
-                                consumer_group: consumer.consumer_group,
                                 station_name: consumer.station_name,
                                 factory_name: consumer.factory_name,
                                 creation_date: consumer.creation_date
@@ -110,9 +108,8 @@ exports.getConsumersByStation = async (station) => {
                         {
                             name: ' ',
                             type: ' ',
-                            consumer_group: ' ',
+                            consumers_group: ' ',
                             created_by_user: ' ',
-                            consumer_group: ' ',
                             station_name: ' ',
                             factory_name: ' ',
                             creation_date: ' '
@@ -124,9 +121,8 @@ exports.getConsumersByStation = async (station) => {
                             return {
                                 name: consumer.name,
                                 type: consumer.type,
-                                consumer_group: consumer.consumer_group,
+                                consumers_group: consumer.consumers_group,
                                 created_by_user: consumer.created_by_user,
-                                consumer_group: consumer.consumer_group,
                                 station_name: consumer.station_name,
                                 factory_name: consumer.factory_name,
                                 creation_date: consumer.creation_date

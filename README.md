@@ -190,7 +190,7 @@ $ npm i memphis-dev-cli -g
 
 > ##### Once connected, the entire functionalities offered by Memphis are available.
 
-``` PowerShell
+```PowerShell
 $ mem connect -s <memphis> -u root -p memphis
 ```
 
@@ -205,8 +205,8 @@ $ mem connect -s <memphis> -u root -p memphis
 
 ### Example
 
-``` PowerShell
-$ mem connect -u root -p memphis -s http://localhost:5555                
+```PowerShell
+$ mem connect -u root -p memphis -s http://localhost:5555
 Connected successfully to Memphis.
 ```
 
@@ -500,7 +500,7 @@ ls                List of Consumers
 ```PowerShell
 $ mem consumer ls
 ┌─────────┬──────┬──────┬────────────────┬─────────────────┬──────────────┬──────────────┬───────────────┐
-│ (index) │ name │ type │ consumer_group │ created_by_user │ station_name │ factory_name │ creation_date │
+│ (index) │ name │ type │ consumers_group │ created_by_user │ station_name │ factory_name │ creation_date │
 ├─────────┼──────┼──────┼────────────────┼─────────────────┼──────────────┼──────────────┼───────────────┤
 │    0    │ ' '  │ ' '  │      ' '       │       ' '       │     ' '      │     ' '      │      ' '      │
 └─────────┴──────┴──────┴────────────────┴─────────────────┴──────────────┴──────────────┴───────────────┘
