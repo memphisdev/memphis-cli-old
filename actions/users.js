@@ -22,31 +22,32 @@ const handleUserActions = (action, options) => {
             users.getUsers();
             break;
         case 'add':
-            if (!options.name)
+            if (!options.username)
                 console.log(
-                    `User name is required. Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type> --avatar <avatar-id>\nNote:\ntype values: application/management\n* Password is not required for type application *`
-                ); //--hubuser <hub-username> --hubpass <hub-password>`)
+                    `Username is required. Use command:\nmem user add --username <username> --password <user-password> --type <user-type> --avatar <avatar-id>\nNote:\ntype values: application/management\n* Password is not required for type application *`
+                );
+            //--hubuser <hub-username> --hubpass <hub-password>`)
             else if (!options.password && options.type === 'management')
                 console.log(
-                    `Password is required for user of type management. Use command:\nmem user add --name <user-name> --password <user-password> --type management --avatar <avatar-id>`
+                    `Password is required for user of type management. Use command:\nmem user add --username <username> --password <user-password> --type management --avatar <avatar-id>`
                 );
             else if (options.password && options.type === 'application')
                 console.log(
-                    `Password is not required for user of type application. Use command:\nmem user add --name <user-name> --type application --avatar <avatar-id>`
+                    `Password is not required for user of type application. Use command:\nmem user add --username <username> --type application --avatar <avatar-id>`
                 );
             else if (!options.type || options.type === 'management' || options.type === 'application') users.addUser(options);
             else
                 console.log(
-                    ` Use command:\nmem user add --name <user-name> --password <user-password> --type <user-type> --avatar <avatar-id>\nNote:\ntype values: application/management`
+                    ` Use command:\nmem user add --username <username> --password <user-password> --type <user-type> --avatar <avatar-id>\nNote:\ntype values: application/management`
                 );
             break;
         case 'del':
-            if (!action[1]) console.log('User name is required. Use command:\nmem user del <user-name> ');
+            if (!action[1]) console.log('Username is required. Use command:\nmem user del <username> ');
             else users.removeUser(action[1]);
             break;
         // case "edithubcred":
         //     if (!options.hubuser || !options.hubpass)
-        //         console.log("Hub user name or hub user password is required. Use command:\nmem user edithubcred --hubuser <hub-username> --hubpass <hub-password>")
+        //         console.log("Hub username or hub user password is required. Use command:\nmem user edithubcred --hubuser <hub-username> --hubpass <hub-password>")
         //     else
         //         users.edithubcred(options)
         //     break;

@@ -344,7 +344,7 @@ del               Delete user
 ```
 ### User options
 ``` PowerShell
--n, --name <user-name>          User name
+-u, --username <username>          Username
 -p, --password <user-password>  User password
 -t, --type <user-type>          User type (default: "management") - application/management
 -a, --avatar <avatar-id>        Avatar id (default: 1) -  1-4

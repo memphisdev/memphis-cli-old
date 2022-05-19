@@ -24,6 +24,7 @@ const producer = require('./actions/producer');
 const consumer = require('./actions/consumer');
 const init = require('./actions/init');
 const packageDetails = require('./package.json');
+const validateVersion = require('./utils/validateVersion');
 
 const program = new commander.Command();
 
@@ -32,7 +33,7 @@ program
     .usage('<command> [options]')
     // .description('Memphis CLI')
     .addHelpText(
-        'after',
+        'before',
         `
 ${helper.factoryDesc}
 ${helper.factoryHelp}
@@ -51,6 +52,7 @@ ${helper.consumerHelp}
         sortSubcommands: false,
         subcommandTerm: (cmd) => cmd.name() // Just show the name, instead of short usage.
     });
+// .action(async () => await validateVersion());
 
 program
     .command('connect')
@@ -62,7 +64,8 @@ program
     .usage('<command> [options]')
     .showHelpAfterError()
     .addHelpText('before', helper.connectDesc)
-    .action(function () {
+    .action(async function () {
+        await validateVersion();
         if (Object.keys(this.opts()).length === 0 || !this.opts().user || !this.opts().password || !this.opts().server) {
             console.log('\nUse command: mem connect --user <user> --password <password> --server <server>\n');
             console.log('Example: mem connect -u root -p memphis -s <host>:<management_port>');
@@ -85,7 +88,8 @@ program
     })
     .addHelpText('before', helper.factoryDesc)
     .addHelpText('after', `\n${helper.factoryHelp}`)
-    .action(function () {
+    .action(async function () {
+        await validateVersion();
         const factoryActions = ['ls', 'create', 'edit', 'del'];
         if (!this.args?.length || !factoryActions.includes(this.args[0])) {
             console.log('');
@@ -114,7 +118,8 @@ program
     })
     .addHelpText('before', helper.stationDesc)
     .addHelpText('after', `\n${helper.stationHelp}`)
-    .action(function () {
+    .action(async function () {
+        await validateVersion();
         const stationActions = ['ls', 'create', 'info', 'del'];
         if (!this.args?.length || !stationActions.includes(this.args[0])) {
             console.log('');
@@ -128,11 +133,11 @@ program
     .command('user')
     .description('Users usage commands')
     .argument('<command>')
-    .option('-n, --name <user-name>', 'User name')
+    .option('-u, --username <username>', 'Username')
     .option('-p, --password <user-password>', 'User password')
     .option('-t, --type <user-type>', 'User type', 'management')
     .option('-a, --avatar <avatar-id>', 'Avatar id', 1)
-    // .option("-hu, --hubuser <hub-username>", "Hub user name")
+    // .option("-hu, --hubuser <hub-username>", "Hub username")
     // .option("-hp, --hubpass <hub-password>", "Hub password")
     .usage('<command> [options]')
     .showHelpAfterError()
@@ -142,7 +147,8 @@ program
     })
     .addHelpText('before', helper.userDesc)
     .addHelpText('after', `\n${helper.userHelp}`)
-    .action(function () {
+    .action(async function () {
+        await validateVersion();
         const userActions = ['ls', 'add', 'del'];
         if (!this.args?.length || !userActions.includes(this.args[0])) {
             console.log('');
@@ -165,7 +171,8 @@ program
     })
     .addHelpText('before', helper.producerDesc)
     .addHelpText('after', `\n${helper.producerHelp}`)
-    .action(function () {
+    .action(async function () {
+        await validateVersion();
         const producerActions = ['ls'];
         if (!this.args?.length || !producerActions.includes(this.args[0])) {
             console.log('');
@@ -188,7 +195,8 @@ program
     })
     .addHelpText('before', helper.consumerDesc)
     .addHelpText('after', `\n${helper.consumerHelp}`)
-    .action(function () {
+    .action(async function () {
+        await validateVersion();
         const consumerActions = ['ls'];
         if (!this.args?.length || !consumerActions.includes(this.args[0])) {
             console.log('');
@@ -205,7 +213,8 @@ program
     .argument('[command]')
     .usage('[options]')
     .showHelpAfterError()
-    .action(function () {
+    .action(async function () {
+        await validateVersion();
         init.initMenu(this.args, this.opts());
     });
 
@@ -222,7 +231,8 @@ program
 //     })
 //     .addHelpText('before', helper.hubDesc)
 //     .addHelpText('after', `\n${helper.hubHelp}`)
-//     .action(function () {
+//     .action(async function () {
+//         await validateVersion();
 //         const userActions = ["login"]
 //         if (!this.args?.length || !userActions.includes(this.args[0])) {
 //             console.log(program.commands[4].help())
