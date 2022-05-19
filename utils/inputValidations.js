@@ -11,11 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-exports.validateAvatar = (avatar) => {
-    const avatars = [1, 2, 3, 4];
-    return !isNaN(avatar) && avatars.includes(parseInt(avatar)) ? true : false;
-};
-
 exports.validateUserType = (type) => {
     return type == 'application' || type == 'management' ? true : false;
 };

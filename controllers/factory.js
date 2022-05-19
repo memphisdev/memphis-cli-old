@@ -11,13 +11,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const fs = require('fs');
+
 const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
-const fs = require('fs');
+const configDir = require('../utils/configDir');
 
 exports.getFactories = async () => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -55,14 +62,14 @@ exports.getFactories = async () => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log('Failed to fetch all factories');
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log('Failed to fetch all factories');
         }
@@ -71,7 +78,12 @@ exports.getFactories = async () => {
 
 exports.createFactory = async (factory, options) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -92,14 +104,14 @@ exports.createFactory = async (factory, options) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to create ${factory} factory.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to create ${factory} factory.`);
         }
@@ -108,7 +120,12 @@ exports.createFactory = async (factory, options) => {
 
 exports.editFactory = async (factory, options) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -130,14 +147,14 @@ exports.editFactory = async (factory, options) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to edit ${factory} factory.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to edit ${factory} factory.`);
         }
@@ -146,7 +163,12 @@ exports.editFactory = async (factory, options) => {
 
 exports.removenFactory = async (factory) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -166,14 +188,14 @@ exports.removenFactory = async (factory) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to remove ${factory} factory.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to remove ${factory} factory.`);
         }

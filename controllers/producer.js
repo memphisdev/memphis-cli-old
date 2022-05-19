@@ -11,13 +11,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const fs = require('fs');
+
 const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
-const fs = require('fs');
+const configDir = require('../utils/configDir');
 
 exports.getProducers = async () => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -59,14 +66,14 @@ exports.getProducers = async () => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log('Failed to fetch all producers');
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log('Failed to fetch all producers');
         }
@@ -75,7 +82,12 @@ exports.getProducers = async () => {
 
 exports.getProducersByStation = async (station) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -117,14 +129,14 @@ exports.getProducersByStation = async (station) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to fetch all producers of station ${station}.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to fetch all producers of station ${station}.`);
         }

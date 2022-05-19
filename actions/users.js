@@ -12,9 +12,7 @@
 // limitations under the License.
 
 const users = require('../controllers/users');
-const inputValidation = require('../utils/inputValidations');
-const isValidToken = require('../utils/validateToken');
-const login = require('../controllers/login');
+const validateToken = require('../utils/validateToken');
 
 const handleUserActions = (action, options) => {
     switch (action[0]) {
@@ -56,18 +54,15 @@ const handleUserActions = (action, options) => {
     }
 };
 
-exports.userMenu = (action, options) => {
-    if (!isValidToken()) {
-        login()
-            .then((res) => {
-                handleUserActions(action, options);
-            })
-            .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.errorObj.message);
-                } else {
-                    console.log('Failed to connect to Memphis.');
-                }
-            });
-    } else handleUserActions(action, options);
+exports.userMenu = async (action, options) => {
+    try {
+        await validateToken();
+        handleUserActions(action, options);
+    } catch (error) {
+        if (error.status === 666) {
+            console.log(error.message);
+        } else {
+            console.log('Please check your credentials and connect again');
+        }
+    }
 };

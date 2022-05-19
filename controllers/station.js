@@ -11,56 +11,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const ApiEndpoint = require('../apiEndpoints');
-const httpRequest = require('../services/httpRequest');
 const fs = require('fs');
 
-const stations = [
-    {
-        factory_name: 'factory1',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'messsages',
-        max_throughput_value: '100000'
-    },
-    {
-        factory_name: 'factory2',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 day',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '100000'
-    },
-    {
-        factory_name: 'factory3',
-        application_name: 'application1',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '5000000'
-    },
-    {
-        factory_name: 'factory4',
-        application_name: 'application2',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'bytes',
-        max_throughput_value: '500000'
-    },
-    {
-        factory_name: 'factory5',
-        application_name: 'application3',
-        retention_type: 'time',
-        retentention_value: '1 week',
-        max_throughput_type: 'messsages',
-        max_throughput_value: '15000'
-    }
-];
+const ApiEndpoint = require('../apiEndpoints');
+const httpRequest = require('../services/httpRequest');
+const configDir = require('../utils/configDir');
 
 exports.getAllStations = async () => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -112,14 +76,14 @@ exports.getAllStations = async () => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log('Failed to fetch all stations');
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log('Failed to fetch all stations');
         }
@@ -128,11 +92,22 @@ exports.getAllStations = async () => {
 
 exports.createStation = async (station, options) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
         const credentials = JSON.parse(data.toString());
+        const dw = Number(options.dedupwindow ? options.dedupwindow : 0);
+        const de = Boolean(options.dedupenabled ? options.dedupenabled : false);
+        const r = Number(options.replicas ? options.replicas : 1);
+        const s = options.storage ? options.storage : 'file';
+        const rv = Number(options.retentionvalue ? options.retentionvalue : 604800);
+        const rt = options.retentiontype ? options.retentiontype : 'message_age_sec';
         httpRequest({
             method: 'POST',
             url: `${credentials.server}${ApiEndpoint.CREATE_STATION}`,
@@ -140,12 +115,12 @@ exports.createStation = async (station, options) => {
             bodyParams: {
                 name: station,
                 factory_name: options.factory,
-                retention_type: options.retentiontype,
-                retention_value: options.retentionvalue,
-                storage_type: options.storage,
-                replicas: options.replicas,
-                dedup_enabled: options.dedupenabled,
-                dedup_window_in_ms: options.dedupwindow
+                retention_type: rt,
+                retention_value: rv,
+                storage_type: s,
+                replicas: r,
+                dedup_enabled: de,
+                dedup_window_in_ms: dw
             },
 
             queryParams: null,
@@ -156,11 +131,11 @@ exports.createStation = async (station, options) => {
                 console.table(
                     [res].map((station) => {
                         return {
-                            name: station.name,
+                            'name ': station.name,
                             'retention type': station.retention_type,
                             'retentention value': station.retention_value,
                             'storage type': station.storage_type,
-                            replicas: station.replicas,
+                            'replicas ': station.replicas,
                             'dedup enabled': station.dedup_enabled,
                             'dedup window ms': station.dedup_window_in_ms,
                             'created by': station.created_by_user,
@@ -171,14 +146,14 @@ exports.createStation = async (station, options) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to create ${station} station.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to create ${station} station.`);
         }
@@ -187,7 +162,12 @@ exports.createStation = async (station, options) => {
 
 exports.getStationInfo = async (station) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -206,14 +186,14 @@ exports.getStationInfo = async (station) => {
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to fetch ${station} station details.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to fetch ${station} station details.`);
         }
@@ -222,7 +202,12 @@ exports.getStationInfo = async (station) => {
 
 exports.removeStation = async (station) => {
     try {
-        const data = fs.readFileSync('.memconfig', 'utf8');
+        const memConfigDir = configDir();
+        if (memConfigDir === null) {
+            console.log(`No support for this OS`);
+            return;
+        }
+        const data = fs.readFileSync(memConfigDir + '.memconfig', 'utf8');
         if (data.length == 0) {
             return;
         }
@@ -238,18 +223,18 @@ exports.removeStation = async (station) => {
             timeout: 0
         })
             .then((res) => {
-                Object.keys(res).length === 0 ? console.log(`Statoin ${station} was removed.`) : console.log(`Failed to remove station ${station}.`);
+                Object.keys(res).length === 0 ? console.log(`Station ${station} was removed.`) : console.log(`Failed to remove station ${station}.`);
             })
             .catch((error) => {
                 if (error.status === 666) {
-                    console.log(error.errorObj.message);
+                    console.log(error.message);
                 } else {
                     console.log(`Failed to remove ${station} station.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
-            console.log(error.errorObj.message);
+            console.log(error.message);
         } else {
             console.log(`Failed to remove ${station} station.`);
         }
