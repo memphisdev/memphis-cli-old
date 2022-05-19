@@ -63,7 +63,7 @@ program
     .option('-s, --server <server>', 'Memphis')
     .usage('<command> [options]')
     .showHelpAfterError()
-    .addHelpText('before', helper.connectDesc)
+    .addHelpText('after', helper.connectDesc)
     .action(async function () {
         await validateVersion();
         if (Object.keys(this.opts()).length === 0 || !this.opts().user || !this.opts().password || !this.opts().server) {
