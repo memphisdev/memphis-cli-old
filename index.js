@@ -52,7 +52,6 @@ ${helper.consumerHelp}
         sortSubcommands: false,
         subcommandTerm: (cmd) => cmd.name() // Just show the name, instead of short usage.
     });
-// .action(async () => await validateVersion());
 
 program
     .command('connect')
