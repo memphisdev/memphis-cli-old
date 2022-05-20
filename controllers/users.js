@@ -82,7 +82,7 @@ exports.addUser = async (user) => {
             url: `${credentials.server}${ApiEndpoint.ADD_USER}`,
             headers: { Authorization: 'Bearer ' + credentials.jwt },
             bodyParams: {
-                username: user.name,
+                username: user.username,
                 password: user.password,
                 // "hub_username": user.hubuser,
                 // "hub_password": user.hubpass,
@@ -102,14 +102,14 @@ exports.addUser = async (user) => {
                 if (error.status === 666) {
                     console.log(error.message);
                 } else {
-                    console.log(`Failed to add user ${user.name}.`);
+                    console.log(`Failed to add user ${user.username}.`);
                 }
             });
     } catch (error) {
         if (error.status === 666) {
             console.log(error.message);
         } else {
-            console.log(`Failed to add user ${user.name}.`);
+            console.log(`Failed to add user ${user.username}.`);
         }
     }
 };
