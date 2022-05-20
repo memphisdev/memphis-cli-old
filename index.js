@@ -134,7 +134,7 @@ program
     .description('Users usage commands')
     .argument('<command>')
     .option('-u, --username <username>', 'Username')
-    .option('-p, --password <user-password>', 'User password')
+    .option('-p, --password <password>', 'User password')
     .option('-t, --type <user-type>', 'User type', 'management')
     // .option("-hu, --hubuser <hub-username>", "Hub username")
     // .option("-hp, --hubpass <hub-password>", "Hub password")
