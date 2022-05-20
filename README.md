@@ -396,9 +396,10 @@ del               Delete user
 ```
 
 ### User options
-``` PowerShell
+
+```PowerShell
 -u, --username <username>          Username
--p, --password <user-password>  User password
+-p, --password <password>  User password
 -t, --type <user-type>          User type (default: "management") - application/management
 -h, --help                      display help for command
 ```
