@@ -33,7 +33,7 @@ program
     .usage('<command> [options]')
     // .description('Memphis CLI')
     .addHelpText(
-        'before',
+        'after',
         `
 ${helper.factoryDesc}
 ${helper.factoryHelp}
