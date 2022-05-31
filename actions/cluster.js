@@ -11,25 +11,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const producer = require('../controllers/producer');
 const validateToken = require('../utils/validateToken');
+const cluster = require('../controllers/cluster');
 
-const handleProducerActions = (action, options) => {
+const handleClusterActions = (action) => {
     switch (action[0]) {
-        case 'ls':
-            if (!options.station) producer.getProducers();
-            else if (options.station) producer.getProducersByStation(options.station);
-            else console.log('Use command:\nmem producer ls\nOR\nmem producer ls --station <station-name>');
-            break;
+        case 'info':
+            cluster.getClusterInfo();
         default:
             return;
     }
 };
 
-exports.producerMenu = async (action, options) => {
+exports.clusterMenu = async (action) => {
     try {
         await validateToken();
-        handleProducerActions(action, options);
+        handleClusterActions(action);
     } catch (error) {
         console.log('Please check your credentials and connect again');
         if (error.response.status === 666) {

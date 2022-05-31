@@ -23,6 +23,7 @@ const helper = require('./config/helper');
 const producer = require('./actions/producer');
 const consumer = require('./actions/consumer');
 const init = require('./actions/init');
+const cluster = require('./actions/cluster');
 const packageDetails = require('./package.json');
 const validateVersion = require('./utils/validateVersion');
 
@@ -45,6 +46,8 @@ ${helper.producerDesc}
 ${helper.producerHelp}
 ${helper.consumerDesc}
 ${helper.consumerHelp}
+${helper.clusterDesc}
+${helper.clusterHelp}
 `
     )
     //TODO: add ${helper.hubDesc} ${helper.hubHelp}
@@ -78,7 +81,6 @@ program
     .command('factory')
     .description('Factories usage commands')
     .argument('<command>')
-    .option('-n, --name <factory-name>', 'Factory name')
     .option('-d, --desc <factory-description>', 'Factory description')
     .usage('<command> [options]')
     .showHelpAfterError()
@@ -215,6 +217,16 @@ program
     .action(async function () {
         await validateVersion();
         init.initMenu(this.args, this.opts());
+    });
+
+program
+    .command('cluster')
+    .description('Memphis cluster commands')
+    .argument('info')
+    .showHelpAfterError()
+    .action(async function () {
+        await validateVersion();
+        cluster.clusterMenu(this.args);
     });
 
 //Prepare to hub command
