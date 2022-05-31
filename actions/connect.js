@@ -89,17 +89,15 @@ module.exports = (credentials) => {
                                 }
                             })
                             .catch((error) => {
-                                if (error.status === 666) {
-                                    console.log(error.message);
-                                } else {
-                                    console.log('Failed to connect to Memphis.');
+                                console.log('Failed to connect to Memphis.');
+                                if (error.response.status === 666) {
+                                    console.log(error.response.data.message);
                                 }
                             });
                     } catch (error) {
-                        if (error.status === 666) {
-                            console.log(error.message);
-                        } else {
-                            console.log('Failed to connect to Memphis.');
+                        console.log('Failed to connect to Memphis.');
+                        if (error.response.status === 666) {
+                            console.log(error.response.data.message);
                         }
                     }
                     console.log('Failed to connect to Memphis.');
@@ -112,17 +110,15 @@ module.exports = (credentials) => {
                 return res;
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log('Failed to connect to Memphis.');
+                console.log('Failed to connect to Memphis.');
+                if (error.response.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log('Failed to connect to Memphis.');
+        console.log('Failed to connect to Memphis.');
+        if (error.response.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };

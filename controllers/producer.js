@@ -65,17 +65,15 @@ exports.getProducers = async () => {
                 }
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log('Failed to fetch all producers');
+                console.log('Failed to fetch all producers');
+                if (error.response.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log('Failed to fetch all producers');
+        console.log('Failed to fetch all producers');
+        if (error.response.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -128,17 +126,15 @@ exports.getProducersByStation = async (station) => {
                 }
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log(`Failed to fetch all producers of station ${station}.`);
+                console.log(`Failed to fetch all producers of station ${station}.`);
+                if (error.response.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to fetch all producers of station ${station}.`);
+        console.log(`Failed to fetch all producers of station ${station}.`);
+        if (error.response.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
