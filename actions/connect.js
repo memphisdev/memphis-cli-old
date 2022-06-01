@@ -90,13 +90,13 @@ module.exports = (credentials) => {
                             })
                             .catch((error) => {
                                 console.log('Failed to connect to Memphis.');
-                                if (error.response.status === 666) {
+                                if (error.response?.status === 666) {
                                     console.log(error.response.data.message);
                                 }
                             });
                     } catch (error) {
                         console.log('Failed to connect to Memphis.');
-                        if (error.response.status === 666) {
+                        if (error.response?.status === 666) {
                             console.log(error.response.data.message);
                         }
                     }
@@ -111,13 +111,13 @@ module.exports = (credentials) => {
             })
             .catch((error) => {
                 console.log('Failed to connect to Memphis.');
-                if (error.response.status === 666) {
+                if (error.response?.status === 666) {
                     console.log(error.response.data.message);
                 }
             });
     } catch (error) {
         console.log('Failed to connect to Memphis.');
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             console.log(error.response.data.message);
         }
     }

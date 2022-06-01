@@ -31,7 +31,7 @@ module.exports = async (url, username, password) => {
             return res;
         })
         .catch((error) => {
-            if (error.response.status === 666) {
+            if (error.response?.status === 666) {
                 console.log(error.response.data.message);
             }
             return false;

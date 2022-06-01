@@ -68,13 +68,13 @@ exports.getConsumers = async () => {
             })
             .catch((error) => {
                 console.log('Failed to fetch all consumers');
-                if (error.response.status === 666) {
+                if (error.response?.status === 666) {
                     console.log(error.response.data.message);
                 }
             });
     } catch (error) {
         console.log('Failed to fetch all consumers');
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             console.log(error.response.data.message);
         }
     }
@@ -131,13 +131,13 @@ exports.getConsumersByStation = async (station) => {
             })
             .catch((error) => {
                 console.log(`Failed to fetch all consumers of station ${station}.`);
-                if (error.response.status === 666) {
+                if (error.response?.status === 666) {
                     console.log(error.response.data.message);
                 }
             });
     } catch (error) {
         console.log(`Failed to fetch all consumers of station ${station}.`);
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             console.log(error.response.data.message);
         }
     }
