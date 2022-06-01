@@ -12,6 +12,7 @@
 // limitations under the License.
 
 const fs = require('fs');
+const { version } = require('os');
 
 const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
@@ -42,12 +43,11 @@ exports.getClusterInfo = async () => {
             } else {
                 console.log('\x1b[33m', 'Cluster Info: ');
                 console.log('\x1b[0m', '');
-                console.log(`Memphis version: ${res}`);
+                console.log(`Memphis version: ${res.version}`);
             }
         })
         .catch((error) => {
             console.log('Failed to get cluster info');
-            console.log(error.response);
             if (error.response?.status === 666) {
                 console.log(error.response.data.message);
             }

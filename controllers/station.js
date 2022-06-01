@@ -76,13 +76,13 @@ exports.getAllStations = async () => {
             })
             .catch((error) => {
                 console.log('Failed to fetch all stations');
-                if (error.response.status === 666) {
+                if (error.response?.status === 666) {
                     console.log(error.response.data.message);
                 }
             });
     } catch (error) {
         console.log('Failed to fetch all stations');
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             console.log(error.response.data.message);
         }
     }
@@ -144,13 +144,13 @@ exports.createStation = async (station, options) => {
             })
             .catch((error) => {
                 console.log(`Failed to create ${station} station.`);
-                if (error.response.status === 666) {
+                if (error.response?.status === 666) {
                     console.log(error.response.data.message);
                 }
             });
     } catch (error) {
         console.log(`Failed to create ${station} station.`);
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             console.log(error.response.data.message);
         }
     }
@@ -182,13 +182,13 @@ exports.getStationInfo = async (station) => {
             })
             .catch((error) => {
                 console.log(`Failed to fetch ${station} station details.`);
-                if (error.response.status === 666) {
+                if (error.response?.status === 666) {
                     console.log(error.response.data.message);
                 }
             });
     } catch (error) {
         console.log(`Failed to fetch ${station} station details.`);
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             console.log(error.response.data.message);
         }
     }
@@ -221,13 +221,13 @@ exports.removeStation = async (station) => {
             })
             .catch((error) => {
                 console.log(`Failed to remove ${station} station.`);
-                if (error.response.status === 666) {
+                if (error.response?.status === 666) {
                     console.log(error.response.data.message);
                 }
             });
     } catch (error) {
         console.log(`Failed to remove ${station} station.`);
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             console.log(error.response.data.message);
         }
     }

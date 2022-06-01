@@ -54,7 +54,7 @@ exports.stationMenu = async (action, options) => {
         handleStationActions(action, options);
     } catch (error) {
         console.log('Please check your credentials and connect again');
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             console.log(error.response.data.message);
         }
     }

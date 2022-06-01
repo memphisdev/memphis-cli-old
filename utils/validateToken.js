@@ -60,7 +60,7 @@ module.exports = async () => {
             }
         } else return;
     } catch (error) {
-        if (error.response.status === 666) {
+        if (error.response?.status === 666) {
             throw error;
         } else {
             throw new Error({ status: 666, message: 'Please check your credentials and connect again' });
