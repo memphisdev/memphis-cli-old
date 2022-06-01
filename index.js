@@ -81,6 +81,7 @@ program
     .command('factory')
     .description('Factories usage commands')
     .argument('<command>')
+    .option('-n, --name <factory-name>', 'Factory name')
     .option('-d, --desc <factory-description>', 'Factory description')
     .usage('<command> [options]')
     .showHelpAfterError()
