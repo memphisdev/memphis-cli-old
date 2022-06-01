@@ -14,14 +14,18 @@ const memphis = require('memphis-dev');
         });
 
         const promises = [];
-        for (let index = 0; index < 100; index++)
+        for (let index = 0; index < 100; index++) {
             promises.push(
                 producer.produce({
                     message: Buffer.from(`Message #${index}: Hello world`)
                 })
             );
+            console.log("Message sent");
+        }
 
         await Promise.all(promises);
+        console.log("All messages sent");
+        memphis.close();
     } catch (ex) {
         console.log(ex);
         memphis.close();
