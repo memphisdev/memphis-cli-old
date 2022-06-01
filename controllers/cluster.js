@@ -12,7 +12,6 @@
 // limitations under the License.
 
 const fs = require('fs');
-const { version } = require('os');
 
 const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
