@@ -61,17 +61,15 @@ exports.getFactories = async () => {
                 }
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log('Failed to fetch all factories');
+                console.log('Failed to fetch all factories');
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log('Failed to fetch all factories');
+        console.log('Failed to fetch all factories');
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -103,17 +101,15 @@ exports.createFactory = async (factory, options) => {
                 console.log(`Factory ${res.name} was created.`);
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log(`Failed to create ${factory} factory.`);
+                console.log(`Failed to create ${factory} factory.`);
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to create ${factory} factory.`);
+        console.log(`Failed to create ${factory} factory.`);
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -146,17 +142,15 @@ exports.editFactory = async (factory, options) => {
                 console.log(`Factory ${res.name} was edited.`);
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log(`Failed to edit ${factory} factory.`);
+                console.log(`Failed to edit ${factory} factory.`);
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to edit ${factory} factory.`);
+        console.log(`Failed to edit ${factory} factory.`);
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -187,17 +181,15 @@ exports.removenFactory = async (factory) => {
                 Object.keys(res).length === 0 ? console.log(`Factory ${factory} was removed.`) : console.log(`Failed to remove ${factory} factory.`);
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log(`Failed to remove ${factory} factory.`);
+                console.log(`Failed to remove ${factory} factory.`);
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to remove ${factory} factory.`);
+        console.log(`Failed to remove ${factory} factory.`);
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };

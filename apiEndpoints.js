@@ -37,5 +37,8 @@ module.exports = {
 
     //Consumers
     GET_ALL_CONSUMERS: '/api/consumers/getAllConsumers',
-    GET_ALL_CONSUMERS_BY_STATION: '/api/consumers/getAllConsumersByStation?station_name='
+    GET_ALL_CONSUMERS_BY_STATION: '/api/consumers/getAllConsumersByStation?station_name=',
+
+    //Cluster Info
+    GET_CLUSTER_INFO: '/api/monitoring/getClusterInfo'
 };

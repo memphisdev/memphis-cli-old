@@ -57,6 +57,11 @@ const initDesc = `Creates an example project for working with Memphis`;
 //    login             Login to Hub
 // `
 
+const clusterDesc = `Memphis Cluster`;
+const clusterHelp = `Cluster Commands:
+   info              Get information about the Memphis cluster
+`;
+
 exports.factoryDesc = factoryDesc;
 exports.factoryHelp = factoryHelp;
 
@@ -78,3 +83,6 @@ exports.consumerDesc = consumerDesc;
 exports.consumerHelp = consumerHelp;
 
 exports.initDesc = initDesc;
+
+exports.clusterDesc = clusterDesc;
+exports.clusterHelp = clusterHelp;

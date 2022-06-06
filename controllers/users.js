@@ -50,17 +50,15 @@ exports.getUsers = async () => {
                 );
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log('Failed to fetch all users');
+                console.log('Failed to fetch all users');
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log('Failed to fetch all users');
+        console.log('Failed to fetch all users');
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -99,17 +97,15 @@ exports.addUser = async (user) => {
                 }
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log(`Failed to add user ${user.username}.`);
+                console.log(`Failed to add user ${user.username}.`);
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to add user ${user.username}.`);
+        console.log(`Failed to add user ${user.username}.`);
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -141,10 +137,9 @@ exports.removeUser = async (user) => {
                 console.log(`Failed to remove user ${user}.`);
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to remove user ${user}.`);
+        console.log(`Failed to remove user ${user}.`);
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -180,10 +175,10 @@ exports.removeUser = async (user) => {
 //                 console.error(`Failed to update hub credentials.`)
 //             })
 //     } catch (error) {
-// if (error.status === 666){
-//     console.log(error.message);
-// } else {
+
 //     console.error(`Failed to update hub credentials.`)
-// }
+//      if (error.response?.status === 666) {
+//          console.log(error.response.data.message);
+//      }
 //     }
 // }

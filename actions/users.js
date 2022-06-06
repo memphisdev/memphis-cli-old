@@ -52,10 +52,9 @@ exports.userMenu = async (action, options) => {
         await validateToken();
         handleUserActions(action, options);
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log('Please check your credentials and connect again');
+        console.log('Please check your credentials and connect again');
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };

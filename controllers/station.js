@@ -75,17 +75,15 @@ exports.getAllStations = async () => {
                 }
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log('Failed to fetch all stations');
+                console.log('Failed to fetch all stations');
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log('Failed to fetch all stations');
+        console.log('Failed to fetch all stations');
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -145,17 +143,15 @@ exports.createStation = async (station, options) => {
                 );
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log(`Failed to create ${station} station.`);
+                console.log(`Failed to create ${station} station.`);
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to create ${station} station.`);
+        console.log(`Failed to create ${station} station.`);
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -185,17 +181,15 @@ exports.getStationInfo = async (station) => {
                 console.log(res);
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log(`Failed to fetch ${station} station details.`);
+                console.log(`Failed to fetch ${station} station details.`);
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to fetch ${station} station details.`);
+        console.log(`Failed to fetch ${station} station details.`);
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
@@ -226,17 +220,15 @@ exports.removeStation = async (station) => {
                 Object.keys(res).length === 0 ? console.log(`Station ${station} was removed.`) : console.log(`Failed to remove station ${station}.`);
             })
             .catch((error) => {
-                if (error.status === 666) {
-                    console.log(error.message);
-                } else {
-                    console.log(`Failed to remove ${station} station.`);
+                console.log(`Failed to remove ${station} station.`);
+                if (error.response?.status === 666) {
+                    console.log(error.response.data.message);
                 }
             });
     } catch (error) {
-        if (error.status === 666) {
-            console.log(error.message);
-        } else {
-            console.log(`Failed to remove ${station} station.`);
+        console.log(`Failed to remove ${station} station.`);
+        if (error.response?.status === 666) {
+            console.log(error.response.data.message);
         }
     }
 };
