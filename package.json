@@ -1,6 +1,6 @@
 {
     "name": "memphis-dev-cli",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "description": "A dev-first event processing platform",
     "main": "index.js",
     "bin": {
@@ -25,6 +25,6 @@
     "homepage": "https://memphis.dev",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Memphis-OS/memphis-cli"
+        "url": "https://github.com/memphisdev/memphis-cli"
     }
 }
