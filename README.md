@@ -1,6 +1,6 @@
 ![](https://memphis-public-files.s3.eu-central-1.amazonaws.com/Vector_page-0001.jpg)
 <br><br>
-![Github tag](https://img.shields.io/github/v/release/memphis-os/memphis-cli) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Memphis-OS/memphis-control-plane/commit-activity) [![GoReportCard example](https://goreportcard.com/badge/github.com/nanomsg/mangos)](https://goreportcard.com/report/github.com/nanomsg/mangos)
+![Github tag](https://img.shields.io/github/v/release/memphisdev/memphis-cli) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Memphisdev/memphis-control-plane/commit-activity) [![GoReportCard example](https://goreportcard.com/badge/github.com/nanomsg/mangos)](https://goreportcard.com/report/github.com/nanomsg/mangos)
 
 Too many data sources and too many schemas? Looking for a messaging queue to scale your data-driven architecture? Require greater performance for your data streams? Your architecture is based on post-processing data, and you want to switch to real-time in minutes instead of months? Struggle to install, configure and update Kafka/RabbitMQ/and other MQs?
 
@@ -37,39 +37,42 @@ For Memphis CLI
 
 **Table of Contents**
 
--   [Usage](#usage)
-    -   [Installation](#installation-1)
-        -   [Homebrew](#homebrew)
-        -   [npm](#npm)
-    -   [Connect](#connect)
-        -   [Parameters - all required](#parameters---all-required)
-        -   [Example](#example)
-    -   [Factory](#factory)
-        -   [Factory commands](#factory-commands)
-        -   [Factory options](#factory-options)
-        -   [Examples](#examples)
-    -   [Station](#station)
-        -   [Station commands](#station-commands)
-        -   [Station options](#station-options)
-        -   [Examples](#examples-1)
-    -   [User](#user)
-        -   [User commands](#user-commands)
-        -   [User options](#user-options)
-        -   [Examples](#examples-2)
-    -   [Producer](#producer)
-        -   [Producer commands](#producer-commands)
-        -   [Producer options](#producer-options)
-        -   [Examples](#examples-3)
-    -   [Consumer](#consumer)
-        -   [Consumer commands](#consumer-commands)
-        -   [Consumer options](#consumer-options)
-        -   [Examples](#examples-4)
-    -   [Init](#init)
-        -   [Examples](#examples-5)
-    -   [Memphis Contributors](#memphis-contributors)
-    -   [Contribution guidelines](#contribution-guidelines)
-    -   [Documentation](#documentation)
-    -   [Contact](#contact)
+- [Usage](#usage)
+  - [Installation](#installation-1)
+    - [Homebrew](#homebrew)
+    - [npm](#npm)
+  - [Connect](#connect)
+    - [Parameters - all required](#parameters---all-required)
+    - [Example](#example)
+  - [Factory](#factory)
+    - [Factory commands](#factory-commands)
+    - [Factory options](#factory-options)
+    - [Examples](#examples)
+  - [Station](#station)
+    - [Station commands](#station-commands)
+    - [Station options](#station-options)
+    - [Examples](#examples-1)
+  - [User](#user)
+    - [User commands](#user-commands)
+    - [User options](#user-options)
+    - [Examples](#examples-2)
+  - [Producer](#producer)
+    - [Producer commands](#producer-commands)
+    - [Producer options](#producer-options)
+    - [Examples](#examples-3)
+  - [Consumer](#consumer)
+    - [Consumer commands](#consumer-commands)
+    - [Consumer options](#consumer-options)
+    - [Examples](#examples-4)
+  - [Init](#init)
+    - [Examples](#examples-5)
+  - [Cluster Info](#cluster-info)
+    - [Information about your Memphis cluster](#information-about-your-memphis-cluster)
+    - [Examples](#examples-6)
+  - [Memphis Contributors](#memphis-contributors)
+  - [Contribution guidelines](#contribution-guidelines)
+  - [Documentation](#documentation)
+  - [Contact](#contact)
 
 ## Memphis Components
 
@@ -77,16 +80,16 @@ For Memphis CLI
 
 ## Memphis repos
 
--   [memphis-control-plane](https://github.com/Memphis-OS/memphis-control-plane 'memphis-control-plane')
--   [memphis-ui](https://github.com/Memphis-OS/memphis-ui 'memphis-ui')
--   [memphis-broker](https://github.com/Memphis-OS/memphis-broker 'memphis-broker')
--   [memphis-cli](https://github.com/Memphis-OS/memphis-cli 'memphis-cli')
--   [memphis-k8s](https://github.com/Memphis-OS/memphis-k8s 'memphis-k8s')
--   [memphis-docker](https://github.com/Memphis-OS/memphis-docker 'memphis-docker')
+-   [memphis-broker](https://github.com/Memphisdev/memphis-broker 'memphis-broker')
+-   [memphis-ui](https://github.com/Memphisdev/memphis-ui 'memphis-ui')
+-   [memphis-cli](https://github.com/Memphisdev/memphis-cli 'memphis-cli')
+-   [memphis-k8s](https://github.com/Memphisdev/memphis-k8s 'memphis-k8s')
+-   [memphis-docker](https://github.com/Memphisdev/memphis-docker 'memphis-docker')
 
 ## Current SDKs
 
--   [memphis-js](https://github.com/Memphis-OS/memphis.js 'Node.js')
+-   [memphis-js](https://github.com/Memphisdev/memphis.js 'Node.js')
+-   [memphis-py](https://github.com/Memphisdev/memphis.py 'Python')
 
 ## Installation
 
@@ -121,7 +124,7 @@ Example:<br>
 #### Install
 
 ```PowerShell
-curl -s https://memphis-os.github.io/memphis-docker/docker-compose.yml -o docker-compose.yml
+curl -s https://memphisdev.github.io/memphis-docker/docker-compose.yml -o docker-compose.yml
 docker compose -f docker-compose.yml -p memphis up
 ```
 
@@ -175,7 +178,7 @@ Control-Plane for SDK - `localhost:6666`
 ### Homebrew
 
 ```PowerShell
-$ brew install Memphis-OS/homebrew-memphis-cli/memphis
+$ brew install Memphisdev/homebrew-memphis-cli/memphis
 ```
 
 ### npm

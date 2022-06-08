@@ -18,7 +18,7 @@ module.exports = async () => {
     try {
         const res = await httpRequest({
             method: 'GET',
-            url: `https://api.github.com/repos/Memphis-OS/memphis-cli/releases`
+            url: `https://api.github.com/repos/Memphisdev/memphis-cli/releases`
         });
         const version = res[0].name.replace('v', '');
         if (version !== packageDetails.version) {
