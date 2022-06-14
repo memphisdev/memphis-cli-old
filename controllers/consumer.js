@@ -51,8 +51,13 @@ exports.getConsumers = async () => {
                         }
                     ]);
                 } else {
+                    const activeConsumers = [];
+                    for (let consumer of res)
+                        if (consumer.is_active)
+                            activeConsumers.push(consumer);
+
                     console.table(
-                        res.map((consumer) => {
+                        activeConsumers.map((consumer) => {
                             return {
                                 name: consumer.name,
                                 type: consumer.type,
@@ -114,8 +119,13 @@ exports.getConsumersByStation = async (station) => {
                         }
                     ]);
                 } else {
+                    const activeConsumers = [];
+                    for (let consumer of res)
+                        if (consumer.is_active)
+                            activeConsumers.push(consumer);
+
                     console.table(
-                        res.map((consumer) => {
+                        activeConsumers.map((consumer) => {
                             return {
                                 name: consumer.name,
                                 type: consumer.type,
