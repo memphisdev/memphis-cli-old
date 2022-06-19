@@ -50,8 +50,13 @@ exports.getProducers = async () => {
                         }
                     ]);
                 } else {
+                    const activeProducers = [];
+                    for (let producer of res)
+                        if (producer.is_active)
+                            activeProducers.push(producer);
+
                     console.table(
-                        res.map((producer) => {
+                        activeProducers.map((producer) => {
                             return {
                                 name: producer.name,
                                 type: producer.type,
@@ -111,8 +116,13 @@ exports.getProducersByStation = async (station) => {
                         }
                     ]);
                 } else {
+                    const activeProducers = [];
+                    for (let producer of res)
+                        if (producer.is_active)
+                            activeProducers.push(producer);
+
                     console.table(
-                        res.map((producer) => {
+                        activeProducers.map((producer) => {
                             return {
                                 name: producer.name,
                                 type: producer.type,
