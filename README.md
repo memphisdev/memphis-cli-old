@@ -1,568 +1,129 @@
-![](https://memphis-public-files.s3.eu-central-1.amazonaws.com/Vector_page-0001.jpg)
-<br><br>
-![Github tag](https://img.shields.io/github/v/release/memphisdev/memphis-cli) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Memphisdev/memphis-control-plane/commit-activity) [![GoReportCard example](https://goreportcard.com/badge/github.com/nanomsg/mangos)](https://goreportcard.com/report/github.com/nanomsg/mangos)
+<div align="center">
+  
+  ![Memphis light logo](https://github.com/memphisdev/memphis-broker/blob/staging/logo-white.png?raw=true#gh-dark-mode-only)
+  
+</div>
 
-Too many data sources and too many schemas? Looking for a messaging queue to scale your data-driven architecture? Require greater performance for your data streams? Your architecture is based on post-processing data, and you want to switch to real-time in minutes instead of months? Struggle to install, configure and update Kafka/RabbitMQ/and other MQs?
+<div align="center">
+  
+  ![Memphis light logo](https://github.com/memphisdev/memphis-broker/blob/staging/logo-black.png?raw=true#gh-light-mode-only)
+  
+</div>
 
-**Meet Memphis**
+<div align="center">
+<h1>Probably The Easiest Message Broker In The World</h1>
+<a target="_blank" href="https://twitter.com/intent/tweet?text=Probably+The+Easiest+Message+Broker+In+The+World%21+%0D%0Ahttps%3A%2F%2Fgithub.com%2Fmemphisdev%2Fmemphis-broker+%0D%0A%0D%0A%23MemphisDev"><img src="https://user-images.githubusercontent.com/70286779/174467733-e7656c1e-cfeb-4877-a5f3-1bd4fccc8cf1.png" width="60"></a> 
+</div>
+ 
+ <p align="center">
+  <a href="https://memphis.dev/docs/">Docs</a> - <a href="https://twitter.com/Memphis_Dev">Twitter</a> - <a href="https://www.youtube.com/channel/UCVdMDLCSxXOqtgrBaRUHKKg">YouTube</a>
+</p>
 
-**[Memphis](https://memphis.dev)** is a dev-first, cloud-native, event processing platform made out of devs' struggles with tools like Kafka, RabbitMQ, NATS, and others, allowing you to achieve all other message brokers' benefits in a fraction of the time.<br><br>
-**[Memphis](https://memphis.dev) delivers:**
+<p align="center">
+<a href="https://discord.gg/WZpysvAeTf"><img src="https://img.shields.io/discord/963333392844328961?color=6557ff&label=discord" alt="Discord"></a> <a href=""><img src="https://img.shields.io/github/issues-closed/memphisdev/memphis-broker?color=6557ff"></a> <a href="https://github.com/memphisdev/memphis-broker/blob/master/CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Code%20of%20Conduct-v1.0-ff69b4.svg?color=ffc633" alt="Code Of Conduct"></a> <a href="https://github.com/memphisdev/memphis-broker/blob/master/LICENSE"><img src="https://img.shields.io/github/license/memphisdev/memphis-broker?color=ffc633" alt="License"></a> <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/memphisdev/memphis-broker?color=61dfc6"> <img src="https://img.shields.io/github/last-commit/memphisdev/memphis-broker?color=61dfc6&label=last%20commit">
+</p>
 
--   The most simple to use Message Broker (With the same behaivour as NATS and Kafka)
--   State-of-the-art UI and CLI
--   No need for Kafka Connect, Kafka Streams, ksql. All the tools you need are under the same roof
--   An in-line data processing in any programming language
--   Out-of-the-box deep observability of every component
+**[Memphis{dev}](https://memphis.dev)** is a modern replacement for Apache Kafka.<br>A message broker for developers made out of devs' struggles develop around message brokers.<br>Enables devs to achieve all other message brokers' benefits in a fraction of the time.<br>
 
-RabbitMQ has Queues, Kafka as Topics, **Memphis has Stations.**
+## ⭐️ Why
+Building an event-driven application is HARD.<br>
+As a developer, you need to build a dedicated pipeline per data source,<br>change the schema, individual analysis, enrich the data with other sources, it crashes, adapt to different rate limits, constantly change APIs, and scale for better performance 🥵 .<br>
+**It takes time that you don't have.**<br><br>
+Message broker is the answer. It allows you to build an architecture that supports such a pattern,<br>but then you encounter Apache Kafka and its documentation and run back to the monolith and batch jobs.<br>
+Give memphis{dev} a spin before.
 
-#### TL;DR
+## ✨ Features
 
-**On Day 1 (For the DevOps heros out there) -**<br>
-Memphis platform provides the same old and loved behavior (Produce-Consume) of other data lakes and MQs, but removes completly the complexity barriers, messy documentation, ops, manual scale, orchestration and more.
+- 🚀 Fully optimized message broker in under 3 minutes
+- 💻 Easy-to-use UI, CLI, and SDKs
+- 📺 Data-level observability
+- 🐳☸Runs on your Docker or Kubernetes
+- 👨‍💻 Community driven
 
-**On Day 2 (For the Developers) -**
-Developer lives with developing real-time, event-driven apps that are too complex.
-Consumers and Producers are filled with logic, data orchestration is needed between the different services, no GUI to understand metrics and flows, lack of monitoring, hard to implement SDKs, etc.
+**Coming soon v0.2.5-0.3.0**
+- Embedded schema registry using dbt
+- Message Journey - Real-time messages tracing
+- More SDKs (GoLang, Python, Kafka compatible)
+- Inline processing
+- Ready-to-use connectors and analysis functions
 
-No More.
-
-In the coming versions, Memphis will answer the challenges above,<br>and recude 90% of dev work arround building a real-time / event-driven / data-driven apps.
-
----
-
-**Purpose of this repo**<br>
-For Memphis CLI
-
-**Table of Contents**
-
-- [Usage](#usage)
-  - [Installation](#installation-1)
-    - [Homebrew](#homebrew)
-    - [npm](#npm)
-  - [Connect](#connect)
-    - [Parameters - all required](#parameters---all-required)
-    - [Example](#example)
-  - [Factory](#factory)
-    - [Factory commands](#factory-commands)
-    - [Factory options](#factory-options)
-    - [Examples](#examples)
-  - [Station](#station)
-    - [Station commands](#station-commands)
-    - [Station options](#station-options)
-    - [Examples](#examples-1)
-  - [User](#user)
-    - [User commands](#user-commands)
-    - [User options](#user-options)
-    - [Examples](#examples-2)
-  - [Producer](#producer)
-    - [Producer commands](#producer-commands)
-    - [Producer options](#producer-options)
-    - [Examples](#examples-3)
-  - [Consumer](#consumer)
-    - [Consumer commands](#consumer-commands)
-    - [Consumer options](#consumer-options)
-    - [Examples](#examples-4)
-  - [Init](#init)
-    - [Examples](#examples-5)
-  - [Cluster Info](#cluster-info)
-    - [Information about your Memphis cluster](#information-about-your-memphis-cluster)
-    - [Examples](#examples-6)
-  - [Memphis Contributors](#memphis-contributors)
-  - [Contribution guidelines](#contribution-guidelines)
-  - [Documentation](#documentation)
-  - [Contact](#contact)
-
-## Memphis Components
-
-![](https://memphis-public-files.s3.eu-central-1.amazonaws.com/graphics+for+github/Architecture+for+ReadME-Page-2.drawio.png)
-
-## Memphis repos
-
--   [memphis-broker](https://github.com/Memphisdev/memphis-broker 'memphis-broker')
--   [memphis-ui](https://github.com/Memphisdev/memphis-ui 'memphis-ui')
--   [memphis-cli](https://github.com/Memphisdev/memphis-cli 'memphis-cli')
--   [memphis-k8s](https://github.com/Memphisdev/memphis-k8s 'memphis-k8s')
--   [memphis-docker](https://github.com/Memphisdev/memphis-docker 'memphis-docker')
-
-## Current SDKs
-
--   [memphis-js](https://github.com/Memphisdev/memphis.js 'Node.js')
--   [memphis-py](https://github.com/Memphisdev/memphis.py 'Python')
-
-## Installation
-
-### Kubernetes
-
-#### Install
-
-```PowerShell
-helm repo add memphis https://k8s.memphis.dev/charts/
+## 🚀 Getting Started
+[Installation videos](https://www.youtube.com/playlist?list=PL_7iYjqhtXpWpZT2U0zDYo2eGOoGmg2mm)<br><br>
+Helm for Kubernetes
+```shell
+helm repo add memphis https://k8s.memphis.dev/charts/ && \
 helm install my-memphis memphis/memphis --create-namespace --namespace memphis
 ```
-
-**Helm chart options**<br>
-Example:<br>
-`helm install my-memphis --set cluster.replicas=1,rootPwd="rootpassword" memphis/memphis --create-namespace --namespace memphis`
-
-| Option           | Description                                                              | Default Value |
-| :--------------- | :----------------------------------------------------------------------- | :------------ |
-| rootPwd          | Root password for the dashboard                                          | `"memphis"`   |
-| connectionToken  | Token for connecting an app to the Memphis Message Queue. Auto Generated | `""`          |
-| dashboard.port   | Dashboard's (GUI) port                                                   | 80            |
-| cluster.replicas | Amount of Message Queue workers                                          | 3             |
-
-#### K8S Diagram
-
-![](https://memphis-public-files.s3.eu-central-1.amazonaws.com/Untitled+Diagram.png)
-
----
-
-### Docker
-
-#### Install
-
-```PowerShell
-curl -s https://memphisdev.github.io/memphis-docker/docker-compose.yml -o docker-compose.yml
+Docker Compose
+```shell
+curl -s https://memphisdev.github.io/memphis-docker/docker-compose.yml -o docker-compose.yml && \
 docker compose -f docker-compose.yml -p memphis up
 ```
+[![Connect your first app](https://img.youtube.com/vi/-5YmxYRQsdw/0.jpg)](https://www.youtube.com/watch?v=PL_7iYjqhtXpWpZT2U0zDYo2eGOoGmg2mm)<br>
+[Tutorial: Build an event-driven food delivery app](https://medium.com/memphis-dev/how-to-build-your-own-wolt-app-b220d738bb71)
 
-The following will be deployed as docker containers
+## High-Level Architecture
+<img alt="memphis.dev-logo" height="500" alt="memphis.dev Architecture" src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/graphics+for+github/Architecture.png">
 
-```PowerShell
-memphis-control-plane-1
-memphis-ui-1
-memphis-cluster-1
-memphis-mongo-1
-```
+## Local access
+### Via Kubernetes
+```shell
+To access Memphis UI from localhost, run the below commands:
+  1. kubectl port-forward service/memphis-ui 9000:80 --namespace memphis > /dev/null &
 
----
-
-## Next Steps
-
-### Kubernetes
-
-#### Localhost Environment
-
-```PowerShell
-Memphis UI can be accessed via port 80 on the following DNS name from within your cluster:
-memphis-ui.memphis.svc.cluster.local
-
-To access Memphis from localhost, run the below commands:
-  1. kubectl port-forward service/memphis-ui 9000:80 --namespace memphis &
-  2. kubectl port-forward service/memphis-cluster 7766:7766 --namespace memphis &
-  3. kubectl port-forward service/control-plane 6666:6666 6667:80 --namespace memphis &
+To access Memphis using CLI or SDK from localhost, run the below commands:
+  2. kubectl port-forward service/memphis-cluster 7766:7766 6666:6666 5555:5555 --namespace memphis > /dev/null &
 
 Dashboard: http://localhost:9000
+Memphis broker: localhost:5555 (Management Port) / 7766 (Data Port) / 6666 (TCP Port)
 ```
-
-#### Production Environments
-
+**For Production Environments**
 Please expose the UI, Cluster, and Control-plane via k8s ingress / load balancer / nodeport
 
----
+### Via Docker
+Dashboard - http://localhost:9000<br>
+Broker - localhost:7766<br>
+Control-Plane - localhost:5555/6666<br>
 
-### Docker
+## Beta
+Memphis{dev} is currently in Beta version. This means that we are still working on essential features like real-time messages tracing,<br>
+Schema registry, and inline processing, as well as making more SDKs and supporting materials.
 
-**To access Memphis, run the below commands:**
-Dashboard - `http://localhost:9000`<br>
-Broker - `localhost:7766`<br>
-Control-Plane for CLI - `localhost:9000`<br>
-Control-Plane for SDK - `localhost:6666`
+How does it affect you? Well... mostly it doesn't.<br>
+(a) The core of memphis broker is highly stable<br>
+(b) We learn&fix fast<br><br>
+But we need your love, and any help we can get by stars, PR, feedback, issues, and enhancments.<br>
+Read more on https://memphis.dev/docs
 
-# Usage
+## Support
 
-## Installation
+### Ask a question about Memphis{dev} or related
 
-### Homebrew
+You can ask questions, and participate in discussions about Memphis{dev}-related topics in the Memphis Discord channel.
 
-```PowerShell
-$ brew install Memphisdev/homebrew-memphis-cli/memphis
-```
+<a href="https://discord.gg/WZpysvAeTf"><img src="https://amplication.com/images/discord_banner_purple.svg" /></a>
 
-### npm
+### Create a bug report
 
-```PowerShell
-$ npm i memphis-dev-cli -g
-```
+If you see an error message or run into an issue, please [create bug report](https://github.com/memphisdev/memphis-broker/issues/new?assignees=&labels=type%3A%20bug&template=bug_report.md&title=). This effort is valued and it will help all Memphis{dev} users.
 
-## Connect
 
-> ##### Connection to Memphis control plane
+### Submit a feature request
 
-> ##### Once connected, the entire functionalities offered by Memphis are available.
+If you have an idea, or you're missing a capability that would make development easier and more robust, please [Submit feature request](https://github.com/memphisdev/memphis-broker/issues/new?assignees=&labels=type%3A%20feature%20request).
 
-```PowerShell
-$ mem connect -s <memphis> -u root -p memphis
-```
+If a similar feature request already exists, don't forget to leave a "+1".
+If you add some more information such as your thoughts and vision about the feature, your comments will be embraced warmly :)
 
-### Parameters - all required
+## Contributing
 
-```PowerShell
--u, --user                 User
--p, --password <password>  Password
--s, --server <server>      Memphis broker
--h, --help                 display help for command
-```
+Memphis{dev} is an open-source project.<br>
+We are committed to a fully transparent development process and appreciate highly any contributions.<br>
+Whether you are helping us fix bugs, proposing new features, improving our documentation or spreading the word - <br>we would love to have you as part of the Memphis{dev} community.
 
-### Example
+Please refer to our [Contribution Guidelines](./CONTRIBUTING.md) and [Code of Conduct](./code_of_conduct.md).
 
-```PowerShell
-$ mem connect -u root -p memphis -s http://localhost:5555
-Connected successfully to Memphis.
-```
+## Contributors ✨
 
----
-
-## Factory
-
-> ##### Factory is the place to bind stations that have some close business logic
-
-```PowerShell
-$ mem factory <command> [options]
-```
-
-### Factory commands
-
-```PowerShell
-ls                List of factories
-create            Create new factory
-edit              Edit factory name and/or description
-del               Delete a factory
-```
-
-### Factory options
-
-```PowerShell
--d, --desc <factory-description>  Factory description
--h, --help                        display help for command
-```
-
-### Examples
-
-```PowerShell
-$ mem factory ls
-┌─────────┬────────┬─────────────┬─────────────────┬────────────────────────────┐
-│ (index) │  name  │ description │ created_by_user │       creation_date        │
-├─────────┼────────┼─────────────┼─────────────────┼────────────────────────────┤
-│    0    │ 'test' │     ''      │     'root'      │ '2022-04-19T06:21:19.029Z' │
-└─────────┴────────┴─────────────┴─────────────────┴────────────────────────────┘
-```
-
-```PowerShell
-$ mem factory create myfactory
-Factory myfactory was created.
-
-$ mem factory ls
-┌─────────┬─────────────┬────────────────────┬─────────────────┬────────────────────────────┐
-│ (index) │    name     │    description     │ created_by_user │       creation_date        │
-├─────────┼─────────────┼────────────────────┼─────────────────┼────────────────────────────┤
-│    0    │   'test'    │         ''         │     'root'      │ '2022-04-19T06:21:19.029Z' │
-│    1    │ 'myfactory' │         ''         │     'root'      │ '2022-04-20T09:22:49.037Z' │
-└─────────┴─────────────┴────────────────────┴─────────────────┴────────────────────────────┘
-```
-
-```PowerShell
-$ mem factory edit myfactory -d 'my first factory'
-Factory myfactory was edited.
-
-$ mem factory ls
-┌─────────┬─────────────┬────────────────────┬─────────────────┬────────────────────────────┐
-│ (index) │    name     │    description     │ created_by_user │       creation_date        │
-├─────────┼─────────────┼────────────────────┼─────────────────┼────────────────────────────┤
-│    0    │   'test'    │         ''         │     'root'      │ '2022-04-19T06:21:19.029Z' │
-│    1    │ 'myfactory' │ 'my first factory' │     'root'      │ '2022-04-20T09:22:49.037Z' │
-└─────────┴─────────────┴────────────────────┴─────────────────┴────────────────────────────┘
-```
-
-```PowerShell
-$ mem factory del myfactory
-Factory myfactory was removed.
-
-$ mem factory ls
-┌─────────┬────────┬─────────────┬─────────────────┬────────────────────────────┐
-│ (index) │  name  │ description │ created_by_user │       creation_date        │
-├─────────┼────────┼─────────────┼─────────────────┼────────────────────────────┤
-│    0    │ 'test' │     ''      │     'root'      │ '2022-04-19T06:21:19.029Z' │
-└─────────┴────────┴─────────────┴─────────────────┴────────────────────────────┘
-```
-
----
-
-## Station
-
-> ##### Station is Memphis' queue/topic/channel/subject
-
-```PowerShell
-$ mem station <command> [options]
-```
-
-### Station commands
-
-```PowerShell
-ls                List of stations
-create            Create new station
-info              Specific station's info
-del               Delete a station
-```
-
-### Station options
-
-```PowerShell
--f, --factory <factory>                  Factory name
--rt, --retentiontype <retention-type>    Retention type
--rv, --retentionvalue <retention-value>  Retention value
--s, --storage <storage-type>             Storage type
--r, --replicas <replicas>                Replicas
--de, --dedupenabled <dedup-enabled>      Dedup enabled
--dw, --dedupwindow <dedup-window-in-ms>  Dedup window in ms
--h, --help                               display help for command
-```
-
-### Examples
-
-```PowerShell
-$ mem station ls
-┌─────────┬────────┬─────────┬───────────────────┬────────────────────┬──────────────┬──────────┬───────────────┬─────────────────┬────────────┬───────────────┬──────────────┐
-│ (index) │  name  │ factory │  retention type   │ retentention value │ storage type │ replicas │ dedup enabled │ dedup window ms │ created by │ creation date │ last_update  │
-├─────────┼────────┼─────────┼───────────────────┼────────────────────┼──────────────┼──────────┼───────────────┼─────────────────┼────────────┼───────────────┼──────────────┤
-│    0    │ 'test' │ 'test'  │ 'message_age_sec' │       604800       │      ''      │    1     │     false     │        0        │   'root'   │ '2022-04-20'  │ '2022-04-20' │
-└─────────┴────────┴─────────┴───────────────────┴────────────────────┴──────────────┴──────────┴───────────────┴─────────────────┴────────────┴───────────────┴──────────────┘
-```
-
-```PowerShell
-$ mem station create mystation -f myfactory
-Station mystation was created with the following details:
-┌─────────┬─────────────┬───────────────────┬────────────────────┬──────────────┬──────────┬───────────────┬─────────────────┬────────────┬───────────────┐
-│ (index) │    name     │  retention type   │ retentention value │ storage type │ replicas │ dedup enabled │ dedup window ms │ created by │ creation date │
-├─────────┼─────────────┼───────────────────┼────────────────────┼──────────────┼──────────┼───────────────┼─────────────────┼────────────┼───────────────┤
-│    0    │ 'mystation' │ 'message_age_sec' │       604800       │      ''      │    1     │     false     │        0        │   'root'   │ '2022-04-20'  │
-└─────────┴─────────────┴───────────────────┴────────────────────┴──────────────┴──────────┴───────────────┴─────────────────┴────────────┴───────────────┘
-
-$ mem station ls
-┌─────────┬─────────────┬─────────────┬───────────────────┬────────────────────┬──────────────┬──────────┬───────────────┬─────────────────┬────────────┬───────────────┬──────────────┐
-│ (index) │    name     │   factory   │  retention type   │ retentention value │ storage type │ replicas │ dedup enabled │ dedup window ms │ created by │ creation date │ last_update  │
-├─────────┼─────────────┼─────────────┼───────────────────┼────────────────────┼──────────────┼──────────┼───────────────┼─────────────────┼────────────┼───────────────┼──────────────┤
-│    0    │   'test'    │   'test'    │ 'message_age_sec' │       604800       │      ''      │    1     │     false     │        0        │   'root'   │ '2022-04-20'  │ '2022-04-20' │
-│    1    │ 'mystation' │ 'myfactory' │ 'message_age_sec' │       604800       │      ''      │    1     │     false     │        0        │   'root'   │ '2022-04-20'  │ '2022-04-20' │
-└─────────┴─────────────┴─────────────┴───────────────────┴────────────────────┴──────────────┴──────────┴───────────────┴─────────────────┴────────────┴───────────────┴──────────────┘
-```
-
-```PowerShell
-$ mem station info mystation
-Station info:
-{
-  id: '62600a5a03e78b618f036364',
-  name: 'mystation',
-  factory_id: '62600a4503e78b618f036363',
-  retention_type: 'message_age_sec',
-  retention_value: 604800,
-  storage_type: '',
-  replicas: 1,
-  dedup_enabled: false,
-  dedup_window_in_ms: 0,
-  created_by_user: 'root',
-  creation_date: '2022-04-20T13:27:54.818Z',
-  last_update: '2022-04-20T13:27:54.818Z',
-  functions: []
-}
-
-del
-$ mem station del mystation
-Station mystation was removed.
-
-$ mem station ls
-┌─────────┬────────┬─────────┬───────────────────┬────────────────────┬──────────────┬──────────┬───────────────┬─────────────────┬────────────┬───────────────┬──────────────┐
-│ (index) │  name  │ factory │  retention type   │ retentention value │ storage type │ replicas │ dedup enabled │ dedup window ms │ created by │ creation date │ last_update  │
-├─────────┼────────┼─────────┼───────────────────┼────────────────────┼──────────────┼──────────┼───────────────┼─────────────────┼────────────┼───────────────┼──────────────┤
-│    0    │ 'test' │ 'test'  │ 'message_age_sec' │       604800       │      ''      │    1     │     false     │        0        │   'root'   │ '2022-04-20'  │ '2022-04-20' │
-└─────────┴────────┴─────────┴───────────────────┴────────────────────┴──────────────┴──────────┴───────────────┴─────────────────┴────────────┴───────────────┴──────────────┘
-```
-
----
-
-## User
-
-> ##### Manage users and permissions
-
-```PowerShell
-$ mem user <command> [options]
-```
-
-### User commands
-
-```PowerShell
-ls                List of users
-add               Add new user
-del               Delete user
-```
-
-### User options
-
-```PowerShell
--u, --username <username>          Username
--p, --password <password>  User password
--t, --type <user-type>          User type (default: "management") - application/management
--h, --help                      display help for command
-```
-
-### Examples
-
-```PowerShell
-$ mem user ls
-┌─────────┬───────────┬────────────────────────────┬───────────┐
-│ (index) │ user_name │       creation_date        │ user_type │
-├─────────┼───────────┼────────────────────────────┼───────────┤
-│    0    │  'root'   │ '2022-04-18T12:38:47.034Z' │  'root'   │
-└─────────┴───────────┴────────────────────────────┴───────────┘
-```
-
-```PowerShell
-$ mem user add --name shay --password 123456
-User shay was created.
-$ mem user add --name sveta --type application
-User sveta was created.
-Broker connection credentials: imeD5g08Bz8mbJavU4zi
-These credentials CANT be restored, save them in a safe place
-
-$ mem user ls
-┌─────────┬───────────┬────────────────────────────┬───────────────┐
-│ (index) │ user_name │       creation_date        │   user_type   │
-├─────────┼───────────┼────────────────────────────┼───────────────┤
-│    0    │  'root'   │ '2022-04-18T12:38:47.034Z' │    'root'     │
-│    1    │  'shay'   │ '2022-04-20T13:54:32.571Z' │ 'management'  │
-│    2    │  'sveta'  │ '2022-04-20T13:56:46.589Z' │ 'application' │
-└─────────┴───────────┴────────────────────────────┴───────────────┘
-```
-
-```PowerShell
-$ mem user del shay
-User shay was removed.
-
-$ mem user ls
-┌─────────┬───────────┬────────────────────────────┬───────────────┐
-│ (index) │ user_name │       creation_date        │   user_type   │
-├─────────┼───────────┼────────────────────────────┼───────────────┤
-│    0    │  'root'   │ '2022-04-18T12:38:47.034Z' │    'root'     │
-│    1    │  'sveta'  │ '2022-04-20T14:01:38.494Z' │ 'application' │
-└─────────┴───────────┴────────────────────────────┴───────────────┘
-```
-
----
-
-## Producer
-
-> ##### Producer is the entity who can send messages into stations
-
-### Producer commands
-
-```PowerShell
-ls                List of Producers
-```
-
-### Producer options
-
-```PowerShell
--s, --station <station-name>  Producers by station
--h, --help                    display help for command
-```
-
-### Examples
-
-```PowerShell
-$ mem producer ls
-┌─────────┬──────┬──────┬─────────────────┬──────────────┬──────────────┬───────────────┐
-│ (index) │ name │ type │ created_by_user │ station_name │ factory_name │ creation_date │
-├─────────┼──────┼──────┼─────────────────┼──────────────┼──────────────┼───────────────┤
-│    0    │ ' '  │ ' '  │       ' '       │     ' '      │     ' '      │      ' '      │
-└─────────┴──────┴──────┴─────────────────┴──────────────┴──────────────┴───────────────┘
-```
-
----
-
-## Consumer
-
-> ##### Consumer is the entity who can consume messages from stations
-
-### Consumer commands
-
-```PowerShell
-ls                List of Consumers
-```
-
-### Consumer options
-
-```PowerShell
--s, --station <station-name>  Consumers by station
--h, --help                    display help for command
-```
-
-### Examples
-
-```PowerShell
-$ mem consumer ls
-┌─────────┬──────┬──────┬────────────────┬─────────────────┬──────────────┬──────────────┬───────────────┐
-│ (index) │ name │ type │ consumers_group │ created_by_user │ station_name │ factory_name │ creation_date │
-├─────────┼──────┼──────┼────────────────┼─────────────────┼──────────────┼──────────────┼───────────────┤
-│    0    │ ' '  │ ' '  │      ' '       │       ' '       │     ' '      │     ' '      │      ' '      │
-└─────────┴──────┴──────┴────────────────┴─────────────────┴──────────────┴──────────────┴───────────────┘
-```
-
----
-
-## Init
-
-> ##### Creates an example project for working with Memphis
-
-### Examples
-
-```PowerShell
-$ mem init
-
-'mem init' creates an example project for connecting an app with Memphis.
-
-The default language is nodejs.
-If you want to use different language use 'mem init -l/--language <language>'.
-Currently supported languages: nodejs.
-
-For more help use 'mem init -h'.
-
-The project will be created in directory /Users/myUser/myCurrentDir
- continue? Y/n
-index.js was created.
-```
-
-## Cluster Info
-
-### Information about your Memphis cluster
-
-### Examples
-
-```PowerShell
-$ mem cluster info
-
-Cluster Info:
-
-Memphis version: 0.2.0
-```
-
-## Memphis Contributors
-
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):<br><br>
 <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Alon+Avrahami.jpg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Ariel+Bar.jpeg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Arjun+Anjaria.jpeg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Carlos+Gasperi.jpeg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Daniel+Eliyahu.jpeg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Itay+Katz.jpeg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Jim+Doty.jpeg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Nikita+Aizenberg.jpg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Rado+Marina.jpg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"><img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Raghav+Ramesh.jpg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Tal+Goldberg.jpg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;"> <img src="https://memphis-public-files.s3.eu-central-1.amazonaws.com/contributors-images/Yehuda+Mizrahi.jpeg" width="60" height="60" style="border-radius: 25px; border: 2px solid #61DFC6;">
-
-## Contribution guidelines
-
-soon
-
-## Documentation
-
--   [Official documentation](https://docs.memphis.dev)
-
-## Contact
-
--   [Slack](https://bit.ly/37uwCPd): Q&A, Help, Feature requests, and more
--   [Twitter](https://bit.ly/3xzkxTx): Follow us on Twitter!
--   [Discord](https://bit.ly/3OfnuhX): Join our Discord Server!
--   [Medium](https://bit.ly/3ryFDgS): Follow our Medium page!
--   [Youtube](https://bit.ly/38Y8rcq): Subscribe our youtube channel!
