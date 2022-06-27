@@ -17,9 +17,16 @@ const validateToken = require('../utils/validateToken');
 const handleConsumerActions = (action, options) => {
     switch (action[0]) {
         case 'ls':
-            if (!options.station) consumer.getConsumers();
-            else if (options.station) consumer.getConsumersByStation(options.station);
-            else console.log('Use command:\nmem consumer ls\nOR\nmem consumer ls --station <station-name>');
+            if (!options.station) {
+                if (options.live) consumer.getAllConsumers('live');
+                else if (options.disconnected) consumer.getAllConsumers('disconnected');
+                else if (options.destroyed) consumer.getAllConsumers('destroyed');
+                else consumer.getAllConsumers();
+            } else if (options.station) {
+                if (options.live) consumer.getConsumersByStation(options.station, 'live');
+                else if (options.disconnected) consumer.getConsumersByStation(options.station, 'disconnected');
+                else if (options.destroyed) consumer.getConsumersByStation(options.station, 'destroyed');
+            } else console.log('Use command:\nmem consumer ls\nOR\nmem consumer ls --station <station-name>');
             break;
         default:
             return;

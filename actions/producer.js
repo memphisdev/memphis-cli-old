@@ -17,9 +17,17 @@ const validateToken = require('../utils/validateToken');
 const handleProducerActions = (action, options) => {
     switch (action[0]) {
         case 'ls':
-            if (!options.station) producer.getProducers();
-            else if (options.station) producer.getProducersByStation(options.station);
-            else console.log('Use command:\nmem producer ls\nOR\nmem producer ls --station <station-name>');
+            if (!options.station) {
+                if (options.live) producer.getAllProducers('live');
+                else if (options.disconnected) producer.getAllProducers('disconnected');
+                else if (options.destroyed) producer.getAllProducers('destroyed');
+                else producer.getAllProducers();
+            } else if (options.station) {
+                if (options.live) producer.getProducersByStation(options.station, 'live');
+                else if (options.disconnected) producer.getProducersByStation(options.station, 'disconnected');
+                else if (options.destroyed) producergetProducersByStation(options.station, 'destroyed');
+                else producer.getProducersByStation(options.station);
+            } else console.log('Use command:\nmem producer ls\nOR\nmem producer ls --station <station-name>');
             break;
         default:
             return;
