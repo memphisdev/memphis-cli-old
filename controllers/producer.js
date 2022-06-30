@@ -17,7 +17,7 @@ const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
 const configDir = require('../utils/configDir');
 
-exports.getProducers = async () => {
+exports.getAllProducers = async (state = 'all') => {
     try {
         const memConfigDir = configDir();
         if (memConfigDir === null) {
@@ -46,27 +46,67 @@ exports.getProducers = async () => {
                             created_by_user: ' ',
                             station_name: ' ',
                             factory_name: ' ',
-                            creation_date: ' '
+                            creation_date: ' ',
+                            status: ''
                         }
                     ]);
                 } else {
-                    const activeProducers = [];
-                    for (let producer of res)
-                        if (producer.is_active)
-                            activeProducers.push(producer);
-
-                    console.table(
-                        activeProducers.map((producer) => {
-                            return {
-                                name: producer.name,
-                                type: producer.type,
-                                created_by_user: producer.created_by_user,
-                                station_name: producer.station_name,
-                                factory_name: producer.factory_name,
-                                creation_date: producer.creation_date
-                            };
-                        })
-                    );
+                    var producers = [];
+                    var liveProducers = [];
+                    var destroyedProducers = [];
+                    var disconnectedProducers = [];
+                    for (let producer of res) {
+                        if (producer.is_active) {
+                            producer['status'] = 'live';
+                            liveProducers.push(producer);
+                        } else if (producer.is_deleted) {
+                            producer['status'] = 'destroyed';
+                            destroyedProducers.push(producer);
+                        } else {
+                            producer['status'] = 'disconnected';
+                            disconnectedProducers.push(producer);
+                        }
+                    }
+                    switch (state) {
+                        case 'live':
+                            producers = liveProducers.reverse();
+                            break;
+                        case 'destroyed':
+                            producers = destroyedProducers.reverse();
+                            break;
+                        case 'disconnected':
+                            producers = disconnectedProducers.reverse();
+                            break;
+                        default:
+                            producers = [].concat(liveProducers.reverse(), disconnectedProducers.reverse(), destroyedProducers.reverse());
+                    }
+                    if (producers.length === 0) {
+                        console.table([
+                            {
+                                name: ' ',
+                                type: ' ',
+                                created_by_user: ' ',
+                                station_name: ' ',
+                                factory_name: ' ',
+                                creation_date: ' ',
+                                status: ''
+                            }
+                        ]);
+                    } else {
+                        console.table(
+                            producers.map((producer) => {
+                                return {
+                                    name: producer.name,
+                                    type: producer.type,
+                                    created_by_user: producer.created_by_user,
+                                    station_name: producer.station_name,
+                                    factory_name: producer.factory_name,
+                                    creation_date: producer.creation_date,
+                                    status: producer.status
+                                };
+                            })
+                        );
+                    }
                 }
             })
             .catch((error) => {
@@ -83,7 +123,7 @@ exports.getProducers = async () => {
     }
 };
 
-exports.getProducersByStation = async (station) => {
+exports.getProducersByStation = async (station, state = 'all') => {
     try {
         const memConfigDir = configDir();
         if (memConfigDir === null) {
@@ -112,27 +152,67 @@ exports.getProducersByStation = async (station) => {
                             created_by_user: ' ',
                             station_name: ' ',
                             factory_name: ' ',
-                            creation_date: ' '
+                            creation_date: ' ',
+                            status: ''
                         }
                     ]);
                 } else {
-                    const activeProducers = [];
-                    for (let producer of res)
-                        if (producer.is_active)
-                            activeProducers.push(producer);
-
-                    console.table(
-                        activeProducers.map((producer) => {
-                            return {
-                                name: producer.name,
-                                type: producer.type,
-                                created_by_user: producer.created_by_user,
-                                station_name: producer.station_name,
-                                factory_name: producer.factory_name,
-                                creation_date: producer.creation_date
-                            };
-                        })
-                    );
+                    var producers = [];
+                    var liveProducers = [];
+                    var destroyedProducers = [];
+                    var disconnectedProducers = [];
+                    for (let producer of res) {
+                        if (producer.is_active) {
+                            producer['status'] = 'live';
+                            liveProducers.push(producer);
+                        } else if (producer.is_deleted) {
+                            producer['status'] = 'destroyed';
+                            destroyedProducers.push(producer);
+                        } else {
+                            producer['status'] = 'disconnected';
+                            disconnectedProducers.push(producer);
+                        }
+                    }
+                    switch (state) {
+                        case 'live':
+                            producers = liveProducers.reverse();
+                            break;
+                        case 'destroyed':
+                            producers = destroyedProducers.reverse();
+                            break;
+                        case 'disconnected':
+                            producers = disconnectedProducers.reverse();
+                            break;
+                        default:
+                            producers = [].concat(liveProducers.reverse(), disconnectedProducers.reverse(), destroyedProducers.reverse());
+                    }
+                    if (producers.length === 0) {
+                        console.table([
+                            {
+                                name: ' ',
+                                type: ' ',
+                                created_by_user: ' ',
+                                station_name: ' ',
+                                factory_name: ' ',
+                                creation_date: ' ',
+                                status: ''
+                            }
+                        ]);
+                    } else {
+                        console.table(
+                            producers.map((producer) => {
+                                return {
+                                    name: producer.name,
+                                    type: producer.type,
+                                    created_by_user: producer.created_by_user,
+                                    station_name: producer.station_name,
+                                    factory_name: producer.factory_name,
+                                    creation_date: producer.creation_date,
+                                    status: producer.status
+                                };
+                            })
+                        );
+                    }
                 }
             })
             .catch((error) => {

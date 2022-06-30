@@ -17,7 +17,7 @@ const ApiEndpoint = require('../apiEndpoints');
 const httpRequest = require('../services/httpRequest');
 const configDir = require('../utils/configDir');
 
-exports.getConsumers = async () => {
+exports.getAllConsumers = async (state = 'all') => {
     try {
         const memConfigDir = configDir();
         if (memConfigDir === null) {
@@ -47,28 +47,67 @@ exports.getConsumers = async () => {
                             created_by_user: ' ',
                             station_name: ' ',
                             factory_name: ' ',
-                            creation_date: ' '
+                            creation_date: ' ',
+                            status: ''
                         }
                     ]);
                 } else {
-                    const activeConsumers = [];
-                    for (let consumer of res)
-                        if (consumer.is_active)
-                            activeConsumers.push(consumer);
-
-                    console.table(
-                        activeConsumers.map((consumer) => {
-                            return {
-                                name: consumer.name,
-                                type: consumer.type,
-                                consumers_group: consumer.consumers_group,
-                                created_by_user: consumer.created_by_user,
-                                station_name: consumer.station_name,
-                                factory_name: consumer.factory_name,
-                                creation_date: consumer.creation_date
-                            };
-                        })
-                    );
+                    var consumers = [];
+                    var liveConsumers = [];
+                    var destroyedConsumers = [];
+                    var disconnectedConsumers = [];
+                    for (let producer of res) {
+                        if (producer.is_active) {
+                            producer['status'] = 'live';
+                            liveConsumers.push(producer);
+                        } else if (producer.is_deleted) {
+                            producer['status'] = 'destroyed';
+                            destroyedConsumers.push(producer);
+                        } else {
+                            producer['status'] = 'disconnected';
+                            disconnectedConsumers.push(producer);
+                        }
+                    }
+                    switch (state) {
+                        case 'live':
+                            consumers = liveConsumers.reverse();
+                            break;
+                        case 'destroyed':
+                            consumers = destroyedConsumers.reverse();
+                            break;
+                        case 'disconnected':
+                            consumers = disconnectedConsumers.reverse();
+                            break;
+                        default:
+                            consumers = [].concat(liveConsumers.reverse(), disconnectedConsumers.reverse(), destroyedConsumers.reverse());
+                    }
+                    if (consumers.length === 0) {
+                        console.table([
+                            {
+                                name: ' ',
+                                type: ' ',
+                                created_by_user: ' ',
+                                station_name: ' ',
+                                factory_name: ' ',
+                                creation_date: ' ',
+                                status: ''
+                            }
+                        ]);
+                    } else {
+                        console.table(
+                            consumers.map((producer) => {
+                                return {
+                                    name: producer.name,
+                                    type: producer.type,
+                                    created_by_user: producer.created_by_user,
+                                    station_name: producer.station_name,
+                                    factory_name: producer.factory_name,
+                                    creation_date: producer.creation_date,
+                                    status: producer.status
+                                };
+                            })
+                        );
+                    }
                 }
             })
             .catch((error) => {
@@ -85,7 +124,7 @@ exports.getConsumers = async () => {
     }
 };
 
-exports.getConsumersByStation = async (station) => {
+exports.getConsumersByStation = async (station, state = 'all') => {
     try {
         const memConfigDir = configDir();
         if (memConfigDir === null) {
@@ -115,28 +154,67 @@ exports.getConsumersByStation = async (station) => {
                             created_by_user: ' ',
                             station_name: ' ',
                             factory_name: ' ',
-                            creation_date: ' '
+                            creation_date: ' ',
+                            status: ''
                         }
                     ]);
                 } else {
-                    const activeConsumers = [];
-                    for (let consumer of res)
-                        if (consumer.is_active)
-                            activeConsumers.push(consumer);
-
-                    console.table(
-                        activeConsumers.map((consumer) => {
-                            return {
-                                name: consumer.name,
-                                type: consumer.type,
-                                consumers_group: consumer.consumers_group,
-                                created_by_user: consumer.created_by_user,
-                                station_name: consumer.station_name,
-                                factory_name: consumer.factory_name,
-                                creation_date: consumer.creation_date
-                            };
-                        })
-                    );
+                    var consumers = [];
+                    var liveConsumers = [];
+                    var destroyedConsumers = [];
+                    var disconnectedConsumers = [];
+                    for (let producer of res) {
+                        if (producer.is_active) {
+                            producer['status'] = 'live';
+                            liveConsumers.push(producer);
+                        } else if (producer.is_deleted) {
+                            producer['status'] = 'destroyed';
+                            destroyedConsumers.push(producer);
+                        } else {
+                            producer['status'] = 'disconnected';
+                            disconnectedConsumers.push(producer);
+                        }
+                    }
+                    switch (state) {
+                        case 'live':
+                            consumers = liveConsumers.reverse();
+                            break;
+                        case 'destroyed':
+                            consumers = destroyedConsumers.reverse();
+                            break;
+                        case 'disconnected':
+                            consumers = disconnectedConsumers.reverse();
+                            break;
+                        default:
+                            consumers = [].concat(liveConsumers.reverse(), disconnectedConsumers.reverse(), destroyedConsumers.reverse());
+                    }
+                    if (consumers.length === 0) {
+                        console.table([
+                            {
+                                name: ' ',
+                                type: ' ',
+                                created_by_user: ' ',
+                                station_name: ' ',
+                                factory_name: ' ',
+                                creation_date: ' ',
+                                status: ''
+                            }
+                        ]);
+                    } else {
+                        console.table(
+                            consumers.map((producer) => {
+                                return {
+                                    name: producer.name,
+                                    type: producer.type,
+                                    created_by_user: producer.created_by_user,
+                                    station_name: producer.station_name,
+                                    factory_name: producer.factory_name,
+                                    creation_date: producer.creation_date,
+                                    status: producer.status
+                                };
+                            })
+                        );
+                    }
                 }
             })
             .catch((error) => {
