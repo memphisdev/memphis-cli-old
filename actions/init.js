@@ -29,11 +29,11 @@ const writeProjectFiles = (language) => {
                 fs.writeFileSync(consumer, consumerData);
                 fs.writeFileSync(producer, producerData);
                 break;
-            case 'golang':
+            case 'go':
                 consumer = 'consumer.go';
                 producer = 'producer.go';
-                consumerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/golang/consumer.go');
-                producerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/golang/producer.go');
+                consumerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/go/consumer.go');
+                producerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/go/producer.go');
                 fs.writeFileSync(consumer, consumerData);
                 fs.writeFileSync(producer, producerData);
                 break;
@@ -51,7 +51,7 @@ const handleInitActions = (action, options) => {
         output: process.stdout
     });
     let language = options.lang || 'nodejs';
-    const allowedLang = ['nodejs', 'golang'];
+    const allowedLang = ['nodejs', 'go'];
     if (!allowedLang.includes(language)) {
         console.log(`\nThe language you selected is not supported yet\n\nCurrently supported languages: ${allowedLang}.\n\nFor more help use 'mem init -h'.\n`);
         readline.close();
