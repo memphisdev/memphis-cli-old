@@ -16,14 +16,27 @@ const fs = require('fs');
 const writeProjectFiles = (language) => {
     global.__basedir = __dirname;
     try {
+        let consumer;
+        let producer;
+        let consumerData;
+        let producerData;
         switch (language) {
             case 'nodejs':
-                const consumer = 'consumer.js';
-                const producer = 'producer.js';
-                const consumerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/nodejs/consumer.js');
-                const producerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/nodejs/producer.js');
+                consumer = 'consumer.js';
+                producer = 'producer.js';
+                consumerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/nodejs/consumer.js');
+                producerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/nodejs/producer.js');
                 fs.writeFileSync(consumer, consumerData);
                 fs.writeFileSync(producer, producerData);
+                break;
+            case 'go':
+                consumer = 'consumer.go';
+                producer = 'producer.go';
+                consumerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/go/consumer.go');
+                producerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/go/producer.go');
+                fs.writeFileSync(consumer, consumerData);
+                fs.writeFileSync(producer, producerData);
+                break;
         }
         console.log(`Example project was created.`);
     } catch (error) {
@@ -38,7 +51,7 @@ const handleInitActions = (action, options) => {
         output: process.stdout
     });
     let language = options.lang || 'nodejs';
-    const allowedLang = ['nodejs'];
+    const allowedLang = ['nodejs', 'go'];
     if (!allowedLang.includes(language)) {
         console.log(`\nThe language you selected is not supported yet\n\nCurrently supported languages: ${allowedLang}.\n\nFor more help use 'mem init -h'.\n`);
         readline.close();
@@ -46,17 +59,14 @@ const handleInitActions = (action, options) => {
         console.log(
             `\n'mem init' creates an example project for connecting an app with Memphis.\n\nThe default language is nodejs.\nIf you want to use different language use 'mem init -l/--language <language>'.\nCurrently supported languages: ${allowedLang}.\n\nFor more help use 'mem init -h'.\n`
         );
-        readline.question(
-            `The project will be created in directory ${process.cwd()}\n\n***Note: Please run npm install before running the project*** \ncontinue? Y/n    ->    `,
-            (answer) => {
-                if (answer.toString().trim().toLowerCase() === 'y' || !answer) {
-                    writeProjectFiles(language);
-                } else {
-                    console.log(`aborted.`);
-                }
-                readline.close();
+        readline.question(`You chose ${language} language.\nThe project will be created in directory ${process.cwd()}\n\ncontinue? Y/n    ->    `, (answer) => {
+            if (answer.toString().trim().toLowerCase() === 'y' || !answer) {
+                writeProjectFiles(language);
+            } else {
+                console.log(`aborted.`);
             }
-        );
+            readline.close();
+        });
     }
 };
 

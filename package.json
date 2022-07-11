@@ -9,7 +9,9 @@
     "pkg": {
         "assets": [
             "actions/memphis_code_examples/nodejs/consumer.js",
-            "actions/memphis_code_examples/nodejs/producer.js"
+            "actions/memphis_code_examples/nodejs/producer.js",
+            "actions/memphis_code_examples/go/consumer.go",
+            "actions/memphis_code_examples/go/producer.go"
         ]
     },
     "scripts": {
