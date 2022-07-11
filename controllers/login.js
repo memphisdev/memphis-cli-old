@@ -25,7 +25,7 @@ module.exports = async (url, username, password) => {
             password: password
         },
         queryParams: null,
-        timeout: 0
+        timeout: 10000
     })
         .then((res) => {
             return res;
