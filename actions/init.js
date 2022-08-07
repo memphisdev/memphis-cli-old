@@ -37,6 +37,14 @@ const writeProjectFiles = (language) => {
                 fs.writeFileSync(consumer, consumerData);
                 fs.writeFileSync(producer, producerData);
                 break;
+            case 'python':
+                consumer = 'consumer.py';
+                producer = 'producer.py';
+                consumerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/python/consumer.py');
+                producerData = fs.readFileSync(global.__basedir + '/memphis_code_examples/python/producer.py');
+                fs.writeFileSync(consumer, consumerData);
+                fs.writeFileSync(producer, producerData);
+                break;
         }
         console.log(`Example project was created.`);
     } catch (error) {
@@ -51,7 +59,7 @@ const handleInitActions = (action, options) => {
         output: process.stdout
     });
     let language = options.lang || 'nodejs';
-    const allowedLang = ['nodejs', 'go'];
+    const allowedLang = ['nodejs', 'go', 'python'];
     if (!allowedLang.includes(language)) {
         console.log(`\nThe language you selected is not supported yet\n\nCurrently supported languages: ${allowedLang}.\n\nFor more help use 'mem init -h'.\n`);
         readline.close();
