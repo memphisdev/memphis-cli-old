@@ -47,7 +47,8 @@ exports.getAllProducers = async (state = 'all') => {
                             station_name: ' ',
                             factory_name: ' ',
                             creation_date: ' ',
-                            status: ''
+                            status: '',
+                            IP: ''
                         }
                     ]);
                 } else {
@@ -89,7 +90,8 @@ exports.getAllProducers = async (state = 'all') => {
                                 station_name: ' ',
                                 factory_name: ' ',
                                 creation_date: ' ',
-                                status: ''
+                                status: '',
+                                IP: ''
                             }
                         ]);
                     } else {
@@ -102,7 +104,8 @@ exports.getAllProducers = async (state = 'all') => {
                                     station_name: producer.station_name,
                                     factory_name: producer.factory_name,
                                     creation_date: producer.creation_date,
-                                    status: producer.status
+                                    status: producer.status,
+                                    IP: producer.client_address
                                 };
                             })
                         );
