@@ -299,6 +299,11 @@ exports.getConsumersByStationOverView = async (station, state = 'all') => {
                     }
 
                     for (let cg of res.connected_cgs) {
+                        for (let consumer of cg.connected_consumers) {
+                            consumer['status'] = 'live';
+                            consumer['cg_status'] = 'live';
+                            liveConsumers.push(consumer);
+                        }
                         for (let consumer of cg.disconnected_consumers) {
                             consumer['status'] = 'disconnected';
                             consumer['cg_status'] = 'live';
@@ -308,11 +313,6 @@ exports.getConsumersByStationOverView = async (station, state = 'all') => {
                             consumer['status'] = 'destroyed';
                             consumer['cg_status'] = 'live';
                             destroyedConsumers.push(consumer);
-                        }
-                        for (let consumer of cg.connected_consumers) {
-                            consumer['status'] = 'live';
-                            consumer['cg_status'] = 'live';
-                            liveConsumers.push(consumer);
                         }
                     }
 
