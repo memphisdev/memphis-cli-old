@@ -30,6 +30,7 @@ module.exports = {
     CREATE_STATION: '/api/stations/createStation',
     REMOVE_STATION: '/api/stations/removeStation',
     GET_ALL_STATIONS: '/api/stations/getAllStations',
+    GET_STATION_OVERVIEW: '/api/monitoring/getStationOverviewData',
 
     //Producers
     GET_ALL_PRODUCERS: '/api/producers/getAllProducers',

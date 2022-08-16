@@ -18,17 +18,19 @@ const handleConsumerActions = (action, options) => {
     switch (action[0]) {
         case 'ls':
             if (!options.station) {
-                if (options.live) consumer.getAllConsumers('live');
+                if (options.connected) consumer.getAllConsumers('connected');
                 else if (options.disconnected) consumer.getAllConsumers('disconnected');
-                else if (options.destroyed) consumer.getAllConsumers('destroyed');
+                else if (options.deleted) consumer.getAllConsumers('deleted');
                 else consumer.getAllConsumers();
-            } else if (options.station) {
-                if (options.live) consumer.getConsumersByStation(options.station, 'live');
-                else if (options.disconnected) consumer.getConsumersByStation(options.station, 'disconnected');
-                else if (options.destroyed) consumer.getConsumersByStation(options.station, 'destroyed');
-            } else console.log('Use command:\nmem consumer ls\nOR\nmem consumer ls --station <station-name>');
+            } else {
+                if (options.connected) consumer.getConsumersByStationOverView(options.station, 'connected');
+                else if (options.disconnected) consumer.getConsumersByStationOverView(options.station, 'disconnected');
+                else if (options.deleted) consumer.getConsumersByStationOverView(options.station, 'deleted');
+                else consumer.getConsumersByStationOverView(options.station);
+            }
             break;
         default:
+            console.log('Use command:\nmem consumer ls\nOR\nmem consumer ls --station <station-name>');
             return;
     }
 };
