@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const { log } = require('console');
 const fs = require('fs');
 
 const ApiEndpoint = require('../apiEndpoints');
@@ -57,33 +56,33 @@ exports.getAllConsumers = async (state = 'all') => {
                     ]);
                 } else {
                     var consumers = [];
-                    var liveConsumers = [];
-                    var destroyedConsumers = [];
+                    var connectedConsumers = [];
+                    var deletedConsumers = [];
                     var disconnectedConsumers = [];
                     for (let consumer of res) {
                         if (consumer.is_active) {
-                            consumer['status'] = 'live';
-                            liveConsumers.push(consumer);
+                            consumer['status'] = 'connected';
+                            connectedConsumers.push(consumer);
                         } else if (consumer.is_deleted) {
-                            consumer['status'] = 'destroyed';
-                            destroyedConsumers.push(consumer);
+                            consumer['status'] = 'deleted';
+                            deletedConsumers.push(consumer);
                         } else {
                             consumer['status'] = 'disconnected';
                             disconnectedConsumers.push(consumer);
                         }
                     }
                     switch (state) {
-                        case 'live':
-                            consumers = liveConsumers.reverse();
+                        case 'connected':
+                            consumers = connectedConsumers.reverse();
                             break;
-                        case 'destroyed':
-                            consumers = destroyedConsumers.reverse();
+                        case 'deleted':
+                            consumers = deletedConsumers.reverse();
                             break;
                         case 'disconnected':
                             consumers = disconnectedConsumers.reverse();
                             break;
                         default:
-                            consumers = [].concat(liveConsumers.reverse(), disconnectedConsumers.reverse(), destroyedConsumers.reverse());
+                            consumers = [].concat(connectedConsumers.reverse(), disconnectedConsumers.reverse(), deletedConsumers.reverse());
                     }
                     if (consumers.length === 0) {
                         console.table([
@@ -166,33 +165,33 @@ exports.getConsumersByStation = async (station, state = 'all') => {
                     ]);
                 } else {
                     var consumers = [];
-                    var liveConsumers = [];
-                    var destroyedConsumers = [];
+                    var connectedConsumers = [];
+                    var deletedConsumers = [];
                     var disconnectedConsumers = [];
                     for (let consumer of res) {
                         if (consumer.is_active) {
-                            consumer['status'] = 'live';
-                            liveConsumers.push(consumer);
+                            consumer['status'] = 'connected';
+                            connectedConsumers.push(consumer);
                         } else if (consumer.is_deleted) {
-                            consumer['status'] = 'destroyed';
-                            destroyedConsumers.push(consumer);
+                            consumer['status'] = 'deleted';
+                            deletedConsumers.push(consumer);
                         } else {
                             consumer['status'] = 'disconnected';
                             disconnectedConsumers.push(consumer);
                         }
                     }
                     switch (state) {
-                        case 'live':
-                            consumers = liveConsumers.reverse();
+                        case 'connected':
+                            consumers = connectedConsumers.reverse();
                             break;
-                        case 'destroyed':
-                            consumers = destroyedConsumers.reverse();
+                        case 'deleted':
+                            consumers = deletedConsumers.reverse();
                             break;
                         case 'disconnected':
                             consumers = disconnectedConsumers.reverse();
                             break;
                         default:
-                            consumers = [].concat(liveConsumers.reverse(), disconnectedConsumers.reverse(), destroyedConsumers.reverse());
+                            consumers = [].concat(connectedConsumers.reverse(), disconnectedConsumers.reverse(), deletedConsumers.reverse());
                     }
                     if (consumers.length === 0) {
                         console.table([
@@ -276,9 +275,27 @@ exports.getConsumersByStationOverView = async (station, state = 'all') => {
                     ]);
                 } else {
                     var consumers = [];
-                    var liveConsumers = [];
-                    var destroyedConsumers = [];
+                    var connectedConsumers = [];
+                    var deletedConsumers = [];
                     var disconnectedConsumers = [];
+
+                    for (let cg of res.connected_cgs) {
+                        for (let consumer of cg.connected_consumers) {
+                            consumer['status'] = 'connected';
+                            consumer['cg_status'] = 'connected';
+                            connectedConsumers.push(consumer);
+                        }
+                        for (let consumer of cg.disconnected_consumers) {
+                            consumer['status'] = 'disconnected';
+                            consumer['cg_status'] = 'connected';
+                            disconnectedConsumers.push(consumer);
+                        }
+                        for (let consumer of cg.deleted_consumers) {
+                            consumer['status'] = 'deleted';
+                            consumer['cg_status'] = 'connected';
+                            deletedConsumers.push(consumer);
+                        }
+                    }
 
                     for (let cg of res.disconnected_cgs) {
                         for (let consumer of cg.disconnected_consumers) {
@@ -287,64 +304,46 @@ exports.getConsumersByStationOverView = async (station, state = 'all') => {
                             disconnectedConsumers.push(consumer);
                         }
                         for (let consumer of cg.deleted_consumers) {
-                            consumer['status'] = 'destroyed';
+                            consumer['status'] = 'deleted';
                             consumer['cg_status'] = 'disconnected';
-                            destroyedConsumers.push(consumer);
+                            deletedConsumers.push(consumer);
                         }
                         for (let consumer of cg.connected_consumers) {
-                            consumer['status'] = 'live';
+                            consumer['status'] = 'connected';
                             consumer['cg_status'] = 'disconnected';
-                            liveConsumers.push(consumer);
-                        }
-                    }
-
-                    for (let cg of res.connected_cgs) {
-                        for (let consumer of cg.connected_consumers) {
-                            consumer['status'] = 'live';
-                            consumer['cg_status'] = 'live';
-                            liveConsumers.push(consumer);
-                        }
-                        for (let consumer of cg.disconnected_consumers) {
-                            consumer['status'] = 'disconnected';
-                            consumer['cg_status'] = 'live';
-                            disconnectedConsumers.push(consumer);
-                        }
-                        for (let consumer of cg.deleted_consumers) {
-                            consumer['status'] = 'destroyed';
-                            consumer['cg_status'] = 'live';
-                            destroyedConsumers.push(consumer);
+                            connectedConsumers.push(consumer);
                         }
                     }
 
                     for (let cg of res.deleted_cgs) {
                         for (let consumer of cg.disconnected_consumers) {
                             consumer['status'] = 'disconnected';
-                            consumer['cg_status'] = 'destroyed';
+                            consumer['cg_status'] = 'deleted';
                             disconnectedConsumers.push(consumer);
                         }
                         for (let consumer of cg.deleted_consumers) {
-                            consumer['status'] = 'destroyed';
-                            consumer['cg_status'] = 'destroyed';
-                            destroyedConsumers.push(consumer);
+                            consumer['status'] = 'deleted';
+                            consumer['cg_status'] = 'deleted';
+                            deletedConsumers.push(consumer);
                         }
                         for (let consumer of cg.connected_consumers) {
-                            consumer['status'] = 'live';
-                            consumer['cg_status'] = 'destroyed';
-                            liveConsumers.push(consumer);
+                            consumer['status'] = 'connected';
+                            consumer['cg_status'] = 'deleted';
+                            connectedConsumers.push(consumer);
                         }
                     }
                     switch (state) {
-                        case 'live':
-                            consumers = liveConsumers.reverse();
+                        case 'connected':
+                            consumers = connectedConsumers.reverse();
                             break;
-                        case 'destroyed':
-                            consumers = destroyedConsumers.reverse();
+                        case 'deleted':
+                            consumers = deletedConsumers.reverse();
                             break;
                         case 'disconnected':
                             consumers = disconnectedConsumers.reverse();
                             break;
                         default:
-                            consumers = [].concat(liveConsumers.reverse(), disconnectedConsumers.reverse(), destroyedConsumers.reverse());
+                            consumers = [].concat(connectedConsumers.reverse(), disconnectedConsumers.reverse(), deletedConsumers.reverse());
                     }
                     if (consumers.length === 0) {
                         console.table([

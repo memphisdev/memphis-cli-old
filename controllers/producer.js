@@ -52,34 +52,34 @@ exports.getAllProducers = async (state = 'all') => {
                         }
                     ]);
                 } else {
-                    var producers = [];
-                    var liveProducers = [];
-                    var destroyedProducers = [];
-                    var disconnectedProducers = [];
+                    let producers = [];
+                    let connectedProducers = [];
+                    let deletedProducers = [];
+                    let disconnectedProducers = [];
                     for (let producer of res) {
                         if (producer.is_active) {
-                            producer['status'] = 'live';
-                            liveProducers.push(producer);
+                            producer['status'] = 'connected';
+                            connectedProducers.push(producer);
                         } else if (producer.is_deleted) {
-                            producer['status'] = 'destroyed';
-                            destroyedProducers.push(producer);
+                            producer['status'] = 'deleted';
+                            deletedProducers.push(producer);
                         } else {
                             producer['status'] = 'disconnected';
                             disconnectedProducers.push(producer);
                         }
                     }
                     switch (state) {
-                        case 'live':
-                            producers = liveProducers.reverse();
+                        case 'connected':
+                            producers = connectedProducers.reverse();
                             break;
-                        case 'destroyed':
-                            producers = destroyedProducers.reverse();
+                        case 'deleted':
+                            producers = deletedProducers.reverse();
                             break;
                         case 'disconnected':
                             producers = disconnectedProducers.reverse();
                             break;
                         default:
-                            producers = [].concat(liveProducers.reverse(), disconnectedProducers.reverse(), destroyedProducers.reverse());
+                            producers = [].concat(connectedProducers.reverse(), disconnectedProducers.reverse(), deletedProducers.reverse());
                     }
                     if (producers.length === 0) {
                         console.table([
@@ -160,34 +160,34 @@ exports.getProducersByStation = async (station, state = 'all') => {
                         }
                     ]);
                 } else {
-                    var producers = [];
-                    var liveProducers = [];
-                    var destroyedProducers = [];
-                    var disconnectedProducers = [];
+                    let producers = [];
+                    let connectedProducers = [];
+                    let deletedProducers = [];
+                    let disconnectedProducers = [];
                     for (let producer of res) {
                         if (producer.is_active) {
-                            producer['status'] = 'live';
-                            liveProducers.push(producer);
+                            producer['status'] = 'connected';
+                            connectedProducers.push(producer);
                         } else if (producer.is_deleted) {
-                            producer['status'] = 'destroyed';
-                            destroyedProducers.push(producer);
+                            producer['status'] = 'deleted';
+                            deletedProducers.push(producer);
                         } else {
                             producer['status'] = 'disconnected';
                             disconnectedProducers.push(producer);
                         }
                     }
                     switch (state) {
-                        case 'live':
-                            producers = liveProducers.reverse();
+                        case 'connected':
+                            producers = connectedProducers.reverse();
                             break;
-                        case 'destroyed':
-                            producers = destroyedProducers.reverse();
+                        case 'deleted':
+                            producers = deletedProducers.reverse();
                             break;
                         case 'disconnected':
                             producers = disconnectedProducers.reverse();
                             break;
                         default:
-                            producers = [].concat(liveProducers.reverse(), disconnectedProducers.reverse(), destroyedProducers.reverse());
+                            producers = [].concat(connectedProducers.reverse(), disconnectedProducers.reverse(), deletedProducers.reverse());
                     }
                     if (producers.length === 0) {
                         console.table([

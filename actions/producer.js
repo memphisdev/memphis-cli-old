@@ -18,14 +18,14 @@ const handleProducerActions = (action, options) => {
     switch (action[0]) {
         case 'ls':
             if (!options.station) {
-                if (options.live) producer.getAllProducers('live');
+                if (options.connected) producer.getAllProducers('connected');
                 else if (options.disconnected) producer.getAllProducers('disconnected');
-                else if (options.destroyed) producer.getAllProducers('destroyed');
+                else if (options.deleted) producer.getAllProducers('deleted');
                 else producer.getAllProducers();
             } else if (options.station) {
-                if (options.live) producer.getProducersByStation(options.station, 'live');
+                if (options.connected) producer.getProducersByStation(options.station, 'connected');
                 else if (options.disconnected) producer.getProducersByStation(options.station, 'disconnected');
-                else if (options.destroyed) producergetProducersByStation(options.station, 'destroyed');
+                else if (options.deleted) producergetProducersByStation(options.station, 'deleted');
                 else producer.getProducersByStation(options.station);
             } else console.log('Use command:\nmem producer ls\nOR\nmem producer ls --station <station-name>');
             break;
