@@ -55,10 +55,10 @@ exports.getAllConsumers = async (state = 'all') => {
                         }
                     ]);
                 } else {
-                    var consumers = [];
-                    var connectedConsumers = [];
-                    var deletedConsumers = [];
-                    var disconnectedConsumers = [];
+                    let consumers = [];
+                    let connectedConsumers = [];
+                    let deletedConsumers = [];
+                    let disconnectedConsumers = [];
                     for (let consumer of res) {
                         if (consumer.is_active) {
                             consumer['status'] = 'connected';
@@ -164,10 +164,10 @@ exports.getConsumersByStation = async (station, state = 'all') => {
                         }
                     ]);
                 } else {
-                    var consumers = [];
-                    var connectedConsumers = [];
-                    var deletedConsumers = [];
-                    var disconnectedConsumers = [];
+                    let consumers = [];
+                    let connectedConsumers = [];
+                    let deletedConsumers = [];
+                    let disconnectedConsumers = [];
                     for (let consumer of res) {
                         if (consumer.is_active) {
                             consumer['status'] = 'connected';
@@ -274,10 +274,10 @@ exports.getConsumersByStationOverView = async (station, state = 'all') => {
                         }
                     ]);
                 } else {
-                    var consumers = [];
-                    var connectedConsumers = [];
-                    var deletedConsumers = [];
-                    var disconnectedConsumers = [];
+                    let consumers = [];
+                    let connectedConsumers = [];
+                    let deletedConsumers = [];
+                    let disconnectedConsumers = [];
 
                     for (let cg of res.connected_cgs) {
                         for (let consumer of cg.connected_consumers) {
