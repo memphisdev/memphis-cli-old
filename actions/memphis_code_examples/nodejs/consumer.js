@@ -1,14 +1,15 @@
 const memphis = require('memphis-dev');
 
 (async function () {
+    let memphisConn;
     try {
-        await memphis.connect({
+        memphisConn = await memphis.connect({
             host: '<memphis-host>',
             username: '<application type username>',
             connectionToken: '<broker-token>'
         });
 
-        const consumer = await memphis.consumer({
+        const consumer = await memphisConn.consumer({
             stationName: '<station-name>',
             consumerName: '<consumer-name>',
             consumerGroup: ''
@@ -24,6 +25,6 @@ const memphis = require('memphis-dev');
         });
     } catch (ex) {
         console.log(ex);
-        memphis.close();
+        memphisConn && memphisConn.close();
     }
 })();

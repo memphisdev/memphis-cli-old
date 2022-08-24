@@ -1,14 +1,15 @@
 const memphis = require('memphis-dev');
 
 (async function () {
+    let memphisConn;
     try {
-        await memphis.connect({
+        memphisConn = await memphis.connect({
             host: '<memphis-host>',
             username: '<application type username>',
             connectionToken: '<broker-token>'
         });
 
-        const producer = await memphis.producer({
+        const producer = await memphisConn.producer({
             stationName: '<station-name>',
             producerName: '<producer-name>'
         });
@@ -21,9 +22,9 @@ const memphis = require('memphis-dev');
         }
 
         console.log("All messages sent");
-        memphis.close();
+        memphisConn.close();
     } catch (ex) {
         console.log(ex);
-        memphis.close();
+        memphisConn && memphisConn.close();
     }
 })();
