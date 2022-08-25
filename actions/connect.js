@@ -31,6 +31,9 @@ module.exports = (credentials) => {
         } else {
             fixedUrl = url;
         }
+        if (fixedUrl.split(':').length - 1 < 2) {
+            fixedUrl = fixedUrl + ':5555';
+        }
         return login(fixedUrl, credentials.user, credentials.password)
             .then((res) => {
                 if (res) {
@@ -64,6 +67,9 @@ module.exports = (credentials) => {
                             fixedUrl = url.replace('https', 'http');
                         } else if (!url.startsWith('https')) {
                             fixedUrl = url.replace('http', 'https');
+                        }
+                        if (fixedUrl.split(':').length - 1 < 2) {
+                            fixedUrl = fixedUrl + ':5555';
                         }
                         return login(fixedUrl, credentials.user, credentials.password)
                             .then((res) => {
