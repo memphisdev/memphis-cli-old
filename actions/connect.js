@@ -25,6 +25,9 @@ module.exports = (credentials) => {
     let fixedUrl;
     let url = credentials.server.endsWith('/') ? credentials.server.slice(0, -1) : credentials.server;
     url = url.endsWith('api') ? url.replace('/api', '') : url;
+    if (url.split(':').length - 1 < 2) {
+        url = url + ':5555';
+    }
     try {
         if (!url.startsWith('http')) {
             fixedUrl = 'https://' + url;

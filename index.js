@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // Copyright 2021-2022 The Memphis Authors
 // Licensed under the MIT License (the "License");
 // Permission is hereby granted, free of charge, to any person obtaining a copy
