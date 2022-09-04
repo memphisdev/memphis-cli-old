@@ -1,15 +1,20 @@
 // Copyright 2021-2022 The Memphis Authors
-// Licensed under the GNU General Public License v3.0 (the “License”);
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// https://www.gnu.org/licenses/gpl-3.0.en.html
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an “AS IS” BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Licensed under the MIT License (the "License");
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// This license limiting reselling the software itself "AS IS".
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 
 const consumer = require('../controllers/consumer');
 const validateToken = require('../utils/validateToken');
@@ -18,17 +23,19 @@ const handleConsumerActions = (action, options) => {
     switch (action[0]) {
         case 'ls':
             if (!options.station) {
-                if (options.live) consumer.getAllConsumers('live');
+                if (options.connected) consumer.getAllConsumers('connected');
                 else if (options.disconnected) consumer.getAllConsumers('disconnected');
-                else if (options.destroyed) consumer.getAllConsumers('destroyed');
+                else if (options.deleted) consumer.getAllConsumers('deleted');
                 else consumer.getAllConsumers();
-            } else if (options.station) {
-                if (options.live) consumer.getConsumersByStation(options.station, 'live');
-                else if (options.disconnected) consumer.getConsumersByStation(options.station, 'disconnected');
-                else if (options.destroyed) consumer.getConsumersByStation(options.station, 'destroyed');
-            } else console.log('Use command:\nmem consumer ls\nOR\nmem consumer ls --station <station-name>');
+            } else {
+                if (options.connected) consumer.getConsumersByStationOverView(options.station, 'connected');
+                else if (options.disconnected) consumer.getConsumersByStationOverView(options.station, 'disconnected');
+                else if (options.deleted) consumer.getConsumersByStationOverView(options.station, 'deleted');
+                else consumer.getConsumersByStationOverView(options.station);
+            }
             break;
         default:
+            console.log('Use command:\nmem consumer ls\nOR\nmem consumer ls --station <station-name>');
             return;
     }
 };

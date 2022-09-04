@@ -1,15 +1,20 @@
 // Copyright 2021-2022 The Memphis Authors
-// Licensed under the GNU General Public License v3.0 (the “License”);
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// https://www.gnu.org/licenses/gpl-3.0.en.html
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an “AS IS” BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Licensed under the MIT License (the "License");
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// This license limiting reselling the software itself "AS IS".
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 
 const fs = require('fs');
 
@@ -47,38 +52,39 @@ exports.getAllProducers = async (state = 'all') => {
                             station_name: ' ',
                             factory_name: ' ',
                             creation_date: ' ',
-                            status: ''
+                            status: '',
+                            IP: ''
                         }
                     ]);
                 } else {
-                    var producers = [];
-                    var liveProducers = [];
-                    var destroyedProducers = [];
-                    var disconnectedProducers = [];
+                    let producers = [];
+                    let connectedProducers = [];
+                    let deletedProducers = [];
+                    let disconnectedProducers = [];
                     for (let producer of res) {
                         if (producer.is_active) {
-                            producer['status'] = 'live';
-                            liveProducers.push(producer);
+                            producer['status'] = 'connected';
+                            connectedProducers.push(producer);
                         } else if (producer.is_deleted) {
-                            producer['status'] = 'destroyed';
-                            destroyedProducers.push(producer);
+                            producer['status'] = 'deleted';
+                            deletedProducers.push(producer);
                         } else {
                             producer['status'] = 'disconnected';
                             disconnectedProducers.push(producer);
                         }
                     }
                     switch (state) {
-                        case 'live':
-                            producers = liveProducers.reverse();
+                        case 'connected':
+                            producers = connectedProducers.reverse();
                             break;
-                        case 'destroyed':
-                            producers = destroyedProducers.reverse();
+                        case 'deleted':
+                            producers = deletedProducers.reverse();
                             break;
                         case 'disconnected':
                             producers = disconnectedProducers.reverse();
                             break;
                         default:
-                            producers = [].concat(liveProducers.reverse(), disconnectedProducers.reverse(), destroyedProducers.reverse());
+                            producers = [].concat(connectedProducers.reverse(), disconnectedProducers.reverse(), deletedProducers.reverse());
                     }
                     if (producers.length === 0) {
                         console.table([
@@ -89,7 +95,8 @@ exports.getAllProducers = async (state = 'all') => {
                                 station_name: ' ',
                                 factory_name: ' ',
                                 creation_date: ' ',
-                                status: ''
+                                status: '',
+                                IP: ''
                             }
                         ]);
                     } else {
@@ -102,7 +109,8 @@ exports.getAllProducers = async (state = 'all') => {
                                     station_name: producer.station_name,
                                     factory_name: producer.factory_name,
                                     creation_date: producer.creation_date,
-                                    status: producer.status
+                                    status: producer.status,
+                                    IP: producer.client_address
                                 };
                             })
                         );
@@ -157,34 +165,34 @@ exports.getProducersByStation = async (station, state = 'all') => {
                         }
                     ]);
                 } else {
-                    var producers = [];
-                    var liveProducers = [];
-                    var destroyedProducers = [];
-                    var disconnectedProducers = [];
+                    let producers = [];
+                    let connectedProducers = [];
+                    let deletedProducers = [];
+                    let disconnectedProducers = [];
                     for (let producer of res) {
                         if (producer.is_active) {
-                            producer['status'] = 'live';
-                            liveProducers.push(producer);
+                            producer['status'] = 'connected';
+                            connectedProducers.push(producer);
                         } else if (producer.is_deleted) {
-                            producer['status'] = 'destroyed';
-                            destroyedProducers.push(producer);
+                            producer['status'] = 'deleted';
+                            deletedProducers.push(producer);
                         } else {
                             producer['status'] = 'disconnected';
                             disconnectedProducers.push(producer);
                         }
                     }
                     switch (state) {
-                        case 'live':
-                            producers = liveProducers.reverse();
+                        case 'connected':
+                            producers = connectedProducers.reverse();
                             break;
-                        case 'destroyed':
-                            producers = destroyedProducers.reverse();
+                        case 'deleted':
+                            producers = deletedProducers.reverse();
                             break;
                         case 'disconnected':
                             producers = disconnectedProducers.reverse();
                             break;
                         default:
-                            producers = [].concat(liveProducers.reverse(), disconnectedProducers.reverse(), destroyedProducers.reverse());
+                            producers = [].concat(connectedProducers.reverse(), disconnectedProducers.reverse(), deletedProducers.reverse());
                     }
                     if (producers.length === 0) {
                         console.table([
