@@ -16,14 +16,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-const factoryDesc = `Factory is the place to bind stations that have some close business logic`;
-
-const factoryHelp = `Factory Commands:
-   ls                List of factories
-   create            Create new factory  
-   edit              Edit factory name and/or description
-   del               Delete a factory
-`;
 const stationDesc = `Station is Memphis' queue/topic/channel/subject`;
 
 const stationHelp = `Station Commands:
@@ -66,9 +58,6 @@ const clusterDesc = `Memphis Cluster`;
 const clusterHelp = `Cluster Commands:
    info              Get information about the Memphis cluster
 `;
-
-exports.factoryDesc = factoryDesc;
-exports.factoryHelp = factoryHelp;
 
 exports.stationDesc = stationDesc;
 exports.stationHelp = stationHelp;

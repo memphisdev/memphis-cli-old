@@ -20,7 +20,6 @@
 
 const commander = require('commander');
 
-const factory = require('./actions/factory');
 const station = require('./actions/station');
 const user = require('./actions/users');
 const connect = require('./actions/connect');
@@ -41,8 +40,6 @@ program
     .addHelpText(
         'after',
         `
-${helper.factoryDesc}
-${helper.factoryHelp}
 ${helper.stationDesc}
 ${helper.stationHelp}
 ${helper.userDesc}
@@ -83,35 +80,9 @@ program
     });
 
 program
-    .command('factory')
-    .description('Factories usage commands')
-    .argument('<command>')
-    .option('-n, --name <factory-name>', 'Factory name')
-    .option('-d, --desc <factory-description>', 'Factory description')
-    .usage('<command> [options]')
-    .showHelpAfterError()
-    .configureHelp({
-        sortSubcommands: true,
-        subcommandTerm: (cmd) => cmd.name() // Just show the name, instead of short usage.
-    })
-    .addHelpText('before', helper.factoryDesc)
-    .addHelpText('after', `\n${helper.factoryHelp}`)
-    .action(async function () {
-        await validateVersion();
-        const factoryActions = ['ls', 'create', 'edit', 'del'];
-        if (!this.args?.length || !factoryActions.includes(this.args[0])) {
-            console.log('');
-            console.log(program.commands[1].help());
-        } else {
-            factory.factoryMenu(this.args, this.opts());
-        }
-    });
-
-program
     .command('station')
     .description('Stations usage commands')
     .argument('<command>')
-    .option('-f, --factory <factory>', 'Factory name')
     .option('-rt, --retentiontype <retention-type>', 'Retention type')
     .option('-rv, --retentionvalue <retention-value>', 'Retention value')
     .option('-s, --storage <storage-type>', 'Storage type')

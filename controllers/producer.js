@@ -50,7 +50,6 @@ exports.getAllProducers = async (state = 'all') => {
                             type: ' ',
                             created_by_user: ' ',
                             station_name: ' ',
-                            factory_name: ' ',
                             creation_date: ' ',
                             status: '',
                             IP: ''
@@ -93,7 +92,6 @@ exports.getAllProducers = async (state = 'all') => {
                                 type: ' ',
                                 created_by_user: ' ',
                                 station_name: ' ',
-                                factory_name: ' ',
                                 creation_date: ' ',
                                 status: '',
                                 IP: ''
@@ -107,7 +105,6 @@ exports.getAllProducers = async (state = 'all') => {
                                     type: producer.type,
                                     created_by_user: producer.created_by_user,
                                     station_name: producer.station_name,
-                                    factory_name: producer.factory_name,
                                     creation_date: producer.creation_date,
                                     status: producer.status,
                                     IP: producer.client_address
@@ -159,7 +156,6 @@ exports.getProducersByStation = async (station, state = 'all') => {
                             type: ' ',
                             created_by_user: ' ',
                             station_name: ' ',
-                            factory_name: ' ',
                             creation_date: ' ',
                             status: ''
                         }
@@ -201,7 +197,6 @@ exports.getProducersByStation = async (station, state = 'all') => {
                                 type: ' ',
                                 created_by_user: ' ',
                                 station_name: ' ',
-                                factory_name: ' ',
                                 creation_date: ' ',
                                 status: ''
                             }
@@ -214,7 +209,6 @@ exports.getProducersByStation = async (station, state = 'all') => {
                                     type: producer.type,
                                     created_by_user: producer.created_by_user,
                                     station_name: producer.station_name,
-                                    factory_name: producer.factory_name,
                                     creation_date: producer.creation_date,
                                     status: producer.status
                                 };

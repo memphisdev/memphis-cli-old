@@ -24,12 +24,6 @@ module.exports = {
     REMOVE_USER: '/api/usermgmt/removeUser',
     // EDIT_HUB_CREDS: '/api/usermgmt/editHubCreds',
 
-    //Factories:
-    CREATE_FACTORY: '/api/factories/createFactory',
-    GET_ALL_FACTORIES: '/api/factories/getAllFactories',
-    REMOVE_FACTORY: '/api/factories/removeFactory',
-    EDIT_FACTORY: '/api/factories/editFactory',
-
     //Stations
     GET_STATION_INFO: '/api/stations/getStation',
     CREATE_STATION: '/api/stations/createStation',

@@ -25,8 +25,8 @@ const handleStationActions = (action, options) => {
             station.getAllStations();
             break;
         case 'create':
-            if (!action[1] || !options.factory) {
-                console.log('\nStation name and factory name are required. Use command:\nmem station create <station-name> -f/--factory <factory> [options]\n');
+            if (!action[1]) {
+                console.log('\nStation name is required. Use command:\nmem station create <station-name> [options]\n');
                 console.log('Options:\n');
                 console.log('-rt, --retentiontype <retention-type>', 'Retention type');
                 console.log('-rv, --retentionvalue <retention-value>', 'Retention value');
