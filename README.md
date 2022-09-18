@@ -15,8 +15,8 @@
 
 <img width="750" alt="Memphis UI" src="https://user-images.githubusercontent.com/70286779/182241744-2016dc1a-c758-48ba-8666-40b883242ea9.png">
 
+<a target="_blank" href="https://twitter.com/intent/tweet?text=Probably+The+Easiest+Message+Broker+In+The+World%21+%0D%0Ahttps%3A%2F%2Fgithub.com%2Fmemphisdev%2Fmemphis-broker+%0D%0A%0D%0A%23MemphisDev"><img src="https://user-images.githubusercontent.com/70286779/174467733-e7656c1e-cfeb-4877-a5f3-1bd4fccc8cf1.png" width="60"></a>
 
-<a target="_blank" href="https://twitter.com/intent/tweet?text=Probably+The+Easiest+Message+Broker+In+The+World%21+%0D%0Ahttps%3A%2F%2Fgithub.com%2Fmemphisdev%2Fmemphis-broker+%0D%0A%0D%0A%23MemphisDev"><img src="https://user-images.githubusercontent.com/70286779/174467733-e7656c1e-cfeb-4877-a5f3-1bd4fccc8cf1.png" width="60"></a> 
 </div>
  
  <p align="center">
@@ -28,15 +28,17 @@
 </p>
 
 **[Memphis{dev}](https://memphis.dev)** is a message broker for developers made out of devs' struggles develop around message brokers.<br>Enables devs to achieve all other message brokers' benefits in a fraction of the time.<br>
-Focusing on automatic optimization, schema management, inline processing,  and troubleshooting abilities. All under the same hood.
+Focusing on automatic optimization, schema management, inline processing, and troubleshooting abilities. All under the same hood.
 Utilizing NATS core.
 
 ## 📸 Screenshots
-Dashboard             |  Station (Topic) overview|  CLI
-:-------------------------:|:-------------------------:|:-------------------------:
-<img width="300" alt="Dashboard" src="https://user-images.githubusercontent.com/70286779/182221769-3aa953cc-df71-4c0e-b0d2-9dd4ab83fea9.png">|<img width="300" alt="Station Overview" src="https://user-images.githubusercontent.com/70286779/182221788-0a159007-ab93-46aa-9c81-222671144a05.png">|<img src="https://user-images.githubusercontent.com/70286779/175806007-9a37e130-3e5a-4606-bdda-a71a89efae7f.png" alt="drawing" width="300"/>
+
+|                                                                   Dashboard                                                                   |                                                               Station (Topic) overview                                                               |                                                                     CLI                                                                      |
+| :-------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="300" alt="Dashboard" src="https://user-images.githubusercontent.com/70286779/182221769-3aa953cc-df71-4c0e-b0d2-9dd4ab83fea9.png"> | <img width="300" alt="Station Overview" src="https://user-images.githubusercontent.com/70286779/182221788-0a159007-ab93-46aa-9c81-222671144a05.png"> | <img src="https://user-images.githubusercontent.com/70286779/175806007-9a37e130-3e5a-4606-bdda-a71a89efae7f.png" alt="drawing" width="300"/> |
 
 ## ⭐️ Why
+
 Working with data streaming is HARD.<br>
 As a developer, you need to build a dedicated pipeline per data source,<br>change the schema, individual analysis, enrich the data with other sources, it constantly crashes, it requires adaptation to different rate limits, constantly change APIs, and scale for better performance 🥵 .<br>
 **It takes time and resources that you don't have.**<br><br>
@@ -45,14 +47,15 @@ Message broker acts as the middleman and supports streaming architecture,<br>but
 Give memphis{dev} a spin before.
 
 ## 👉 Use-cases
-- Async task management
-- Real-time streaming pipelines
-- Data ingestion
-- Cloud Messaging
-  - Services (microservices, service mesh)
-  - Event/Data Streaming (observability, analytics, ML/AI)
-- Queuing
-- N:N communication patterns
+
+-   Async task management
+-   Real-time streaming pipelines
+-   Data ingestion
+-   Cloud Messaging
+    -   Services (microservices, service mesh)
+    -   Event/Data Streaming (observability, analytics, ML/AI)
+-   Queuing
+-   N:N communication patterns
 
 ## ✨ Features
 
@@ -60,55 +63,65 @@ Give memphis{dev} a spin before.
 
 **v0.3.0**
 
-- 🚀 Fully optimized message broker in under 3 minutes
-- 💻 Easy-to-use UI, CLI, and SDKs
-- 📺 Data-level observability
-- ☠️ Dead-Letter Queue with automatic message retransmit
-- SDKs: Node.JS, Go, Python, Typescript, NestJS
-- 🐳☸ Runs on your Docker or Kubernetes
-- 👨‍💻 Community driven
+-   🚀 Fully optimized message broker in under 3 minutes
+-   💻 Easy-to-use UI, CLI, and SDKs
+-   📺 Data-level observability
+-   ☠️ Dead-Letter Queue with automatic message retransmit
+-   SDKs: Node.JS, Go, Python, Typescript, NestJS
+-   🐳☸ Runs on your Docker or Kubernetes
+-   👨‍💻 Community driven
 
 ## 🚀 Getting Started
+
 [Sandbox](https://sandbox.memphis.dev)<br>
 [Installation videos](https://www.youtube.com/playlist?list=PL_7iYjqhtXpWpZT2U0zDYo2eGOoGmg2mm)<br><br>
 Helm for Kubernetes
+
 ```shell
 helm repo add memphis https://k8s.memphis.dev/charts/ && \
 helm install my-memphis memphis/memphis --create-namespace --namespace memphis
 ```
+
 Docker Compose
+
 ```shell
 curl -s https://memphisdev.github.io/memphis-docker/docker-compose.yml -o docker-compose.yml && \
 docker compose -f docker-compose.yml -p memphis up
 ```
+
 [![Connect your first app](https://img.youtube.com/vi/-5YmxYRQsdw/0.jpg)](https://youtu.be/-5YmxYRQsdw)<br>
 [Tutorial: Build an event-driven food delivery app](https://medium.com/memphis-dev/how-to-build-your-own-wolt-app-b220d738bb71)
 
 ## High-Level Architecture
+
 <img alt="memphis.dev-logo" height="500" alt="memphis.dev Architecture" src="https://user-images.githubusercontent.com/70286779/180664120-abd5e178-9cfe-4ab3-8722-b130fbcc6294.png">
 
-
 ## Local access
+
 ### Via Kubernetes
+
 ```shell
 To access Memphis UI from localhost, run the below commands:
   1. kubectl port-forward service/memphis-ui 9000:80 --namespace memphis > /dev/null &
 
 To access Memphis using CLI or SDK from localhost, run the below commands:
-  2. kubectl port-forward service/memphis-cluster 7766:7766 6666:6666 5555:5555 --namespace memphis > /dev/null &
+  2. kubectl port-forward service/memphis-cluster 7766:7766 6666:6666 9000:9000 --namespace memphis > /dev/null &
 
 Dashboard: http://localhost:9000
-Memphis broker: localhost:5555 (Management Port) / 7766 (Data Port) / 6666 (TCP Port)
+Memphis broker: localhost:9000 (Management Port) / 7766 (Data Port) / 6666 (TCP Port)
 ```
+
 **For Production Environments**
 Please expose the UI, Cluster, and Control-plane via k8s ingress / load balancer / nodeport
 
 ### Via Docker
+
 Dashboard - http://localhost:9000<br>
 Broker - localhost:7766<br>
-Control-Plane - localhost:5555/6666<br>
+Control-Plane - localhost:9000/6666<br>
 
 ## Beta
+
 Memphis{dev} is currently in Beta version. This means that we are still working on essential features like real-time messages tracing,<br>
 Schema registry, and inline processing, as well as making more SDKs and supporting materials.
 
@@ -129,7 +142,6 @@ You can ask questions, and participate in discussions about Memphis{dev}-related
 ### Create a bug report
 
 If you see an error message or run into an issue, please [create bug report](https://github.com/memphisdev/memphis-broker/issues/new?assignees=&labels=type%3A%20bug&template=bug_report.md&title=). This effort is valued and it will help all Memphis{dev} users.
-
 
 ### Submit a feature request
 
