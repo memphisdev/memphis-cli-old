@@ -1,7 +1,7 @@
 {
     "name": "memphis-dev-cli",
-    "version": "0.3.8",
-    "description": "A dev-first event processing platform",
+    "version": "0.3.9",
+    "description": "A powerful message broker for modern developers",
     "main": "index.js",
     "bin": {
         "mem": "index.js"

@@ -47,7 +47,6 @@ exports.getAllStations = async () => {
                     console.table([
                         {
                             name: '',
-                            factory: '',
                             'retention type': '',
                             'retentention value': '',
                             'storage type': '',
@@ -64,7 +63,6 @@ exports.getAllStations = async () => {
                         res.map((station) => {
                             return {
                                 name: station.name,
-                                factory: station.factory_name,
                                 'retention type': station.retention_type,
                                 'retentention value': station.retention_value,
                                 'storage type': station.storage_type,
@@ -117,7 +115,6 @@ exports.createStation = async (station, options) => {
             headers: { Authorization: 'Bearer ' + credentials.jwt },
             bodyParams: {
                 name: station,
-                factory_name: options.factory,
                 retention_type: rt,
                 retention_value: rv,
                 storage_type: s,

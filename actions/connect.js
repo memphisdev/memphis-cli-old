@@ -32,7 +32,7 @@ module.exports = (credentials) => {
             fixedUrl = url;
         }
         if (fixedUrl.split(':').length - 1 < 2) {
-            fixedUrl = fixedUrl + ':5555';
+            fixedUrl = fixedUrl + ':9000';
         }
         return login(fixedUrl, credentials.user, credentials.password)
             .then((res) => {
@@ -69,7 +69,7 @@ module.exports = (credentials) => {
                             fixedUrl = url.replace('http', 'https');
                         }
                         if (fixedUrl.split(':').length - 1 < 2) {
-                            fixedUrl = fixedUrl + ':5555';
+                            fixedUrl = fixedUrl + ':9000';
                         }
                         return login(fixedUrl, credentials.user, credentials.password)
                             .then((res) => {
