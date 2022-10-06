@@ -2,7 +2,7 @@ def gitBranch = env.BRANCH_NAME
 def gitURL = "git@github.com:Memphisdev/memphis-cli.git"
 def repoUrlPrefix = "memphisos"
 
-node {
+node ("small-ec2-fleet") {
   git credentialsId: 'main-github', url: gitURL, branch: gitBranch
   
   try{
