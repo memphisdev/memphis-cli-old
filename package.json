@@ -14,7 +14,8 @@
             "actions/memphis_code_examples/go/producer.go",
             "actions/memphis_code_examples/python/consumer.py",
             "actions/memphis_code_examples/python/producer.py"
-        ]
+        ],
+        "outputPath": "release"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

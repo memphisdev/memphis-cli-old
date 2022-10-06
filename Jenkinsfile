@@ -8,7 +8,19 @@ node {
   
   try{
     stage('NPM Install') {
-      
+      sh 'npm install pkg -g'
+      sh 'pkg package.json'
+    }
+
+    stage('Create tar') {
+      sh 'mv release/memphis-dev-cli-macos release/mem'
+      sh 'tar -czf mem.tar.gz release/mem'
+      sh 'shasum -a 256 mem.tar.gz > sha256'
+    }
+
+    stage('Create new release') {
+      sh(script:"""jq -r '"v" + .version' package.json > version.conf""", returnStdout: true)
+      sh(script:"""gh release create $(cat version.conf) ./mem.tar.gz --generate-notes""", returnStdout: true)
     }
     stage('Push to NPM') {
 
