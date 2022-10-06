@@ -4,7 +4,6 @@ def repoUrlPrefix = "memphisos"
 
 node {
   git credentialsId: 'main-github', url: gitURL, branch: gitBranch
-  def versionTag = readFile "./version.conf"
   
   try{
     stage('NPM Install') {
@@ -20,7 +19,7 @@ node {
 
     stage('Create new release') {
       sh(script:"""jq -r '"v" + .version' package.json > version.conf""", returnStdout: true)
-      sh(script:"""gh release create $(cat version.conf) ./mem.tar.gz --generate-notes""", returnStdout: true)
+      sh(script:"""gh release create \$(cat version.conf) ./mem.tar.gz --generate-notes -d""", returnStdout: true)
     }
     stage('Push to NPM') {
 
