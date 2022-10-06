@@ -1,13 +1,15 @@
+def gitBranch = env.BRANCH_NAME
 def gitURL = "git@github.com:Memphisdev/memphis-cli.git"
-def gitBranch = "master"
-unique_Id = UUID.randomUUID().toString()
+def repoUrlPrefix = "memphisos"
 
 node {
+  git credentialsId: 'main-github', url: gitURL, branch: gitBranch
+  def versionTag = readFile "./version.conf"
+  
   try{
-    stage('SCM checkout') {
-        git credentialsId: 'main-github', url: gitURL, branch: gitBranch
+    stage('NPM Install') {
+      
     }
-
     stage('Push to NPM') {
 
     }
