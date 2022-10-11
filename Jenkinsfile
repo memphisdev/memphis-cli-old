@@ -7,7 +7,7 @@ node ("small-ec2-fleet") {
   
   try{
     stage('NPM Install') {
-      sh 'npm install pkg -g'
+      sh 'sudo npm install pkg -g'
       sh 'pkg package.json'
     }
 
