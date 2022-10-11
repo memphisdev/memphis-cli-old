@@ -14,7 +14,7 @@ node ("small-ec2-fleet") {
     stage('Create tar') {
       sh 'mv release/memphis-dev-cli-macos release/mem'
       sh 'tar -czf mem.tar.gz release/mem'
-      sh 'shasum -a 256 mem.tar.gz > sha256'
+      sh "sha256sum mem.tar.gz | awk '{print $1}' > sha256"
     }
 
     stage('Create new release') {
@@ -32,6 +32,7 @@ node ("small-ec2-fleet") {
 
   } catch (e) {
       currentBuild.result = "FAILED"
+      cleanWs()
       notifyFailed()
       throw e
   }
