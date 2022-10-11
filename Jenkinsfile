@@ -14,12 +14,17 @@ node ("small-ec2-fleet") {
     stage('Create tar') {
       sh 'mv release/memphis-dev-cli-macos release/mem'
       sh 'tar -czf mem.tar.gz release/mem'
-      sh(script:"""sha256sum mem.tar.gz | awk '{print $1}' > sha256""", returnStdout: true)
+      sh(script:"""sha256sum mem.tar.gz | awk '{print \$1}' > sha256""", returnStdout: true)
     }
 
     stage('Create new release') {
+      sh 'sudo yum install jq -y'
       sh(script:"""jq -r '"v" + .version' package.json > version.conf""", returnStdout: true)
-      sh(script:"""gh release create \$(cat version.conf) ./mem.tar.gz --generate-notes -d""", returnStdout: true)
+      withCredentials([string(credentialsId: 'gh_token', variable: 'GH_TOKEN')]) {
+        sh 'env'
+        //sh(script:"""gh release create \$(cat version.conf) ./mem.tar.gz --generate-notes -d""", returnStdout: true)
+        sh(script:"""gh release create 5.5.5 ./mem.tar.gz --generate-notes -d""", returnStdout: true)
+      }
     }
     stage('Push to NPM') {
 
