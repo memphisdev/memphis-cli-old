@@ -28,7 +28,7 @@ node ("small-ec2-fleet") {
     stage('Push to NPM') {
       sh 'sudo npm install -g npm-cli-login'
       withCredentials([usernamePassword(credentialsId: 'npm_login', passwordVariable: 'pass', usernameVariable: 'user')]) {
-        sh 'NPM_USER=user NPM_PASS=pass NPM_EMAIL=team@memphis.dev npm-cli-login'
+        sh 'NPM_USER=$user NPM_PASS=$pass NPM_EMAIL=team@memphis.dev npm-cli-login'
         sh 'npm publish'
       }
     }
