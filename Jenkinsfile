@@ -18,17 +18,19 @@ node ("small-ec2-fleet") {
     }
 
     stage('Create new release') {
+      sh 'sudo yum-config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo'
+      sh 'sudo yum install gh -y'
       sh 'sudo yum install jq -y'
       sh(script:"""jq -r '"v" + .version' package.json > version.conf""", returnStdout: true)
       withCredentials([string(credentialsId: 'gh_token', variable: 'GH_TOKEN')]) {
         sh(script:"""gh release create \$(cat version.conf) ./mem.tar.gz --generate-notes -d""", returnStdout: true)
-        //sh(script:"""gh release create 5.5.5 ./mem.tar.gz --generate-notes -d""", returnStdout: true)
+        //sh(script:"""gh release create 5.5.5 ./mem.tar.gz --generate-notes""", returnStdout: true)
       }
     }
     stage('Push to NPM') {
       withCredentials([string(credentialsId: 'npm_token', variable: 'npm_token')]) {
         sh "echo //registry.npmjs.org/:_authToken=${env.NPM_TOKEN} > .npmrc"
-        sh 'npm publish'
+      // sh 'npm publish'
       }
     }
 
