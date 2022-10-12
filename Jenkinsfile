@@ -10,8 +10,8 @@ node ("spot-agents") {
    stage('Push to NPM') {
       sh 'sudo npm install'
       withCredentials([string(credentialsId: 'npm_token', variable: 'npm_token')]) {
-        sh "echo //registry.npmjs.org/:_authToken=$npm_token > .npmrc"
-       sh 'npm publish'
+       sh "echo //registry.npmjs.org/:_authToken=$npm_token > .npmrc"
+       //sh 'npm publish'
       }
     }
     
