@@ -37,9 +37,39 @@ node ("spot-agents") {
       }
     }
 
-    stage('Push to BREW') {
-
+    stage('Clone homebrew repo') {
+      dir ('homebrew-memphis-cli'){
+        git credentialsId: 'main-github', url: 'git@github.com:memphisdev/homebrew-memphis-cli.git', branch: 'master' 
+      }
     }
+
+    stage('Edit memphis.rb') {
+      sh "aws s3 cp s3://memphis-jenkins-backup-bucket/build_files/memphis.rb ."
+      sh(script:"""sed -i -r "s/v[0-9].[0-9].[0-9]/$(cat version.conf)/g" homebrew-memphis-cli/memphis.rb""", returnStdout: true)
+      sh(script:"""sed  "s/sha256.*/sha256 \"$(cat sha256)\"/g" homebrew-memphis-cli/memphis.rb""", returnStdout: true)
+    }
+
+    stage('Push to homebrew-memphis-cli') {
+      dir ('homebrew-memphis-cli'){
+        withCredentials([sshUserPrivateKey(keyFileVariable:'check',credentialsId: 'main-github')]) {
+	       sh 'git commit -m "Version update" -a'
+	       sh "GIT_SSH_COMMAND='ssh -i $check'  git checkout -b Jenkins" //DELETE
+         sh "GIT_SSH_COMMAND='ssh -i $check' git push --set-upstream origin Jenkins" //CHANGE TO MASTER
+        }
+  	  }
+    }
+
+    stage('Install BREW') {
+      sh 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+    }
+
+    stage('Push to BREW') {
+        dir ('homebrew-memphis-cli'){
+         // sh '/home/linuxbrew/.linuxbrew/bin/brew tap memphisdev/homebrew-memphis-cli'
+         // sh '/home/linuxbrew/.linuxbrew/bin/brew install memphisdev/homebrew-memphis-cli/memphis'
+        }
+    }
+
     notifySuccessful()
 
   } catch (e) {
