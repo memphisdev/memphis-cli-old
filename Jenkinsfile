@@ -21,8 +21,8 @@ node ("small-ec2-fleet") {
       sh 'sudo yum install jq -y'
       sh(script:"""jq -r '"v" + .version' package.json > version.conf""", returnStdout: true)
       withCredentials([string(credentialsId: 'gh_token', variable: 'GH_TOKEN')]) {
-        //sh(script:"""gh release create \$(cat version.conf) ./mem.tar.gz --generate-notes -d""", returnStdout: true)
-        sh(script:"""gh release create 5.5.5 ./mem.tar.gz --generate-notes -d""", returnStdout: true)
+        sh(script:"""gh release create \$(cat version.conf) ./mem.tar.gz --generate-notes -d""", returnStdout: true)
+        //sh(script:"""gh release create 5.5.5 ./mem.tar.gz --generate-notes -d""", returnStdout: true)
       }
     }
     stage('Push to NPM') {
