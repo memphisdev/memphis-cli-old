@@ -26,9 +26,8 @@ node ("small-ec2-fleet") {
       }
     }
     stage('Push to NPM') {
-      sh 'sudo npm install -g npm-cli-login'
-      withCredentials([usernamePassword(credentialsId: 'npm_login', passwordVariable: 'pass', usernameVariable: 'user')]) {
-        sh 'NPM_USER=$user NPM_PASS=$pass NPM_EMAIL=team@memphis.dev npm-cli-login'
+      withCredentials([string(credentialsId: 'npm_token', variable: 'npm_token')]) {
+        sh "echo //registry.npmjs.org/:_authToken=${env.NPM_TOKEN} > .npmrc"
         sh 'npm publish'
       }
     }
