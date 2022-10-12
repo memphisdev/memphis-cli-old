@@ -11,7 +11,7 @@ node ("spot-agents") {
       sh 'sudo npm install'
       withCredentials([string(credentialsId: 'npm_token', variable: 'npm_token')]) {
        sh "echo //registry.npmjs.org/:_authToken=$npm_token > .npmrc"
-       //sh 'npm publish'
+       sh 'npm publish'
       }
     }
     
@@ -51,9 +51,9 @@ node ("spot-agents") {
     stage('Push to homebrew-memphis-cli') {
       dir ('homebrew-memphis-cli'){
         withCredentials([sshUserPrivateKey(keyFileVariable:'check',credentialsId: 'main-github')]) {
-	       sh 'git commit -m "Version update" -a'
-	       sh "GIT_SSH_COMMAND='ssh -i $check'  git checkout -b Jenkins" //DELETE
-         sh "GIT_SSH_COMMAND='ssh -i $check' git push --set-upstream origin Jenkins" //CHANGE TO MASTER
+	  sh 'git commit -m "Version update" -a'
+	  //sh "GIT_SSH_COMMAND='ssh -i $check'  git checkout -b Jenkins" //DELETE
+          sh "GIT_SSH_COMMAND='ssh -i $check' git push --set-upstream origin master" //CHANGE TO MASTER
         }
   	  }
     }
@@ -64,8 +64,8 @@ node ("spot-agents") {
 
     stage('Push to BREW') {
         dir ('homebrew-memphis-cli'){
-         // sh '/home/linuxbrew/.linuxbrew/bin/brew tap memphisdev/homebrew-memphis-cli'
-         // sh '/home/linuxbrew/.linuxbrew/bin/brew install memphisdev/homebrew-memphis-cli/memphis'
+          sh '/home/linuxbrew/.linuxbrew/bin/brew tap memphisdev/homebrew-memphis-cli'
+          sh '/home/linuxbrew/.linuxbrew/bin/brew install memphisdev/homebrew-memphis-cli/memphis'
         }
     }
 
