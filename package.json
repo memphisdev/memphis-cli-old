@@ -1,5 +1,5 @@
 {
-    "name": "memphis-dev-cli-test",
+    "name": "memphis-dev-cli-tests",
     "version": "5.5.5",
     "description": "A powerful message broker for modern developers",
     "main": "index.js",
