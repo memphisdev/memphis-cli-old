@@ -213,7 +213,7 @@ exports.removeStation = async (station) => {
             url: `${credentials.server}${ApiEndpoint.REMOVE_STATION}`,
             headers: { Authorization: 'Bearer ' + credentials.jwt },
             bodyParams: {
-                station_name: station
+                station_name: [station]
             },
             queryParams: null,
             timeout: 0
