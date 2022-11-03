@@ -53,7 +53,7 @@ node ("spot-agents") {
 
     stage('Edit memphis.rb') {
       sh(script:"""sed -i -r "s/v[0-9].[0-9].[0-9]/\$(cat version.conf)/g" homebrew-memphis-cli/memphis.rb""", returnStdout: true)
-      sh(script:"""sed -i -r "s/sha256.*/sha256 \"\$(cat sha256)\"/g" homebrew-memphis-cli/memphis.rb""", returnStdout: true)
+      sh(script:"""sed -i -r "s/sha256.*/sha256 \\"\$(cat sha256)\\"/g" homebrew-memphis-cli/memphis.rb""", returnStdout: true)
     }
 
     stage('Push to homebrew-memphis-cli') {
@@ -71,7 +71,7 @@ node ("spot-agents") {
 
     stage('Push to BREW') {
         dir ('homebrew-memphis-cli'){
-	  sh '/home/linuxbrew/.linuxbrew/bin/brew install gcc
+	  sh '/home/linuxbrew/.linuxbrew/bin/brew install gcc'
           sh '/home/linuxbrew/.linuxbrew/bin/brew tap memphisdev/homebrew-memphis-cli'
         }
     }
