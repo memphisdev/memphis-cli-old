@@ -41,8 +41,7 @@ node ("spot-agents") {
       sh 'sudo yum install jq -y'
       sh(script:"""jq -r '"v" + .version' package.json > version.conf""", returnStdout: true)
       withCredentials([string(credentialsId: 'gh_token', variable: 'GH_TOKEN')]) {
-        sh(script:"""gh release create \$(cat version.conf) ./mem.tar.gz --generate-notes -d""", returnStdout: true)
-        //sh(script:"""gh release create 5.5.5 ./mem.tar.gz --generate-notes""", returnStdout: true)
+        sh(script:"""gh release create \$(cat version.conf) ./mem.tar.gz --generate-notes""", returnStdout: true)
       }
     }
 
@@ -61,7 +60,6 @@ node ("spot-agents") {
       dir ('homebrew-memphis-cli'){
         withCredentials([sshUserPrivateKey(keyFileVariable:'check',credentialsId: 'main-github')]) {
 	  sh 'git commit -m "Version update" -a'
-	  //sh "GIT_SSH_COMMAND='ssh -i $check'  git checkout -b Jenkins" //DELETE
           sh "GIT_SSH_COMMAND='ssh -i $check' git push --set-upstream origin master" //CHANGE TO MASTER
         }
       }
