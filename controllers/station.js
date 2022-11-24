@@ -47,8 +47,7 @@ exports.getAllStations = async () => {
                             'retentention value': '',
                             'storage type': '',
                             replicas: '',
-                            'dedup enabled': '',
-                            'dedup window ms': '',
+                            'idempotency window ms': '',
                             'created by': '',
                             'creation date': '',
                             last_update: ''
@@ -57,14 +56,14 @@ exports.getAllStations = async () => {
                 } else {
                     console.table(
                         res.map((station) => {
+                            let storageType = station.storage_type === 'file' ? 'disk' : station.storage_type;
                             return {
                                 name: station.name,
                                 'retention type': station.retention_type,
                                 'retentention value': station.retention_value,
-                                'storage type': station.storage_type,
+                                'storage type': storageType,
                                 replicas: station.replicas,
-                                'dedup enabled': station.dedup_enabled,
-                                'dedup window ms': station.dedup_window_in_ms,
+                                'idempotency window ms': station.idempotency_window_in_ms,
                                 'created by': station.created_by_user,
                                 'creation date': station.creation_date.substring(0, 10),
                                 last_update: station.last_update.substring(0, 10)
@@ -99,10 +98,10 @@ exports.createStation = async (station, options) => {
             return;
         }
         const credentials = JSON.parse(data.toString());
-        const dw = Number(options.dedupwindow ? options.dedupwindow : 0);
-        const de = Boolean(options.dedupenabled ? options.dedupenabled : false);
+        const ipw = Number(options.idempotency_window_in_ms ? options.idempotency_window_in_ms : 120000);
         const r = Number(options.replicas ? options.replicas : 1);
-        const s = options.storage ? options.storage : 'file';
+        let s = options.storage ? options.storage : 'file';
+        if (s === 'disk') s = 'file';
         const rv = Number(options.retentionvalue ? options.retentionvalue : 604800);
         const rt = options.retentiontype ? options.retentiontype : 'message_age_sec';
         httpRequest({
@@ -115,8 +114,7 @@ exports.createStation = async (station, options) => {
                 retention_value: rv,
                 storage_type: s,
                 replicas: r,
-                dedup_enabled: de,
-                dedup_window_in_ms: dw
+                idempotency_window_in_ms: ipw
             },
 
             queryParams: null,
@@ -126,14 +124,14 @@ exports.createStation = async (station, options) => {
                 console.log(`Station ${station} was created with the following details:`);
                 console.table(
                     [res].map((station) => {
+                        let storageType = station.storage_type === 'file' ? 'disk' : station.storage_type;
                         return {
                             'name ': station.name,
                             'retention type': station.retention_type,
                             'retentention value': station.retention_value,
-                            'storage type': station.storage_type,
-                            'replicas ': station.replicas,
-                            'dedup enabled': station.dedup_enabled,
-                            'dedup window ms': station.dedup_window_in_ms,
+                            'storage type': storageType,
+                            replicas: station.replicas,
+                            'idempotency window ms': station.idempotency_window_in_ms,
                             'created by': station.created_by_user,
                             'creation date': station.creation_date.substring(0, 10)
                         };

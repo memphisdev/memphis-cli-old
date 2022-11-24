@@ -28,12 +28,11 @@ const handleStationActions = (action, options) => {
                 console.log('-rv, --retentionvalue <retention-value>', 'Retention value');
                 console.log('-s, --storage <storage-type>', 'Storage type');
                 console.log('-r, --replicas <replicas>', 'Replicas');
-                console.log('-de, --dedupenabled <dedup-enabled>', 'Dedup enabled');
-                console.log('-dw, --dedupwindow <dedup-window-in-ms>', 'Dedup window in ms');
+                console.log('-ipw, --idempotency <idempotency-window-in-ms>', 'Idempotency window in ms');
                 console.log('\nNote:\n');
                 console.log('retentiontype values: time/messages/bytes');
-                console.log('dedupenabled values: true/false');
-                console.log('storage values: file/memory\n');
+                console.log('storage values: disk/memory');
+                console.log('idempotency window in ms default is 120000 ms (2 minutes)\n');
             } else station.createStation(action[1], options);
             break;
         case 'info':
