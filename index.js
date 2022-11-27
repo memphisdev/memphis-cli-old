@@ -83,8 +83,7 @@ program
     .option('-rv, --retentionvalue <retention-value>', 'Retention value')
     .option('-s, --storage <storage-type>', 'Storage type')
     .option('-r, --replicas <replicas>', 'Replicas')
-    .option('-de, --dedupenabled <dedup-enabled>', 'Dedup enabled')
-    .option('-dw, --dedupwindow <dedup-window-in-ms>', 'Dedup window in ms')
+    .option('-ipw, --idempotency <idempotency-window-in-ms>', 'Idempotency window in ms')
     .usage('<command> [options]')
     .showHelpAfterError()
     .configureHelp({
