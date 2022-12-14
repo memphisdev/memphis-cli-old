@@ -29,10 +29,13 @@ const handleStationActions = (action, options) => {
                 console.log('-s, --storage <storage-type>', 'Storage type');
                 console.log('-r, --replicas <replicas>', 'Replicas');
                 console.log('-ipw, --idempotency <idempotency-window-in-ms>', 'Idempotency window in ms');
+                console.log('-pmdls, --poisontodls <send-poison-message-to-dls', 'Send poison message to dls');
+                console.log('-sfdls, --schemafailtodls <send-schema-failed-message-to-dls', 'Send schema failed message to dls');
                 console.log('\nNote:\n');
                 console.log('retentiontype values: time/messages/bytes');
                 console.log('storage values: disk/memory');
                 console.log('idempotency window in ms default is 120000 ms (2 minutes)\n');
+                console.log('Send poison message and schema failed message to dls defaults to true');
             } else station.createStation(action[1], options);
             break;
         case 'info':

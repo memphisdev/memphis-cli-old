@@ -84,6 +84,8 @@ program
     .option('-s, --storage <storage-type>', 'Storage type')
     .option('-r, --replicas <replicas>', 'Replicas')
     .option('-ipw, --idempotency <idempotency-window-in-ms>', 'Idempotency window in ms')
+    .option('-pmdls, --poisontodls <send-poison-message-to-dls', 'Send poison message to dls')
+    .option('-sfdls, --schemafailtodls <send-schema-failed-message-to-dls', 'Send schema failed message to dls')
     .usage('<command> [options]')
     .showHelpAfterError()
     .configureHelp({

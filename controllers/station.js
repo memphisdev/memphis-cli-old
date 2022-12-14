@@ -50,6 +50,10 @@ exports.getAllStations = async () => {
                             'idempotency window ms': '',
                             'created by': '',
                             'creation date': '',
+                            'dls configuration': {
+                                'pm to dls': '',
+                                'schemafail to dls': ''
+                            },
                             last_update: ''
                         }
                     ]);
@@ -66,6 +70,10 @@ exports.getAllStations = async () => {
                                 'idempotency window ms': station.idempotency_window_in_ms,
                                 'created by': station.created_by_user,
                                 'creation date': station.creation_date.substring(0, 10),
+                                'dls configuration': {
+                                    'pm to dls': station.dls_configuration.poison,
+                                    'schemafail to dls': station.dls_configuration.schemaverse
+                                },
                                 last_update: station.last_update.substring(0, 10)
                             };
                         })
@@ -104,6 +112,8 @@ exports.createStation = async (station, options) => {
         if (s === 'disk') s = 'file';
         const rv = Number(options.retentionvalue ? options.retentionvalue : 604800);
         const rt = options.retentiontype ? options.retentiontype : 'message_age_sec';
+        const poisonToDls = options.poisontodls === 'false' ? false : true;
+        const schemaFailToDls = options.schemafailtodls === 'false' ? false : true;
         httpRequest({
             method: 'POST',
             url: `${credentials.server}${ApiEndpoint.CREATE_STATION}`,
@@ -114,7 +124,11 @@ exports.createStation = async (station, options) => {
                 retention_value: rv,
                 storage_type: s,
                 replicas: r,
-                idempotency_window_in_ms: ipw
+                idempotency_window_in_ms: ipw,
+                dls_configuration: {
+                    poison: poisonToDls,
+                    schemaverse: schemaFailToDls
+                }
             },
 
             queryParams: null,
@@ -133,7 +147,11 @@ exports.createStation = async (station, options) => {
                             replicas: station.replicas,
                             'idempotency window ms': station.idempotency_window_in_ms,
                             'created by': station.created_by_user,
-                            'creation date': station.creation_date.substring(0, 10)
+                            'creation date': station.creation_date.substring(0, 10),
+                            'dls configuration': {
+                                'pm to dls': station.dls_configuration.poison,
+                                'schemafail to dls': station.dls_configuration.schemaverse
+                            }
                         };
                     })
                 );
