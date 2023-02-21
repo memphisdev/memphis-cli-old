@@ -37,55 +37,51 @@
 <img src="https://img.shields.io/github/last-commit/memphisdev/memphis-broker?color=61dfc6&label=last%20commit">
 </p>
 
-**[Memphis](https://memphis.dev)** is a next-generation message broker.<br>
+**[Memphis](https://memphis.dev)** is a next-generation alternative to traditional message brokers.<br><br>
 A simple, robust, and durable cloud-native message broker wrapped with<br>
-an entire ecosystem that enables fast and reliable development of next-generation event-driven use cases.<br><br>
-Memphis enables building modern applications that require large volumes of streamed and enriched data,<br>
-modern protocols, zero ops, rapid development, extreme cost reduction,<br>
-and a significantly lower amount of dev time for data-oriented developers and data engineers.
+an entire ecosystem that enables cost-effective, fast, and reliable development of modern queue-based use cases.<br><br>
+Memphis enables the building of modern queue-based applications that require<br>
+large volumes of streamed and enriched data, modern protocols, zero ops, rapid development,<br>
+extreme cost reduction, and a significantly lower amount of dev time for data-oriented developers and data engineers.
 
 ## 📸 Screenshots
 Dashboard             |  Station (Topic) overview|  CLI
 :-------------------------:|:-------------------------:|:-------------------------:
 <img width="300" alt="Dashboard" src="https://user-images.githubusercontent.com/70286779/182221769-3aa953cc-df71-4c0e-b0d2-9dd4ab83fea9.png">|<img width="300" alt="Station Overview" src="https://user-images.githubusercontent.com/70286779/182221788-0a159007-ab93-46aa-9c81-222671144a05.png">|<img src="https://user-images.githubusercontent.com/70286779/175806007-9a37e130-3e5a-4606-bdda-a71a89efae7f.png" alt="drawing" width="300"/>
 
-## ⭐️ Why
-Working with data streaming is HARD.<br>
+## 🫣 A world without Memphis
+When your application requires a message broker or a queue,<br>
+Implementing one will require you to -
+- Build a dead-letter queue
+- Create observability
+- Build a scalable environment
+- Create client wrappers
+- Handle back pressure. Client or queue side
+- Create a retry mechanism
+- Configure monitoring and real-time alerts
+- Deal with ACLs
+- Somehow create a cloud-agnostic implementation
+- Create config alignment between production to a dev environment
+- Spent weeks and months learning the internals through archival documentation, ebooks, and courses
+- Onboard your developers<br>
+And the list continues...<br>
 
-As a developer, you need to build a dedicated pipeline for each data source,<br>
-work with schemas, formats, serializations, analyze each source individually,<br>
-enrich the data with other sources, constantly change APIs, and scale for better performance 🥵.<br>
-Besides that, it constantly crashes and requires adaptation to different rate limits.<br>
-**It takes time and resources that you probably don't have.**<br>
+**Or, you can just use [Memphis](https://memphis.dev)** and focus your resources on tasks that matter 😎
+<br>
 
-Message broker acts as the middleman and supports streaming architecture,<br>
-but then you encounter Apache Kafka and its documentation and run back to the monolith and batch jobs.<br>
-**Give memphis{dev} a spin before.**
-
-## 👉 Use-cases
-- Async task management
-- Real-time streaming pipelines
-- Data ingestion
-- Cloud Messaging
-  - Services (microservices, service mesh)
-  - Event/Data Streaming (observability, analytics, ML/AI)
-- Queuing
-- N:N communication patterns
-
-## ✨ Features
+## ✨ Features [v0.4.5](https://docs.memphis.dev/memphis/release-notes/releases/v0.4.5-beta)
 
 [**Roadmap**](https://github.com/orgs/memphisdev/projects/2/views/1)
 
-**[v0.4.4](https://docs.memphis.dev/memphis/release-notes/releases/v0.4.4-beta)**
-
-- 🚀 Fully optimized message broker in under 3 minutes
-- 💻 Easy-to-use UI, CLI, and SDKs
-- 📺 Data-level observability
-- ☠️ Dead-Letter Queue with automatic message retransmit
-- 🔤 Schemaverse - Embedded schema management for produced data (Protobuf/JSON/GraphQL/Avro)
-- ⛓  SDKs: Node.JS, Go, Python, Typescript, NestJS, REST, .NET, Kotlin
-- 🐳☸ Runs on your Docker or Kubernetes
-- 👨‍💻 Community driven
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) Production-ready message broker in under 3 minutes<br>
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) Easy-to-use UI, CLI, and SDKs<br>
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) Data-level observability<br>
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) Dead-Letter Queue with automatic message retransmit<br>
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) Schemaverse - Embedded schema management for produced data (Protobuf/JSON/GraphQL/Avro)<br>
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) Storage tiering<br>
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) SDKs: Node.JS, Go, Python, Typescript, NestJS, REST, .NET, Kotlin<br>
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) Kubernetes-native<br>
+![20](https://user-images.githubusercontent.com/70286779/220196529-abb958d2-5c58-4c33-b5e0-40f5446515ad.png) Community driven<br>
 
 ## 🚀 Getting Started
 [Sandbox](https://sandbox.memphis.dev)<br>
