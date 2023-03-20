@@ -68,11 +68,11 @@ exports.getAllStations = async () => {
                                 'storage type': storageType,
                                 replicas: station.replicas,
                                 'idempotency window ms': station.idempotency_window_in_ms,
-                                'created by': station.created_by_user,
-                                'creation date': station.creation_date.substring(0, 10),
+                                'created by': station.created_by,
+                                'creation date': station.created_at.substring(0, 10),
                                 'dls configuration': {
-                                    'pm to dls': station.dls_configuration.poison,
-                                    'schemafail to dls': station.dls_configuration.schemaverse
+                                    'pm to dls': station.dls_configuration_poison,
+                                    'schemafail to dls': station.dls_configuration_schemaverse
                                 },
                                 last_update: station.last_update.substring(0, 10)
                             };
