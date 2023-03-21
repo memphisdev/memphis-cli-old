@@ -39,13 +39,13 @@ exports.getUsers = async () => {
             timeout: 0
         })
             .then((res) => {
-                res.sort((a, b) => a.creation_date.localeCompare(b.creation_date));
+                res.sort((a, b) => a.created_at.localeCompare(b.created_at));
                 console.table(
                     res.map((user) => {
                         return {
                             user_name: user.username,
-                            creation_date: user.creation_date,
-                            user_type: user.user_type
+                            created_at: user.created_at,
+                            user_type: user.type
                         };
                     })
                 );
