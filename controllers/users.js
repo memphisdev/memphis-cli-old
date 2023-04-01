@@ -96,7 +96,6 @@ exports.addUser = async (user) => {
                 }
             })
             .catch((error) => {
-                console.error(error)
                 console.log(`Failed to add user ${user.username}.`);
                 if (error.response?.status === 666) {
                     console.log(error.response.data.message);
