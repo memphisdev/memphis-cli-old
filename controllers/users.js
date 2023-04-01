@@ -45,7 +45,7 @@ exports.getUsers = async () => {
                         return {
                             user_name: user.username,
                             created_at: user.created_at,
-                            user_type: user.type
+                            user_type: user.user_type
                         };
                     })
                 );
@@ -83,8 +83,6 @@ exports.addUser = async (user) => {
             bodyParams: {
                 username: user.username,
                 password: user.password,
-                // "hub_username": user.hubuser,
-                // "hub_password": user.hubpass,
                 user_type: user.type
             },
             queryParams: null,
@@ -92,7 +90,7 @@ exports.addUser = async (user) => {
         })
             .then((res) => {
                 console.log(`User ${res.username} was created.`);
-                if (res.user_type === 'application') {
+                if (res.user_type === 'application' && res.broker_connection_creds) {
                     console.log(`Broker connection credentials: ${res.broker_connection_creds}`);
                     console.warn(`These credentials CAN'T be restored, save them in a safe place`);
                 }

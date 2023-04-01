@@ -1,30 +1,30 @@
-const memphis = require('memphis-dev');
+const { memphis } = require("memphis-dev");
 
 (async function () {
-    let memphisConn;
+    let memphisConnection
+
     try {
-        memphisConn = await memphis.connect({
+        memphisConnection = await memphis.connect({
             host: '<memphis-host>',
             username: '<application type username>',
             connectionToken: '<broker-token>'
         });
 
-        const producer = await memphisConn.producer({
+        const producer = await memphisConnection.producer({
             stationName: '<station-name>',
             producerName: '<producer-name>'
         });
 
-        for (let index = 0; index < 100; index++) {
-            await producer.produce({
-                message: Buffer.from(`Message #${index}: Hello world`)
-            });
-            console.log("Message sent");
-        }
+        const headers = memphis.headers()
+        headers.add('<key>', '<value>')
+        await producer.produce({
+            message: Buffer.from("Message: Hello world"), // you can also send JS object - {}
+            headers: headers
+        });
 
-        console.log("All messages sent");
-        memphisConn.close();
+        memphisConnection.close();
     } catch (ex) {
         console.log(ex);
-        memphisConn && memphisConn.close();
+        if (memphisConnection) memphisConnection.close();
     }
 })();

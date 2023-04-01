@@ -46,7 +46,7 @@ exports.getAllProducers = async (state = 'all') => {
                             type: ' ',
                             created_by_user: ' ',
                             station_name: ' ',
-                            creation_date: ' ',
+                            created_at: ' ',
                             status: '',
                             IP: ''
                         }
@@ -88,7 +88,7 @@ exports.getAllProducers = async (state = 'all') => {
                                 type: ' ',
                                 created_by_user: ' ',
                                 station_name: ' ',
-                                creation_date: ' ',
+                                created_at: ' ',
                                 status: '',
                                 IP: ''
                             }
@@ -99,9 +99,9 @@ exports.getAllProducers = async (state = 'all') => {
                                 return {
                                     name: producer.name,
                                     type: producer.type,
-                                    created_by_user: producer.created_by_user,
+                                    created_by_user: producer.created_by_username,
                                     station_name: producer.station_name,
-                                    creation_date: producer.creation_date,
+                                    created_at: producer.created_at,
                                     status: producer.status,
                                     IP: producer.client_address
                                 };
@@ -151,8 +151,7 @@ exports.getProducersByStation = async (station, state = 'all') => {
                             name: ' ',
                             type: ' ',
                             created_by_user: ' ',
-                            station_name: ' ',
-                            creation_date: ' ',
+                            created_at: ' ',
                             status: ''
                         }
                     ]);
@@ -192,8 +191,7 @@ exports.getProducersByStation = async (station, state = 'all') => {
                                 name: ' ',
                                 type: ' ',
                                 created_by_user: ' ',
-                                station_name: ' ',
-                                creation_date: ' ',
+                                created_at: ' ',
                                 status: ''
                             }
                         ]);
@@ -203,9 +201,8 @@ exports.getProducersByStation = async (station, state = 'all') => {
                                 return {
                                     name: producer.name,
                                     type: producer.type,
-                                    created_by_user: producer.created_by_user,
-                                    station_name: producer.station_name,
-                                    creation_date: producer.creation_date,
+                                    created_by_user: producer.created_by_username,
+                                    created_at: producer.created_at,
                                     status: producer.status
                                 };
                             })
