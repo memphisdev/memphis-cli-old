@@ -9,8 +9,9 @@ import (
 )
 
 func main() {
-	conn, err := memphis.Connect("<memphis-host>", "<application type username>", "<broker-token>")
+	conn, err := memphis.Connect("<memphis-host>", "<application type username>", memphis.ConnectionToken("<broker-token>"))
 	if err != nil {
+		fmt.Printf("Connection failed: %v", err)
 		os.Exit(1)
 	}
 	defer conn.Close()
@@ -22,7 +23,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	handler := func(msgs []*memphis.Msg, err error) {
+	handler := func(msgs []*memphis.Msg, err error, ctx context.Context) {
 		if err != nil {
 			fmt.Printf("Fetch failed: %v\n", err)
 			return
@@ -31,10 +32,15 @@ func main() {
 		for _, msg := range msgs {
 			fmt.Println(string(msg.Data()))
 			msg.Ack()
+			headers := msg.GetHeaders()
+			fmt.Println(headers)
 		}
 	}
 
 	consumer.Consume(handler)
 
+	// The program will close the connection after 30 seconds,
+	// the message handler may be called after the connection closed
+	// so the handler may receive a timeout error
 	time.Sleep(30 * time.Second)
 }
