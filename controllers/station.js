@@ -74,7 +74,7 @@ exports.getAllStations = async () => {
                                     'pm to dls': station.dls_configuration_poison,
                                     'schemafail to dls': station.dls_configuration_schemaverse
                                 },
-                                last_update: station.last_update.substring(0, 10)
+                                last_update: station.updated_at.substring(0, 10)
                             };
                         })
                     );
