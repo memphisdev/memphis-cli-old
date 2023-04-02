@@ -16,7 +16,9 @@ node ("spot-agents") {
     }
 	  
     stage('Checkout to version branch'){
-      sh(script:"""sed -i -r "s/version\": \"[0-9].[0-9].[0-9]/version\": \"\$(cat version.conf)/g" ./package.json""", returnStdout: true)
+      sh """
+        sed -i -r "s/version\\": \\"[0-9].[0-9].[0-9]/version\\": \\"\$(cat version.conf)/g" ./package.json
+      """
       withCredentials([sshUserPrivateKey(keyFileVariable:'check',credentialsId: 'main-github')]) {
         sh "git reset --hard origin/latest"
         sh "GIT_SSH_COMMAND='ssh -i $check'  git checkout -b \$(cat version.conf)"
