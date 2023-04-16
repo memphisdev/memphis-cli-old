@@ -41,7 +41,12 @@ Memphis enables the building of modern queue-based applications that require<br>
 large volumes of streamed and enriched data, modern protocols, zero ops, rapid development,<br>
 extreme cost reduction, and a significantly lower amount of dev time for data-oriented developers and data engineers.
 
-# Usage
+<p align="center">
+  
+# **This repository is currently outdated and under refactoring.**
+  
+</p>
+
 ## Installation
 ### Homebrew
 
